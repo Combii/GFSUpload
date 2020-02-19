@@ -6,14 +6,10 @@ import * as Papa from "papaparse";
   templateUrl: "./table-data.component.html",
   styleUrls: ["./table-data.component.css"]
 })
-export class TableDataComponent implements OnInit {
+export class TableDataComponent {
 
-  name = "Angular 5 csv file parser example";
   dataList: any[];
 
-  ngOnInit() {
-    obj = this;
-  }
   onChange(files: File[]) {
     if (files[0]) {
       console.log(files[0]);
