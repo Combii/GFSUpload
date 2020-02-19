@@ -10,6 +10,7 @@ export class TableDataComponent {
 
   dataList: any[];
 
+  // Reads csv file
   onChange(files: File[]) {
     if (files[0]) {
       console.log(files[0]);

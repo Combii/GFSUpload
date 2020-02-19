@@ -1,13 +1,11 @@
-<p>
-  used papaparse to parse csv file data into table
-</p>
+<h3>GFS Upload CSV File</h3>
 
 <input type="file" name="files" class="form-control" 
                      #uploads  (change)="onChange(uploads.files)" multiple
                      value="process"/>
 
-<div>
-  <table border="">
+<div class="table-responsive">
+  <table class="table"   >
     <thead>
         <tr>
             <th> Dato</th>
