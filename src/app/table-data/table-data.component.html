@@ -1,60 +1,60 @@
 
-
 <div class="container-fluid">
-    <h3>GFS Upload CSV File</h3>
-    <div class="form-group">
-        <input type="file" name="files" class="form-control-file" 
-                         #uploads  (change)="onChange(uploads.files)" multiple
-                         value="process"/>
-    </div>
-    
-    
-    <div class="table-responsive">
-      <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th> Dato</th>
-                <th> RegNr</th>
-                <th> regnskabstype</th>
-                <th> dkkbass</th>
-                <th> skema_id</th>
-                <th> skemarakke</th>
-                <th> valutakod</th>
-                <th> ldkd</th>
-                <th> kngr</th>
-                <th> kngr_typ</th>
-                <th> sum_rgopid</th>
-                <th> opdater_lev</th>
-                <th> leveran_kor</th>
-                <th> leveran_type</th>
-                <th> saldo</th>
-                <th> Tekst</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let record of dataList">
-                <td> {{record.Dato}} </td>
-                <td> {{record.RegNr}} </td>
-                <td> {{record.regnskabstype}} </td>
-                <td> {{record.dkkbass}} </td>
-                <td> {{record.skema_id}} </td>
-                <td> {{record.skemarakke}} </td>
-                <td> {{record.valutakod}} </td>
-                <td> {{record.ldkd}} </td>
-                <td> {{record.kngr}} </td>
-                <td> {{record.kngr_typ}} </td>
-                <td> {{record.sum_rgopid}} </td>
-                <td> {{record.opdater_lev}} </td>
-                <td> {{record.leveran_kor}} </td>
-                <td> {{record.leveran_type}} </td>
-                <td> {{record.saldo}} </td>
-                <td> {{record.Tekst}} </td>
-            </tr>
-    
-        </tbody>
-    </table>
-    
-    </div>
-    <!-- https://stackblitz.com/edit/angular-csv-parser?file=app%2Fapp.component.html -->
-</div>
+  <h3>GFS Upload CSV File</h3>
 
+  <input
+    type="file"
+    name="files"
+    class="form-control"
+    #uploads
+    (change)="onChange(uploads.files)"
+    multiple
+    value="process"
+  />
+
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Dato</th>
+          <th>RegNr</th>
+          <th>regnskabstype</th>
+          <th>dkkbass</th>
+          <th>skema_id</th>
+          <th>skemarakke</th>
+          <th>valutakod</th>
+          <th>ldkd</th>
+          <th>kngr</th>
+          <th>kngr_typ</th>
+          <th>sum_rgopid</th>
+          <th>opdater_lev</th>
+          <th>leveran_kor</th>
+          <th>leveran_type</th>
+          <th>saldo</th>
+          <th>Tekst</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of dataList">
+          <td contenteditable="true">{{ record.RegNr }}</td>
+          <td contenteditable="true">{{ record.Dato }}</td>
+          <td contenteditable="true">{{ record.regnskabstype }}</td>
+          <td contenteditable="true">{{ record.dkkbass }}</td>
+          <td contenteditable="true">{{ record.skema_id }}</td>
+          <td contenteditable="true">{{ record.skemarakke }}</td>
+          <td contenteditable="true">{{ record.valutakod }}</td>
+          <td contenteditable="true">{{ record.ldkd }}</td>
+          <td contenteditable="true">{{ record.kngr }}</td>
+          <td contenteditable="true">{{ record.kngr_typ }}</td>
+          <td contenteditable="true">{{ record.sum_rgopid }}</td>
+          <td contenteditable="true">{{ record.opdater_lev }}</td>
+          <td contenteditable="true">{{ record.leveran_kor }}</td>
+          <td contenteditable="true">{{ record.leveran_type }}</td>
+          <td contenteditable="true">{{ record.saldo }}</td>
+          <td contenteditable="true">{{ record.Tekst }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- https://stackblitz.com/edit/angular-csv-parser?file=app%2Fapp.component.html -->
+</div>
