@@ -17,6 +17,7 @@ export class TableDataComponent {
       Papa.parse(files[0], {
         header: true,
         skipEmptyLines: true,
+        encoding: "UTF-8",
         complete: (result, file) => {
           console.log(result);
           this.dataList = result.data;
