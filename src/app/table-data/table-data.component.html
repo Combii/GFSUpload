@@ -1,1 +1,27 @@
-<p>table-data works!</p>
+<p>
+  used papaparse to parse csv file data into table
+</p>
+
+<input type="file" name="files" class="form-control" 
+                     #uploads  (change)="onChange(uploads.files)" multiple
+                     value="process"/>
+
+<div>
+  <table border="">
+    <thead>
+        <tr>
+            <td> Visit No</td>
+            <td> Date</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let record of dataList">
+            <td> {{record.VISIT_NO}} </td>
+            <td> {{record.Date}} </td>
+        </tr>
+
+    </tbody>
+</table>
+
+</div>
+<!-- https://stackblitz.com/edit/angular-csv-parser?file=app%2Fapp.component.html -->

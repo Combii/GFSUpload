@@ -12,7 +12,7 @@ import { TableDataComponent } from './table-data/table-data.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]
