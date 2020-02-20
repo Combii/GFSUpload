@@ -42,7 +42,7 @@
           <td contenteditable="true">{{ record.dkkbass }}</td>
           <td contenteditable="true">{{ record.skema_id }}</td>
           <td contenteditable="true">{{ record.skemarakke }}</td>
-          <td contenteditable="true">{{ record.valutakod }}</td>
+          <td contenteditable="true" [ngStyle]="record.errors.length > 0 && {'background-color': 'red'}">{{ record.valutakod }}</td>
           <td contenteditable="true">{{ record.ldkd }}</td>
           <td contenteditable="true">{{ record.kngr }}</td>
           <td contenteditable="true">{{ record.kngr_typ }}</td>
