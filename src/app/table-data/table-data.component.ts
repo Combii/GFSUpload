@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import * as Papa from "papaparse";
+import { CSVParserService } from "./services/CSVParser.service";
 
 @Component({
   selector: "app-table-data",
@@ -9,6 +10,12 @@ import * as Papa from "papaparse";
 export class TableDataComponent {
 
   dataList: any[];
+
+
+  constructor(private csvParseService: CSVParserService) {
+
+  }
+
 
   // Reads csv file
   onChange(files: File[]) {
