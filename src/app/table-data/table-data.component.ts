@@ -22,6 +22,7 @@ export class TableDataComponent {
   onChange(files: File[]) {
   
     this.csvParseService.parseCSV(files);
+    this.dataList = this.csvParseService.dataList;
 
 
   }

@@ -1,7 +1,9 @@
 export interface IBookKeeping {
-    Dato: Date;
+    Dato: string;
     RegNr: string;
+    regnskabstype: string;
     dkkbass: string;
+    skema_id: string;
     skemarakke: string;
     valutakod: string;
     ldkd: string;
