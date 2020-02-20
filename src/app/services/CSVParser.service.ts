@@ -32,14 +32,18 @@ export class CSVParserService {
               leveran_kor: row.leveran_kor,
               leveran_type: row.leveran_type,
               saldo: row.saldo,
-              Tekst: row.Tekst,
-
+              Tekst: row.Tekst
             });
           });
-
+          this.validateBookingsList()
           console.log(this.dataList);
         }
       });
     }
+  }
+
+  validateBookingsList(){
+    this.dataList.forEach
+    
   }
 }
