@@ -1,9 +1,13 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
+import * as Papa from 'papaparse';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class CSVParserService {
 
-    parseCSV(files:File[]) : any[] {
+  dataList: IBookkeeping[];
+
+
+    parseCSV(files: File[]): any[] {
         if (files[0]) {
             console.log(files[0]);
             Papa.parse(files[0], {
@@ -13,8 +17,8 @@ export class CSVParserService {
                 console.log(result);
                 this.dataList = result.data;
               }
-            });
+            }); 
     }
-   
+
 
 }
