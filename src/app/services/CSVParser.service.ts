@@ -32,7 +32,8 @@ export class CSVParserService {
               leveran_kor: row.leveran_kor,
               leveran_type: row.leveran_type,
               saldo: row.saldo,
-              Tekst: row.Tekst
+              Tekst: row.Tekst,
+              errors : []
             });
           });
           this.validateBookingsList()
@@ -43,7 +44,14 @@ export class CSVParserService {
   }
 
   validateBookingsList(){
-    this.dataList.forEach
+    this.dataList.forEach(row => {
+      if(row.valutakod !== 'DKK') {
+        row.errors.push({
+          index : 6,
+          errorMessage : 'Valutacode wrong'
+        });
+      }
+    })
     
   }
 }
