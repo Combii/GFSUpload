@@ -5,16 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TableDataComponent } from './table-data/table-data.component';
 import { MenuComponent } from './menu/menu.component';
+import { TableDataExcelComponent } from './table-data-excel/table-data-excel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableDataComponent,
-    MenuComponent
+    MenuComponent,
+    TableDataExcelComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule, 
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
