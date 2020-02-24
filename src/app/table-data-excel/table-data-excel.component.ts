@@ -11,7 +11,6 @@ export class TableDataExcelComponent {
   constructor() { }
 
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
-  fileName = 'SheetJS.xlsx';
 
   onFileChange(evt: any) {
     /* wire up file reader */
@@ -28,12 +27,11 @@ export class TableDataExcelComponent {
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
 
       /* save data */
-      this.data =  (XLSX.utils.sheet_to_json(ws, { header: 1 })) as AOA;
+      this.data =  (XLSX.utils.sheet_to_json(ws, { header: 1 }));
       console.log(this.data);
     };
     reader.readAsBinaryString(target.files[0]);
   }
-
 
 
 }
