@@ -10,6 +10,7 @@ export class TableDataExcelComponent {
 
   constructor() { }
 
+  data = [[1, 2], [3, 4]];
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
 
   onFileChange(evt: any) {
