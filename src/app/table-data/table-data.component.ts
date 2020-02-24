@@ -23,7 +23,7 @@ export class TableDataComponent {
   
     this.csvParseService.parseCSV(files);
     this.dataList = this.csvParseService.dataList;
-
+    
 
   }
 }

@@ -36,22 +36,22 @@ export class CSVParserService {
               errors : []
             });
           });
-          this.validateBookingsList()
+          this.validateBookingsList();
           console.log(this.dataList);
         }
       });
     }
   }
 
-  validateBookingsList(){
+  validateBookingsList() {
     this.dataList.forEach(row => {
-      if(row.valutakod !== 'DKK') {
+      if (row.valutakod !== 'DKK' && row.valutakod.length > 0) {
         row.errors.push({
           index : 6,
           errorMessage : 'Valutacode wrong'
         });
       }
-    })
-    
+    });
+
   }
 }
