@@ -36,3 +36,5 @@ export class TableDataExcelComponent {
 
 
 }
+
+//https://stackblitz.com/edit/angular-excel-read-table?file=src%2Fapp%2Fsheet.component.ts
