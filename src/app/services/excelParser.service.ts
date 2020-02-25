@@ -63,6 +63,7 @@ export class ExcelParserService {
   }
 
   validateBookingsList() {
+    Validations.IsValidCurrency('');
     this.dataList.forEach(row => {
       if (!Validations.IsValidDate(row.AccountingDate)) {
         row.errors.push({
@@ -71,6 +72,7 @@ export class ExcelParserService {
         });
       }
     });
+
 
   }
 }
