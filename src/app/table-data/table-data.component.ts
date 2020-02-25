@@ -20,10 +20,7 @@ export class TableDataComponent {
 
   // Reads csv file
   onChange(files: File[]) {
-  
     this.csvParseService.parseCSV(files);
     this.dataList = this.csvParseService.dataList;
-    
-
   }
 }

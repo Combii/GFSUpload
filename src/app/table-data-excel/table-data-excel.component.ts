@@ -13,8 +13,6 @@ export class TableDataExcelComponent {
 
   constructor(private excelparser: ExcelParserService) { }
 
-
-
   onFileChange(evt: any) {
      this.excelparser.parseExcelFile(evt);
      this.excelparser.onXLSParsed.subscribe(rData => {
