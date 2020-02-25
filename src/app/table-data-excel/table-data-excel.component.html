@@ -31,7 +31,7 @@
 			  <tbody>
 					
 				<tr *ngFor="let record of data">
-				  <td contenteditable="true">{{ record.AccountingDate }}</td>
+				  <td contenteditable="true" [ngStyle]="(record.errors.length > 0 && record.errors[0].index === 0) && {'background-color': 'red'}">{{ record.AccountingDate }}</td>
 				  <td contenteditable="true">{{ record.RegistrationNo }}</td>
 				  <td contenteditable="true">{{ record.IDKT }}</td>
 				  <td contenteditable="true">{{ record.OriginalIDKT }}</td>

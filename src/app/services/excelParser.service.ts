@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { Subject } from 'rxjs';
 import { IExcelBookKeeping } from '../../models/IExcelBookKeeping';
+import { Validations } from '../services/Validation';
 
 @Injectable({ providedIn: 'root' })
 export class ExcelParserService {
@@ -33,7 +34,6 @@ export class ExcelParserService {
       this.tempDataArr = XLSX.utils.sheet_to_json(ws, { header: 1 });
 
       this.insertDataIntoBookingList();
-      //console.log(this.dataList);
       this.validateBookingsList();
       this.onXLSParsed.next(this.dataList);
     };
@@ -63,7 +63,14 @@ export class ExcelParserService {
   }
 
   validateBookingsList() {
-
+    this.dataList.forEach(row => {
+      if (!Validations.IsValidateDate(row.AccountingDate)) {
+        row.errors.push({
+          index : 0,
+          errorMessage : 'Date is wrong'
+        });
+      }
+    });
 
   }
 }
