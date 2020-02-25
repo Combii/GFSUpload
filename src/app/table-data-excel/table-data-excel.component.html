@@ -34,15 +34,15 @@
 			  <tbody>
 					
 				<tr *ngFor="let record of data">
-				  <td contenteditable="true" [ngStyle]="(record.errors.length > 0 && record.errors[0].index === 0) && {'background-color': 'red'}">{{ record.AccountingDate }}</td>
-				  <td contenteditable="true">{{ record.RegistrationNo }}</td>
-				  <td contenteditable="true">{{ record.IDKT }}</td>
-				  <td contenteditable="true">{{ record.OriginalIDKT }}</td>
-				  <td contenteditable="true">{{ record.CounterAccountIDKT }}</td>
-				  <td contenteditable="true">{{ record.Text }}</td>
-				  <td contenteditable="true">{{ record.ProjectCode }}</td>
-				  <td contenteditable="true">{{ record.Currency }}</td>
-				  <td contenteditable="true">{{ record.Balance }}</td>
+				  <td [ngStyle]="(record.errors.length > 0 && record.errors[0].index === 0) && {'background-color': 'red'}">{{ record.AccountingDate }}</td>
+				  <td>{{ record.RegistrationNo }}</td>
+				  <td>{{ record.IDKT }}</td>
+				  <td>{{ record.OriginalIDKT }}</td>
+				  <td>{{ record.CounterAccountIDKT }}</td>
+				  <td>{{ record.Text }}</td>
+				  <td>{{ record.ProjectCode }}</td>
+				  <td>{{ record.Currency }}</td>
+				  <td>{{ record.Balance }}</td>
 				</tr>
 			  </tbody>
 			</table>
