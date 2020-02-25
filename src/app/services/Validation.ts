@@ -41,7 +41,7 @@ export class Validations {
 
     const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
-    if (currency.length <= 0 || currency.length > 3 || specialChar.test(currency)) {
+    if (currency.length !== 3 || specialChar.test(currency)) {
       console.log(currency + ' IS INVALID');
       return false;
     }
@@ -51,6 +51,14 @@ export class Validations {
   }
 
 
+  // NOT DONE
+  static IsValidRegNumber(regNumber: string): boolean {
 
+    if (regNumber.length <= 0 || regNumber.length > 4) {
+      return false;
+    }
+
+    return true;
+  }
 
 }
