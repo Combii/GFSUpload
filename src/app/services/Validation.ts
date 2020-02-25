@@ -45,11 +45,11 @@ export class Validations {
       console.log(currency + ' IS INVALID');
       return false;
     }
-
     return true;
+      // Cool API call to valid currencies. Could use for future use.
+      // https://openexchangerates.org/api/currencies.json
   }
-  // Cool API call to valid currencies. Could use for future use.
-  // https://openexchangerates.org/api/currencies.json
+
 
 
 
