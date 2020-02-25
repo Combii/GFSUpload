@@ -8,20 +8,17 @@ import { ExcelParserService } from '../services/excelParser.service';
   styleUrls: ['./table-data-excel.component.css']
 })
 export class TableDataExcelComponent {
-
   data = [[], []];
   loading = false;
 
-  constructor(private excelparser: ExcelParserService) { }
+  constructor(private excelparser: ExcelParserService) {}
 
   onFileChange(evt: any) {
     this.loading = true;
-     this.excelparser.parseExcelFile(evt);
-     this.excelparser.onXLSParsed.subscribe(rData => {
-       this.loading = false;
-       this.data = rData;
-     });
+    this.excelparser.parseExcelFile(evt);
+    this.excelparser.onXLSParsed.subscribe(rData => {
+      this.loading = false;
+      this.data = rData;
+    });
   }
-
-
 }
