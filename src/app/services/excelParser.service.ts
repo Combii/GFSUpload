@@ -33,7 +33,7 @@ export class ExcelParserService {
       this.tempDataArr = XLSX.utils.sheet_to_json(ws, { header: 1 });
 
       this.insertDataIntoBookingList();
-      console.log(this.dataList);
+      //console.log(this.dataList);
       this.validateBookingsList();
       this.onXLSParsed.next(this.dataList);
     };

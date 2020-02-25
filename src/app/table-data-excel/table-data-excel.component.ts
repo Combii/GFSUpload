@@ -20,7 +20,7 @@ export class TableDataExcelComponent {
     this.excelparser.onXLSParsed.subscribe(rData => {
       this.loading = false;
       this.data = rData;
-      // console.log(this.data);
+      console.log(this.data);
     });
   }
 }

@@ -14,14 +14,35 @@
 		<p *ngIf="loading">Loading...</p>
 	  
 		<div class="table-responsive">
-		  <table class="table table-bordered">
-			<tbody>
-				<tr *ngFor="let row of data">
-					<td *ngFor="let val of row">
-						{{val}}
-					</td>
-			</tbody>
-		  </table>
-		</div>
+			<table class="table table-bordered">
+			  <thead>
+				<tr>
+					<th>Accounting date</th>
+					<th>Registration No</th>
+					<th>IDKT</th>
+					<th>Original IDKT</th>
+					<th>Counter Account IDKT</th>
+					<th>Text</th>
+					<th>Project code</th>
+					<th>Currency</th>
+					<th>Balance</th>
+				</tr>
+			  </thead>
+			  <tbody>
+					
+				<tr *ngFor="let record of data">
+				  <td contenteditable="true">{{ record.AccountingDate }}</td>
+				  <td contenteditable="true">{{ record.RegistrationNo }}</td>
+				  <td contenteditable="true">{{ record.IDKT }}</td>
+				  <td contenteditable="true">{{ record.OriginalIDKT }}</td>
+				  <td contenteditable="true">{{ record.CounterAccountIDKT }}</td>
+				  <td contenteditable="true">{{ record.Text }}</td>
+				  <td contenteditable="true">{{ record.ProjectCode }}</td>
+				  <td contenteditable="true">{{ record.Currency }}</td>
+				  <td contenteditable="true">{{ record.Balance }}</td>
+				</tr>
+			  </tbody>
+			</table>
+		  </div>
 	  </div>
 	  
