@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { TableDataComponent } from './table-data/table-data.component';
 import { MenuComponent } from './menu/menu.component';
 import { TableDataExcelComponent } from './table-data-excel/table-data-excel.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TableDataComponent,
     MenuComponent,
-    TableDataExcelComponent
+    TableDataExcelComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

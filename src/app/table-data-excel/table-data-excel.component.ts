@@ -10,12 +10,15 @@ import { ExcelParserService } from '../services/excelParser.service';
 export class TableDataExcelComponent {
 
   data = [[], []];
+  loading = false;
 
   constructor(private excelparser: ExcelParserService) { }
 
   onFileChange(evt: any) {
+    this.loading = true;
      this.excelparser.parseExcelFile(evt);
      this.excelparser.onXLSParsed.subscribe(rData => {
+       this.loading = false;
        this.data = rData;
      });
   }

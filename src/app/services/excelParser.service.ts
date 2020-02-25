@@ -28,6 +28,7 @@ export class ExcelParserService {
        this.data =  (XLSX.utils.sheet_to_json(ws, { header: 1 }));
        this.onXLSParsed.next(this.data);
   };
+     
      reader.readAsBinaryString(target.files[0]);
   }
 }
