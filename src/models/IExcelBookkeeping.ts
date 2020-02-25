@@ -3,7 +3,7 @@ interface Error {
     errorMessage: string;
   }
 
-export interface IExcelKeeping {
+export interface IExcelBookKeeping {
     AccountingDate: string;
     RegistrationNo: string;
     IDKT: string;

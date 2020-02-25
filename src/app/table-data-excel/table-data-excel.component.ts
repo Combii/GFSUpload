@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { ExcelParserService } from '../services/excelParser.service';
+import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
 
 @Component({
   selector: 'app-table-data-excel',
@@ -8,7 +9,7 @@ import { ExcelParserService } from '../services/excelParser.service';
   styleUrls: ['./table-data-excel.component.css']
 })
 export class TableDataExcelComponent {
-  data = [[], []];
+  data: IExcelBookKeeping[] = [];
   loading = false;
 
   constructor(private excelparser: ExcelParserService) {}
@@ -19,8 +20,7 @@ export class TableDataExcelComponent {
     this.excelparser.onXLSParsed.subscribe(rData => {
       this.loading = false;
       this.data = rData;
-      //console.log(this.data);
-      this.excelparser.validateBookingsList();
+      // console.log(this.data);
     });
   }
 }

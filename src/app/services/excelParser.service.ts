@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { Subject } from 'rxjs';
+import { IExcelBookKeeping } from '../../models/IExcelBookKeeping';
 
 @Injectable({ providedIn: 'root' })
 export class ExcelParserService {
-  onXLSParsed = new Subject<any[][]>();
+  onXLSParsed = new Subject<IExcelBookKeeping[]>();
 
-  private data = [[], []];
+  private tempDataArr = [[], []];
+  private dataList: IExcelBookKeeping[] = [];
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
 
   private isFirst = false;
@@ -28,29 +30,41 @@ export class ExcelParserService {
       const ws: XLSX.WorkSheet = wb.Sheets[wsname];
 
       /* save data */
-      this.data = XLSX.utils.sheet_to_json(ws, { header: 1 });
-      this.onXLSParsed.next(this.data);
+      this.tempDataArr = XLSX.utils.sheet_to_json(ws, { header: 1 });
+
+      this.insertDataIntoBookingList();
+      console.log(this.dataList);
+      this.validateBookingsList();
+      this.onXLSParsed.next(this.dataList);
     };
 
     reader.readAsBinaryString(target.files[0]);
   }
 
-  validateBookingsList() {
-    this.data.forEach(row => {
+  insertDataIntoBookingList() {
+    this.tempDataArr.forEach(row => {
       if (this.isFirst) {
-        row.forEach(data => {
           // Validation goes here
-
-          
-
-
-
-
-          console.log(data);
-        });
+            this.dataList.push({
+              AccountingDate: row[0],
+              RegistrationNo: row[1],
+              IDKT: row[2],
+              OriginalIDKT: row[3],
+              CounterAccountIDKT: row[4],
+              Text: row[5],
+              ProjectCode: row[6],
+              Currency: row[7],
+              Balance: row[8],
+              errors : []
+            });
       }
       this.isFirst = true;
     });
+  }
+
+  validateBookingsList() {
+
+
   }
 }
 
