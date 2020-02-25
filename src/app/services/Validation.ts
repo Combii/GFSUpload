@@ -1,7 +1,8 @@
 export class Validations {
-  static IsValidateDate(date: string): boolean {
+  static IsValidDate(date: string): boolean {
 
     // https://stackoverflow.com/questions/10638529/how-to-parse-a-date-in-format-yyyymmdd-in-javascript
+    // Must a string of 8 digits only
     if (!/^(\d){8}$/.test(date)) { return false; }
 
     const year = Number(date.toString().substring(0, 4));

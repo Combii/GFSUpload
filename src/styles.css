@@ -2,3 +2,13 @@
 .row {
     margin: 70px 70px;
 }
+
+td {
+    padding:0 !important;
+    font-size:0.7em;
+}
+
+th {
+    padding:0 !important;
+}
+

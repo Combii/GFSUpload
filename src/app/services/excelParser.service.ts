@@ -6,7 +6,7 @@ import { Validations } from '../services/Validation';
 
 @Injectable({ providedIn: 'root' })
 export class ExcelParserService {
-  onXLSParsed = new Subject<IExcelBookKeeping[]>();
+  onExcelFileParsed = new Subject<IExcelBookKeeping[]>();
 
   private tempDataArr = [[], []];
   private dataList: IExcelBookKeeping[] = [];
@@ -35,7 +35,7 @@ export class ExcelParserService {
 
       this.insertDataIntoBookingList();
       this.validateBookingsList();
-      this.onXLSParsed.next(this.dataList);
+      this.onExcelFileParsed.next(this.dataList);
     };
 
     reader.readAsBinaryString(target.files[0]);
@@ -64,7 +64,7 @@ export class ExcelParserService {
 
   validateBookingsList() {
     this.dataList.forEach(row => {
-      if (!Validations.IsValidateDate(row.AccountingDate)) {
+      if (!Validations.IsValidDate(row.AccountingDate)) {
         row.errors.push({
           index : 0,
           errorMessage : 'Date is wrong'
