@@ -39,11 +39,18 @@ export class Validations {
 
   static IsValidCurrency(currency: string): boolean {
 
-    if(currency.length <= 0)
+    const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
+    if (currency.length <= 0 || currency.length > 3 || specialChar.test(currency)) {
+      console.log(currency + ' IS INVALID');
+      return false;
+    }
 
     return true;
   }
+  // Cool API call to valid currencies
+  // https://openexchangerates.org/api/currencies.json
+
 
 
 }
