@@ -51,12 +51,14 @@ export class Validations {
   }
 
 
-  // NOT DONE
   static IsValidRegNumber(regNumber: string): boolean {
 
-    if (regNumber.length <= 0 || regNumber.length > 4) {
+    const firstNumber = Number(regNumber.toString().substring(0, 2));
+
+    if (regNumber.length !== 4 || firstNumber < 30 || firstNumber > 49) {
       return false;
     }
+
 
     return true;
   }
