@@ -48,7 +48,7 @@ export class Validations {
 
     return true;
   }
-  // Cool API call to valid currencies
+  // Cool API call to valid currencies. Could use for future use.
   // https://openexchangerates.org/api/currencies.json
 
 
