@@ -1,15 +1,17 @@
-import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
+import { IExcelBookKeeping, IExcelBookKeepingError } from 'src/models/IExcelBookKeeping';
 import { IBookKeeping } from 'src/models/IbookKeeping';
 
 export class Validations {
-  static validateExcelBookKeeping(excelBookKeeping: IExcelBookKeeping): {} {
-    const errors = {
+  static validateExcelBookKeeping(excelBookKeeping: IExcelBookKeeping): IExcelBookKeepingError {
+    const errors: IExcelBookKeepingError = {
       AccountingDate: Validations.IsValidDate(excelBookKeeping.AccountingDate),
       RegistrationNo: Validations.IsValidRegNumber(
         excelBookKeeping.RegistrationNo
       ),
       Currency: Validations.IsValidCurrency(excelBookKeeping.Currency),
       IDKT: Validations.IsValidIDKT(excelBookKeeping.IDKT, false),
+      OriginalIDKT: [],
+      CounterAccountIDKT: [],
       ProjectCode: Validations.IsValidProjectCode(excelBookKeeping.ProjectCode),
       Balance: Validations.IsValidBalance(excelBookKeeping.Balance),
       Text: Validations.IsValidText(excelBookKeeping.Text)

@@ -32,8 +32,7 @@ export class CSVParserService {
               leveran_kor: row.leveran_kor,
               leveran_type: row.leveran_type,
               saldo: row.saldo,
-              Tekst: row.Tekst,
-              errors : []
+              Tekst: row.Tekst
             });
           });
           this.validateBookingsList();
@@ -47,6 +46,5 @@ export class CSVParserService {
     this.dataList.forEach(row => {
       row.errors = Validations.validateCSVBookKeeping(row);
     });
-
   }
 }

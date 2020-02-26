@@ -56,8 +56,7 @@ export class ExcelParserService {
               Text: row[5],
               ProjectCode: row[6],
               Currency: row[7],
-              Balance: row[8],
-              errors : []
+              Balance: row[8]
             });
       }
       this.isFirst = true;
@@ -69,5 +68,7 @@ export class ExcelParserService {
     this.dataList.forEach(row => {
       row.errors = Validations.validateExcelBookKeeping(row);
     });
+    console.log(this.dataList);
+
   }
 }
