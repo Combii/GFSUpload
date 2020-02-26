@@ -2,7 +2,9 @@ import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
 import { IBookKeeping } from 'src/models/Ibookkeeping';
 
 export class Validations {
-  static validateExcelBookKeeping(excelBookKeeping: IExcelBookKeeping): IExcelBookKeeping {
+  static validateExcelBookKeeping(
+    excelBookKeeping: IExcelBookKeeping
+  ): IExcelBookKeeping {
     if (!Validations.IsValidDate(excelBookKeeping.AccountingDate)) {
       excelBookKeeping.errors.push({
         index: 0,
@@ -28,6 +30,13 @@ export class Validations {
       excelBookKeeping.errors.push({
         index: 2,
         errorMessage: 'IDKT is invalid'
+      });
+    }
+
+    if (!Validations.IsValidProjectCode(excelBookKeeping.ProjectCode)) {
+      excelBookKeeping.errors.push({
+        index: 6,
+        errorMessage: 'Project code is invalid'
       });
     }
 
@@ -130,9 +139,10 @@ export class Validations {
 
   private static IsValidIDKT(
     IDKT: string,
-    isFebosOrBookingUpload: boolean): boolean {
+    isFebosOrBookingUpload: boolean
+  ): boolean {
 
-    if (IDKT.length <= 0) {
+    if (!Validations.isNotEmptyString(IDKT)) {
       return false;
     }
 
@@ -147,6 +157,23 @@ export class Validations {
         return false;
       }
     }
+    return true;
+  }
+
+  private static IsValidProjectCode(projectCode: string): boolean {
+
+    if (!Validations.isNotEmptyString(projectCode) || projectCode !== '078') {
+      return false;
+    }
+
+    return true;
+  }
+
+  private static isNotEmptyString(dataString: string): boolean {
+    if (dataString.length <= 0) {
+      return false;
+    }
+
     return true;
   }
 }
