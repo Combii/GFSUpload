@@ -112,43 +112,57 @@ export class Validations {
     return true;
   }
 
-  private static IsValidCurrency(currency: string): boolean {
+  private static IsValidCurrency(currency: string): string[] {
+
+    const errorsArray = [];
+
     const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
-    if (currency.length !== 3 || specialChar.test(currency)) {
-      console.log(currency + ' IS INVALID');
-      return false;
+    if (currency.length !== 3) {
+      errorsArray.push('Currency is not three chars long');
     }
-    return true;
+
+    if (specialChar.test(currency)) {
+      errorsArray.push('Currency includes special characters');
+    }
+
+    return errorsArray;
     // Cool API call to valid currencies. Could use for future use.
     // https://openexchangerates.org/api/currencies.json
   }
 
-  private static IsValidRegNumber(regNumber: string): boolean {
+  private static IsValidRegNumber(regNumber: string): string[] {
     // This validation is not complete
+
+    const errorsArray = [];
+
     const firstNumber = Number(regNumber.toString().substring(0, 2));
     const firstLastNumberOrChar = regNumber.toString().substring(2, 3);
     const secondLastNumberOrChar = regNumber.toString().substring(3, 4);
 
     if (regNumber.length !== 4 || firstNumber < 30 || firstNumber > 49) {
-      return false;
+      errorsArray.push('Is not 4 in length');
+    }
+
+    if (firstNumber < 30 || firstNumber > 49) {
+      errorsArray.push('First two digits are not between 30 and 49');
     }
 
     if (
       isNaN(Number(firstLastNumberOrChar)) &&
       isNaN(Number(secondLastNumberOrChar))
     ) {
-      return false;
+      errorsArray.push('second last char and last char cannot both be digits or characters');
     }
 
     if (
       !isNaN(Number(firstLastNumberOrChar)) &&
       !isNaN(Number(secondLastNumberOrChar))
     ) {
-      return false;
+      errorsArray.push('second last char and last char cannot both be digits or characters');
     }
 
-    return true;
+    return errorsArray;
   }
 
   private static IsValidIDKT(
