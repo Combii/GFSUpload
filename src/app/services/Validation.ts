@@ -1,5 +1,5 @@
-import { IExcelBookKeeping } from "src/models/IExcelBookKeeping";
-import { IBookKeeping } from "src/models/IbookKeeping";
+import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
+import { IBookKeeping } from 'src/models/IbookKeeping';
 
 export class Validations {
   static validateExcelBookKeeping(excelBookKeeping: IExcelBookKeeping): {} {
@@ -31,7 +31,7 @@ export class Validations {
 
     // https://stackoverflow.com/questions/10638529/how-to-parse-a-date-in-format-yyyymmdd-in-javascript
     if (!/^(\d){8}$/.test(date)) {
-      errorsArray.push("Date must be 8 digits only");
+      errorsArray.push('Date must be 8 digits only');
     }
 
     const year = Number(date.toString().substring(0, 4));
@@ -50,7 +50,7 @@ export class Validations {
     // Saturday === 0
     // Sunday === 1
     if (dayOfWeek === 0 || dayOfWeek === 1) {
-      errorsArray.push("Date cannot be saturday or sunday");
+      errorsArray.push('Date cannot be saturday or sunday');
     }
 
     // Check if first of January
@@ -58,7 +58,7 @@ export class Validations {
     const dayOfMonth = parsedDate.getDate();
 
     if (month === 0 && dayOfMonth === 1) {
-      errorsArray.push("Date cannot be first of January");
+      errorsArray.push('Date cannot be first of January');
     }
 
     return errorsArray;
@@ -70,11 +70,11 @@ export class Validations {
     const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
     if (currency.length !== 3) {
-      errorsArray.push("Currency is not three chars long");
+      errorsArray.push('Currency is not three chars long');
     }
 
     if (specialChar.test(currency)) {
-      errorsArray.push("Currency includes special characters");
+      errorsArray.push('Currency includes special characters');
     }
 
     return errorsArray;
@@ -91,12 +91,12 @@ export class Validations {
     const firstLastNumberOrChar = regNumber.toString().substring(2, 3);
     const secondLastNumberOrChar = regNumber.toString().substring(3, 4);
 
-    if (regNumber.length !== 4 || firstNumber < 30 || firstNumber > 49) {
-      errorsArray.push("Is not 4 in length");
+    if (regNumber.length !== 4) {
+      errorsArray.push('Is not 4 in length');
     }
 
     if (firstNumber < 30 || firstNumber > 49) {
-      errorsArray.push("First two digits are not between 30 and 49");
+      errorsArray.push('First two digits are not between 30 and 49');
     }
 
     if (
@@ -104,7 +104,7 @@ export class Validations {
       isNaN(Number(secondLastNumberOrChar))
     ) {
       errorsArray.push(
-        "second last char and last char cannot both be digits or characters"
+        'second last char and last char cannot both be digits or characters'
       );
     }
 
@@ -113,7 +113,7 @@ export class Validations {
       !isNaN(Number(secondLastNumberOrChar))
     ) {
       errorsArray.push(
-        "second last char and last char cannot both be digits or characters"
+        'second last char and last char cannot both be digits or characters'
       );
     }
 
@@ -127,16 +127,16 @@ export class Validations {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(IDKT)) {
-      errorsArray.push("Is empty");
+      errorsArray.push('Is empty');
     }
 
     if (isFebosOrBookingUpload) {
       if (IDKT.length > 10) {
-        errorsArray.push("Is longer than 10 characters");
+        errorsArray.push('Is longer than 10 characters');
       }
     } else {
       if (IDKT.length > 14) {
-        errorsArray.push("Is longer than 14 characters");
+        errorsArray.push('Is longer than 14 characters');
       }
     }
     return errorsArray;
@@ -146,10 +146,10 @@ export class Validations {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(projectCode)) {
-      errorsArray.push("Is empty");
+      errorsArray.push('Is empty');
     }
-    if (projectCode !== "078") {
-      errorsArray.push("Project Code must be 078");
+    if (projectCode !== '078') {
+      errorsArray.push('Project Code must be 078');
     }
 
     return errorsArray;
@@ -161,7 +161,7 @@ export class Validations {
     const errorsArray = [];
 
     if (!/^\d*$/.test(balance)) {
-      errorsArray.push("Is not a digit");
+      errorsArray.push('Is not a digit');
     }
 
     return errorsArray;
@@ -171,10 +171,10 @@ export class Validations {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(text)) {
-      errorsArray.push("Is empty");
+      errorsArray.push('Is empty');
     }
     if (text.length > 40) {
-      errorsArray.push("Text is longer than 40 characters");
+      errorsArray.push('Text is longer than 40 characters');
     }
 
     return errorsArray;
