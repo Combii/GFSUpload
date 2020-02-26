@@ -45,7 +45,8 @@ export class CSVParserService {
 
   validateBookingsList() {
     this.dataList.forEach(row => {
-      row = Validations.validateCSVBookKeeping(row);
+      // row = Validations.validateCSVBookKeeping(row);
+      Validations.validateCSVBookKeeping(row);
     });
 
   }

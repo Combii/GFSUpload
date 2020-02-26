@@ -4,82 +4,38 @@ import { IBookKeeping } from 'src/models/Ibookkeeping';
 export class Validations {
   static validateExcelBookKeeping(
     excelBookKeeping: IExcelBookKeeping
-  ): IExcelBookKeeping {
-    if (!Validations.IsValidDate(excelBookKeeping.AccountingDate)) {
-      excelBookKeeping.errors.push({
-        index: 0,
-        errorMessage: 'Date is wrong'
-      });
-    }
+  ): string[] {
 
-    if (!Validations.IsValidRegNumber(excelBookKeeping.RegistrationNo)) {
-      excelBookKeeping.errors.push({
-        index: 7,
-        errorMessage: 'Reg Number is invalid'
-      });
-    }
+    const errorsArray = [];
 
-    if (!Validations.IsValidCurrency(excelBookKeeping.Currency)) {
-      excelBookKeeping.errors.push({
-        index: 7,
-        errorMessage: 'Currency is invalid'
-      });
-    }
+    errorsArray.push(Validations.IsValidDate(excelBookKeeping.AccountingDate));
+    errorsArray.push(Validations.IsValidRegNumber(excelBookKeeping.RegistrationNo));
+    errorsArray.push(Validations.IsValidCurrency(excelBookKeeping.Currency));
+    errorsArray.push(Validations.IsValidIDKT(excelBookKeeping.IDKT, false));
+    errorsArray.push(Validations.IsValidProjectCode(excelBookKeeping.ProjectCode));
+    errorsArray.push(Validations.IsValidBalance(excelBookKeeping.Balance));
+    errorsArray.push(Validations.IsValidText(excelBookKeeping.Text));
 
-    if (!Validations.IsValidIDKT(excelBookKeeping.IDKT, false)) {
-      excelBookKeeping.errors.push({
-        index: 2,
-        errorMessage: 'IDKT is invalid'
-      });
-    }
-
-    if (!Validations.IsValidProjectCode(excelBookKeeping.ProjectCode)) {
-      excelBookKeeping.errors.push({
-        index: 6,
-        errorMessage: 'Project code is invalid'
-      });
-    }
-
-    if (!Validations.IsValidBalance(excelBookKeeping.Balance)) {
-      excelBookKeeping.errors.push({
-        index: 8,
-        errorMessage: 'Balance is invalid'
-      });
-    }
-
-    if (!Validations.IsValidText(excelBookKeeping.Text)) {
-      excelBookKeeping.errors.push({
-        index: 5,
-        errorMessage: 'Text is invalid'
-      });
-    }
-
-    return excelBookKeeping;
+    return errorsArray;
   }
 
-  static validateCSVBookKeeping(csvBookKeeping: IBookKeeping): IBookKeeping {
-    if (!Validations.IsValidDate(csvBookKeeping.Dato)) {
-      csvBookKeeping.errors.push({
-        index: 0,
-        errorMessage: 'Date is wrong'
-      });
-    }
+  static validateCSVBookKeeping(csvBookKeeping: IBookKeeping): string[] {
 
-    if (!Validations.IsValidCurrency(csvBookKeeping.valutakod)) {
-      csvBookKeeping.errors.push({
-        index: 7,
-        errorMessage: 'Currency is invalid'
-      });
-    }
+    const errorsArray = [];
 
-    return csvBookKeeping;
+    errorsArray.push(Validations.IsValidDate(csvBookKeeping.Dato));
+    errorsArray.push(Validations.IsValidCurrency(csvBookKeeping.valutakod));
+
+    return errorsArray;
   }
 
-  private static IsValidDate(date: string): boolean {
+  private static IsValidDate(date: string): string[] {
+
+    const errorsArray = [];
+
     // https://stackoverflow.com/questions/10638529/how-to-parse-a-date-in-format-yyyymmdd-in-javascript
-    // Must a string of 8 digits only
     if (!/^(\d){8}$/.test(date)) {
-      return false;
+      errorsArray.push('Date must be 8 digits only');
     }
 
     const year = Number(date.toString().substring(0, 4));
@@ -98,7 +54,7 @@ export class Validations {
     // Saturday === 0
     // Sunday === 1
     if (dayOfWeek === 0 || dayOfWeek === 1) {
-      return false;
+      errorsArray.push('Date is a saturday or sunday');
     }
 
     // Check if first of January
@@ -106,97 +62,126 @@ export class Validations {
     const dayOfMonth = parsedDate.getDate();
 
     if (month === 0 && dayOfMonth === 1) {
-      return false;
+      errorsArray.push('Date is first of January');
     }
 
-    return true;
+    return errorsArray;
   }
 
-  private static IsValidCurrency(currency: string): boolean {
+  private static IsValidCurrency(currency: string): string[] {
+
+    const errorsArray = [];
+
     const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
-    if (currency.length !== 3 || specialChar.test(currency)) {
-      console.log(currency + ' IS INVALID');
-      return false;
+    if (currency.length !== 3) {
+      errorsArray.push('Currency is not three chars long');
     }
-    return true;
+
+    if (specialChar.test(currency)) {
+      errorsArray.push('Currency includes special characters');
+    }
+
+    return errorsArray;
     // Cool API call to valid currencies. Could use for future use.
     // https://openexchangerates.org/api/currencies.json
   }
 
-  private static IsValidRegNumber(regNumber: string): boolean {
+  private static IsValidRegNumber(regNumber: string): string[] {
     // This validation is not complete
+
+    const errorsArray = [];
+
     const firstNumber = Number(regNumber.toString().substring(0, 2));
     const firstLastNumberOrChar = regNumber.toString().substring(2, 3);
     const secondLastNumberOrChar = regNumber.toString().substring(3, 4);
 
     if (regNumber.length !== 4 || firstNumber < 30 || firstNumber > 49) {
-      return false;
+      errorsArray.push('Is not 4 in length');
+    }
+
+    if (firstNumber < 30 || firstNumber > 49) {
+      errorsArray.push('First two digits are not between 30 and 49');
     }
 
     if (
       isNaN(Number(firstLastNumberOrChar)) &&
       isNaN(Number(secondLastNumberOrChar))
     ) {
-      return false;
+      errorsArray.push('second last char and last char cannot both be digits or characters');
     }
 
     if (
       !isNaN(Number(firstLastNumberOrChar)) &&
       !isNaN(Number(secondLastNumberOrChar))
     ) {
-      return false;
+      errorsArray.push('second last char and last char cannot both be digits or characters');
     }
 
-    return true;
+    return errorsArray;
   }
 
   private static IsValidIDKT(
     IDKT: string,
     isFebosOrBookingUpload: boolean
-  ): boolean {
+  ): string[] {
+
+    const errorsArray = [];
 
     if (!Validations.isNotEmptyString(IDKT)) {
-      return false;
+      errorsArray.push('Is empty');
     }
 
     if (isFebosOrBookingUpload) {
       if (IDKT.length > 10) {
-        return false;
+        errorsArray.push('Is longer than 10 characters');
       }
     } else {
       if (IDKT.length > 14) {
-        return false;
+        errorsArray.push('Is longer than 14 characters');
       }
     }
-    return true;
+    return errorsArray;
   }
 
-  private static IsValidProjectCode(projectCode: string): boolean {
+  private static IsValidProjectCode(projectCode: string): string[] {
 
-    if (!Validations.isNotEmptyString(projectCode) || projectCode !== '078') {
-      return false;
+    const errorsArray = [];
+
+    if (!Validations.isNotEmptyString(projectCode)) {
+      errorsArray.push('Is empty');
+    }
+    if (projectCode !== '078') {
+      errorsArray.push('Project Code must be 078');
     }
 
-    return true;
+    return errorsArray;
   }
 
-  private static IsValidBalance(balance: string): boolean {
+  private static IsValidBalance(balance: string): string[] {
     // NOT DONE YET
+
+    const errorsArray = [];
+
     if (!(/^\d*$/.test(balance))) {
-      return false;
+      errorsArray.push('Is not a digit');
     }
 
-    return true;
+    return errorsArray;
   }
 
-  private static IsValidText(text: string): boolean {
+  private static IsValidText(text: string): string[] {
 
-    if (!Validations.isNotEmptyString(text) || text.length > 40) {
-      return false;
+    const errorsArray = [];
+
+    if (!Validations.isNotEmptyString(text)) {
+      errorsArray.push('Is empty');
+    }
+    if (text.length > 40) {
+      errorsArray.push('Text is longer than 40 characters');
     }
 
-    return true;
+    return errorsArray;
   }
 
   private static isNotEmptyString(dataString: string): boolean {
