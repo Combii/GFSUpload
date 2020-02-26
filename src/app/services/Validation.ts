@@ -47,6 +47,13 @@ export class Validations {
       });
     }
 
+    if (!Validations.IsValidText(excelBookKeeping.Text)) {
+      excelBookKeeping.errors.push({
+        index: 5,
+        errorMessage: 'Text is invalid'
+      });
+    }
+
     return excelBookKeeping;
   }
 
@@ -177,8 +184,17 @@ export class Validations {
   }
 
   private static IsValidBalance(balance: string): boolean {
-
+    // NOT DONE YET
     if (!(/^\d*$/.test(balance))) {
+      return false;
+    }
+
+    return true;
+  }
+
+  private static IsValidText(text: string): boolean {
+
+    if (!Validations.isNotEmptyString(text) || text.length > 40) {
       return false;
     }
 
