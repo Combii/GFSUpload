@@ -68,7 +68,7 @@ export class ExcelParserService {
     this.dataList.forEach(row => {
       row.errors = Validations.validateExcelBookKeeping(row);
     });
-    console.log(this.dataList);
+    //console.log(this.dataList);
 
   }
 }
