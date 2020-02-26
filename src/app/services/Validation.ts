@@ -163,8 +163,6 @@ export class Validations {
     if (isFebosOrBookingUpload) {
       if (IDKT.length > 10) {
         return false;
-      } else {
-        return true;
       }
     } else {
       if (IDKT.length > 14) {
