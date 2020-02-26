@@ -64,8 +64,6 @@ export class ExcelParserService {
 
   validateBookingsList() {
 
-    console.log(Validations.IsValidRegNumber(this.dataList[0].RegistrationNo));
-
     this.dataList.forEach(row => {
       row = Validations.validateExcelBookKeeping(row);
     });

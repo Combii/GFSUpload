@@ -1,10 +1,12 @@
 import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
+import { IBookKeeping } from 'src/models/Ibookkeeping';
 
 export class Validations {
 
 
 
   static validateExcelBookKeeping(excelBookKeeping: IExcelBookKeeping): IExcelBookKeeping {
+
     if (!Validations.IsValidDate(excelBookKeeping.AccountingDate)) {
       excelBookKeeping.errors.push({
         index : 0,
@@ -13,7 +15,6 @@ export class Validations {
     }
 
     // Validations.IsValidRegNumber(row.RegistrationNo);
-
 
     if (!Validations.IsValidCurrency(excelBookKeeping.Currency)) {
       excelBookKeeping.errors.push({
@@ -25,8 +26,26 @@ export class Validations {
     return excelBookKeeping;
   }
 
+  static validateCSVBookKeeping(csvBookKeeping: IBookKeeping): IBookKeeping {
 
-  static IsValidDate(date: string): boolean {
+    if (!Validations.IsValidDate(csvBookKeeping.Dato)) {
+      csvBookKeeping.errors.push({
+        index : 0,
+        errorMessage : 'Date is wrong'
+      });
+    }
+
+    if (!Validations.IsValidCurrency(csvBookKeeping.valutakod)) {
+      csvBookKeeping.errors.push({
+        index : 7,
+        errorMessage : 'Currency is invalid'
+      });
+    }
+
+    return csvBookKeeping;
+  }
+
+  private static IsValidDate(date: string): boolean {
     // https://stackoverflow.com/questions/10638529/how-to-parse-a-date-in-format-yyyymmdd-in-javascript
     // Must a string of 8 digits only
     if (!/^(\d){8}$/.test(date)) {
@@ -63,7 +82,7 @@ export class Validations {
     return true;
   }
 
-  static IsValidCurrency(currency: string): boolean {
+  private static IsValidCurrency(currency: string): boolean {
 
     const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
@@ -76,8 +95,7 @@ export class Validations {
       // https://openexchangerates.org/api/currencies.json
   }
 
-
-  static IsValidRegNumber(regNumber: string): boolean {
+  private static IsValidRegNumber(regNumber: string): boolean {
 
     const firstNumber = Number(regNumber.toString().substring(0, 2));
     const firstLastNumberOrChar = regNumber.toString().substring(2, 3);
