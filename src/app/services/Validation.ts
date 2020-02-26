@@ -40,6 +40,13 @@ export class Validations {
       });
     }
 
+    if (!Validations.IsValidBalance(excelBookKeeping.Balance)) {
+      excelBookKeeping.errors.push({
+        index: 8,
+        errorMessage: 'Balance is invalid'
+      });
+    }
+
     return excelBookKeeping;
   }
 
@@ -163,6 +170,15 @@ export class Validations {
   private static IsValidProjectCode(projectCode: string): boolean {
 
     if (!Validations.isNotEmptyString(projectCode) || projectCode !== '078') {
+      return false;
+    }
+
+    return true;
+  }
+
+  private static IsValidBalance(balance: string): boolean {
+
+    if (!(/^\d*$/.test(balance))) {
       return false;
     }
 
