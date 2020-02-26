@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as Papa from 'papaparse';
 import { IBookKeeping } from '../../models/Ibookkeeping';
-import { stringify } from 'querystring';
+import { Validations } from '../services/Validation';
 
 @Injectable({ providedIn: 'root' })
 export class CSVParserService {
@@ -45,12 +45,7 @@ export class CSVParserService {
 
   validateBookingsList() {
     this.dataList.forEach(row => {
-      if (row.valutakod !== 'DKK' && row.valutakod.length > 0) {
-        row.errors.push({
-          index : 6,
-          errorMessage : 'Valutacode wrong'
-        });
-      }
+      row = Validations.validateCSVBookKeeping(row);
     });
 
   }

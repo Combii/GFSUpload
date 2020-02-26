@@ -1,28 +1,29 @@
-import { IExcelBookKeeping } from "src/models/IExcelBookKeeping";
-import { IBookKeeping } from "src/models/Ibookkeeping";
+import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
+import { IBookKeeping } from 'src/models/Ibookkeeping';
 
 export class Validations {
+
   static validateExcelBookKeeping(
     excelBookKeeping: IExcelBookKeeping
   ): IExcelBookKeeping {
     if (!Validations.IsValidDate(excelBookKeeping.AccountingDate)) {
       excelBookKeeping.errors.push({
         index: 0,
-        errorMessage: "Date is wrong"
+        errorMessage: 'Date is wrong'
       });
     }
 
     if (!Validations.IsValidRegNumber(excelBookKeeping.RegistrationNo)) {
       excelBookKeeping.errors.push({
         index: 7,
-        errorMessage: "Reg Number is invalid"
+        errorMessage: 'Reg Number is invalid'
       });
     }
 
     if (!Validations.IsValidCurrency(excelBookKeeping.Currency)) {
       excelBookKeeping.errors.push({
         index: 7,
-        errorMessage: "Currency is invalid"
+        errorMessage: 'Currency is invalid'
       });
     }
 
@@ -33,14 +34,14 @@ export class Validations {
     if (!Validations.IsValidDate(csvBookKeeping.Dato)) {
       csvBookKeeping.errors.push({
         index: 0,
-        errorMessage: "Date is wrong"
+        errorMessage: 'Date is wrong'
       });
     }
 
     if (!Validations.IsValidCurrency(csvBookKeeping.valutakod)) {
       csvBookKeeping.errors.push({
         index: 7,
-        errorMessage: "Currency is invalid"
+        errorMessage: 'Currency is invalid'
       });
     }
 
@@ -88,7 +89,7 @@ export class Validations {
     const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
     if (currency.length !== 3 || specialChar.test(currency)) {
-      console.log(currency + " IS INVALID");
+      console.log(currency + ' IS INVALID');
       return false;
     }
     return true;
