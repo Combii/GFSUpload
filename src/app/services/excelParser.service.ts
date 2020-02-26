@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { Subject } from 'rxjs';
-import { IExcelBookKeeping } from '../../models/IExcelBookkeeping';
+import { IExcelBookKeeping } from '../../models/IExcelBookKeeping';
 import { Validations } from '../services/Validation';
 
 @Injectable({ providedIn: 'root' })
