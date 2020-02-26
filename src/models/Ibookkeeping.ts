@@ -21,5 +21,5 @@ export interface IBookKeeping {
   leveran_type: string;
   saldo: number;
   Tekst: string;
-  errors?: Error[];
+  errors: {};
 }

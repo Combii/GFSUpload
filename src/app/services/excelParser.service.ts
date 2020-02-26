@@ -10,7 +10,7 @@ export class ExcelParserService {
 
   private tempDataArr = [[], []];
   dataList: IExcelBookKeeping[] = [];
-  errors = [];
+
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
 
   private isFirst = false;
@@ -67,10 +67,7 @@ export class ExcelParserService {
   validateBookingsList() {
 
     this.dataList.forEach(row => {
-      this.errors.push(Validations.validateExcelBookKeeping(row));
+      row.errors = Validations.validateExcelBookKeeping(row);
     });
-
-    console.log(this.errors);
-
   }
 }

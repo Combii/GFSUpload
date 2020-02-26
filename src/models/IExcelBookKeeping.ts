@@ -13,5 +13,5 @@ export interface IExcelBookKeeping {
     ProjectCode: string;
     Currency: string;
     Balance: string;
-    errors?: Error[];
+    errors: {};
   }
