@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { Subject } from 'rxjs';
-import { IExcelBookKeeping } from '../../models/IExcelBookKeeping';
+import { IExcelBookKeeping } from '../../models/IExcelBookkeeping';
 import { Validations } from '../services/Validation';
 
 @Injectable({ providedIn: 'root' })
@@ -9,7 +9,8 @@ export class ExcelParserService {
   onExcelFileParsed = new Subject<IExcelBookKeeping[]>();
 
   private tempDataArr = [[], []];
-  private dataList: IExcelBookKeeping[] = [];
+  dataList: IExcelBookKeeping[] = [];
+  errors = [];
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
 
   private isFirst = false;
@@ -65,9 +66,12 @@ export class ExcelParserService {
   validateBookingsList() {
 
     this.dataList.forEach(row => {
-      // row = Validations.validateExcelBookKeeping(row);
-      Validations.validateExcelBookKeeping(row);
+      // errosList = Validations.validateExcelBookKeeping(row);
+      this.errors.push(Validations.validateExcelBookKeeping(row));
+      
     });
+
+    console.log(this.errors);
 
   }
 }
