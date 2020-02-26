@@ -188,22 +188,30 @@ export class Validations {
     return errorsArray;
   }
 
-  private static IsValidBalance(balance: string): boolean {
+  private static IsValidBalance(balance: string): string[] {
     // NOT DONE YET
+
+    const errorsArray = [];
+
     if (!(/^\d*$/.test(balance))) {
-      return false;
+      errorsArray.push('Is not a digit');
     }
 
-    return true;
+    return errorsArray;
   }
 
-  private static IsValidText(text: string): boolean {
+  private static IsValidText(text: string): string[] {
 
-    if (!Validations.isNotEmptyString(text) || text.length > 40) {
-      return false;
+    const errorsArray = [];
+
+    if (!Validations.isNotEmptyString(text)) {
+      errorsArray.push('Is empty');
+    }
+    if (text.length > 40) {
+      errorsArray.push('Text is longer than 40 characters');
     }
 
-    return true;
+    return errorsArray;
   }
 
   private static isNotEmptyString(dataString: string): boolean {
