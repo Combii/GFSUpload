@@ -16,6 +16,7 @@ export class ExcelParserService {
   private isFirst = false;
 
   parseExcelFile(evt: any) {
+    // https://stackblitz.com/edit/angular-excel-read-table?file=src%2Fapp%2Fsheet.component.ts
     /* wire up file reader */
     const target: DataTransfer = evt.target as DataTransfer;
     if (target.files.length !== 1) {
@@ -75,5 +76,3 @@ export class ExcelParserService {
 
   }
 }
-
-// https://stackblitz.com/edit/angular-excel-read-table?file=src%2Fapp%2Fsheet.component.ts
