@@ -174,13 +174,18 @@ export class Validations {
     return errorsArray;
   }
 
-  private static IsValidProjectCode(projectCode: string): boolean {
+  private static IsValidProjectCode(projectCode: string): string[] {
 
-    if (!Validations.isNotEmptyString(projectCode) || projectCode !== '078') {
-      return false;
+    const errorsArray = [];
+
+    if (!Validations.isNotEmptyString(projectCode)) {
+      errorsArray.push('Is empty');
+    }
+    if (projectCode !== '078') {
+      errorsArray.push('Project Code must be 078');
     }
 
-    return true;
+    return errorsArray;
   }
 
   private static IsValidBalance(balance: string): boolean {
