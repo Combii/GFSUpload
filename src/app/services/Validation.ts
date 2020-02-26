@@ -2,7 +2,6 @@ import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
 import { IBookKeeping } from 'src/models/Ibookkeeping';
 
 export class Validations {
-
   static validateExcelBookKeeping(excelBookKeeping: IExcelBookKeeping): IExcelBookKeeping {
     if (!Validations.IsValidDate(excelBookKeeping.AccountingDate)) {
       excelBookKeeping.errors.push({
@@ -22,6 +21,13 @@ export class Validations {
       excelBookKeeping.errors.push({
         index: 7,
         errorMessage: 'Currency is invalid'
+      });
+    }
+
+    if (!Validations.IsValidIDKT(excelBookKeeping.IDKT, false)) {
+      excelBookKeeping.errors.push({
+        index: 2,
+        errorMessage: 'IDKT is invalid'
       });
     }
 
@@ -96,7 +102,7 @@ export class Validations {
   }
 
   private static IsValidRegNumber(regNumber: string): boolean {
-    // This validation is not completely
+    // This validation is not complete
     const firstNumber = Number(regNumber.toString().substring(0, 2));
     const firstLastNumberOrChar = regNumber.toString().substring(2, 3);
     const secondLastNumberOrChar = regNumber.toString().substring(3, 4);
@@ -122,9 +128,25 @@ export class Validations {
     return true;
   }
 
-  private static IsValidIDKT(IDKT: string): boolean {
+  private static IsValidIDKT(
+    IDKT: string,
+    isFebosOrBookingUpload: boolean): boolean {
 
+    if (IDKT.length <= 0) {
+      return false;
+    }
 
+    if (isFebosOrBookingUpload) {
+      if (IDKT.length > 10) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      if (IDKT.length > 14) {
+        return false;
+      }
+    }
     return true;
   }
 }
