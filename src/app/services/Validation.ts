@@ -3,9 +3,7 @@ import { IBookKeeping } from 'src/models/Ibookkeeping';
 
 export class Validations {
 
-  static validateExcelBookKeeping(
-    excelBookKeeping: IExcelBookKeeping
-  ): IExcelBookKeeping {
+  static validateExcelBookKeeping(excelBookKeeping: IExcelBookKeeping): IExcelBookKeeping {
     if (!Validations.IsValidDate(excelBookKeeping.AccountingDate)) {
       excelBookKeeping.errors.push({
         index: 0,
@@ -98,6 +96,7 @@ export class Validations {
   }
 
   private static IsValidRegNumber(regNumber: string): boolean {
+    // This validation is not completely
     const firstNumber = Number(regNumber.toString().substring(0, 2));
     const firstLastNumberOrChar = regNumber.toString().substring(2, 3);
     const secondLastNumberOrChar = regNumber.toString().substring(3, 4);
@@ -119,6 +118,12 @@ export class Validations {
     ) {
       return false;
     }
+
+    return true;
+  }
+
+  private static IsValidIDKT(IDKT: string): boolean {
+
 
     return true;
   }
