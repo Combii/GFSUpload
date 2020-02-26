@@ -1,5 +1,5 @@
 import { IExcelBookKeeping } from "src/models/IExcelBookKeeping";
-import { IBookKeeping } from "src/models/Ibookkeeping";
+import { IBookKeeping } from "src/models/IbookKeeping";
 
 export class Validations {
   static validateExcelBookKeeping(excelBookKeeping: IExcelBookKeeping): {} {

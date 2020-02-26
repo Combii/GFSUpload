@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as Papa from 'papaparse';
-import {IBookKeeping} from '../../models/Ibookkeeping';
+import {IBookKeeping} from '../../models/IbookKeeping';
 import {CSVParserService} from '../services/CSVParser.service';
 
 @Component({

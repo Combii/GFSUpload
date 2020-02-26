@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as Papa from 'papaparse';
-import { IBookKeeping } from '../../models/Ibookkeeping';
+import { IBookKeeping } from '../../models/IbookKeeping';
 import { Validations } from '../services/Validation';
 
 @Injectable({ providedIn: 'root' })
