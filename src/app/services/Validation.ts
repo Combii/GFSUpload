@@ -90,8 +90,8 @@ export class Validations {
     const firstNumber = Number(regNumber.toString().substring(0, 2));
     const firstLastNumberOrChar = regNumber.toString().substring(2, 3);
     const secondLastNumberOrChar = regNumber.toString().substring(3, 4);
-
-    if (regNumber.length !== 4) {
+    
+    if (regNumber.toString().length !== 4) {
       errorsArray.push('Is not 4 in length');
     }
 
