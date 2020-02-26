@@ -1,25 +1,28 @@
-import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
-import { IBookKeeping } from 'src/models/Ibookkeeping';
+import { IExcelBookKeeping } from "src/models/IExcelBookKeeping";
+import { IBookKeeping } from "src/models/Ibookkeeping";
 
 export class Validations {
-
-
-
-  static validateExcelBookKeeping(excelBookKeeping: IExcelBookKeeping): IExcelBookKeeping {
-
+  static validateExcelBookKeeping(
+    excelBookKeeping: IExcelBookKeeping
+  ): IExcelBookKeeping {
     if (!Validations.IsValidDate(excelBookKeeping.AccountingDate)) {
       excelBookKeeping.errors.push({
-        index : 0,
-        errorMessage : 'Date is wrong'
+        index: 0,
+        errorMessage: "Date is wrong"
       });
     }
 
-    // Validations.IsValidRegNumber(row.RegistrationNo);
+    if (!Validations.IsValidRegNumber(excelBookKeeping.RegistrationNo)) {
+      excelBookKeeping.errors.push({
+        index: 7,
+        errorMessage: "Reg Number is invalid"
+      });
+    }
 
     if (!Validations.IsValidCurrency(excelBookKeeping.Currency)) {
       excelBookKeeping.errors.push({
-        index : 7,
-        errorMessage : 'Currency is invalid'
+        index: 7,
+        errorMessage: "Currency is invalid"
       });
     }
 
@@ -27,18 +30,17 @@ export class Validations {
   }
 
   static validateCSVBookKeeping(csvBookKeeping: IBookKeeping): IBookKeeping {
-
     if (!Validations.IsValidDate(csvBookKeeping.Dato)) {
       csvBookKeeping.errors.push({
-        index : 0,
-        errorMessage : 'Date is wrong'
+        index: 0,
+        errorMessage: "Date is wrong"
       });
     }
 
     if (!Validations.IsValidCurrency(csvBookKeeping.valutakod)) {
       csvBookKeeping.errors.push({
-        index : 7,
-        errorMessage : 'Currency is invalid'
+        index: 7,
+        errorMessage: "Currency is invalid"
       });
     }
 
@@ -83,38 +85,40 @@ export class Validations {
   }
 
   private static IsValidCurrency(currency: string): boolean {
-
     const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
     if (currency.length !== 3 || specialChar.test(currency)) {
-      console.log(currency + ' IS INVALID');
+      console.log(currency + " IS INVALID");
       return false;
     }
     return true;
-      // Cool API call to valid currencies. Could use for future use.
-      // https://openexchangerates.org/api/currencies.json
+    // Cool API call to valid currencies. Could use for future use.
+    // https://openexchangerates.org/api/currencies.json
   }
 
   private static IsValidRegNumber(regNumber: string): boolean {
-
     const firstNumber = Number(regNumber.toString().substring(0, 2));
     const firstLastNumberOrChar = regNumber.toString().substring(2, 3);
     const secondLastNumberOrChar = regNumber.toString().substring(3, 4);
-
 
     if (regNumber.length !== 4 || firstNumber < 30 || firstNumber > 49) {
       return false;
     }
 
-    if (isNaN(Number(firstLastNumberOrChar)) && isNaN(Number(secondLastNumberOrChar))) {
+    if (
+      isNaN(Number(firstLastNumberOrChar)) &&
+      isNaN(Number(secondLastNumberOrChar))
+    ) {
       return false;
     }
 
-    if (!isNaN(Number(firstLastNumberOrChar)) && !isNaN(Number(secondLastNumberOrChar))) {
+    if (
+      !isNaN(Number(firstLastNumberOrChar)) &&
+      !isNaN(Number(secondLastNumberOrChar))
+    ) {
       return false;
     }
 
     return true;
   }
-
 }
