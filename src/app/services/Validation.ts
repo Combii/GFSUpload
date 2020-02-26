@@ -4,75 +4,35 @@ import { IBookKeeping } from 'src/models/Ibookkeeping';
 export class Validations {
   static validateExcelBookKeeping(
     excelBookKeeping: IExcelBookKeeping
-  ): IExcelBookKeeping {
-    if (!Validations.IsValidDate(excelBookKeeping.AccountingDate)) {
-      excelBookKeeping.errors.push({
-        index: 0,
-        errorMessage: 'Date is wrong'
-      });
-    }
+  ): string[] {
 
-    if (!Validations.IsValidRegNumber(excelBookKeeping.RegistrationNo)) {
-      excelBookKeeping.errors.push({
-        index: 7,
-        errorMessage: 'Reg Number is invalid'
-      });
-    }
+    const errorsArray = [];
 
-    if (!Validations.IsValidCurrency(excelBookKeeping.Currency)) {
-      excelBookKeeping.errors.push({
-        index: 7,
-        errorMessage: 'Currency is invalid'
-      });
-    }
+    errorsArray.push(Validations.IsValidDate(excelBookKeeping.AccountingDate));
 
-    if (!Validations.IsValidIDKT(excelBookKeeping.IDKT, false)) {
-      excelBookKeeping.errors.push({
-        index: 2,
-        errorMessage: 'IDKT is invalid'
-      });
-    }
+    errorsArray.push(Validations.IsValidRegNumber(excelBookKeeping.RegistrationNo));
 
-    if (!Validations.IsValidProjectCode(excelBookKeeping.ProjectCode)) {
-      excelBookKeeping.errors.push({
-        index: 6,
-        errorMessage: 'Project code is invalid'
-      });
-    }
+    errorsArray.push(Validations.IsValidCurrency(excelBookKeeping.Currency));
 
-    if (!Validations.IsValidBalance(excelBookKeeping.Balance)) {
-      excelBookKeeping.errors.push({
-        index: 8,
-        errorMessage: 'Balance is invalid'
-      });
-    }
+    errorsArray.push(Validations.IsValidIDKT(excelBookKeeping.IDKT, false));
 
-    if (!Validations.IsValidText(excelBookKeeping.Text)) {
-      excelBookKeeping.errors.push({
-        index: 5,
-        errorMessage: 'Text is invalid'
-      });
-    }
+    errorsArray.push(Validations.IsValidProjectCode(excelBookKeeping.ProjectCode));
 
-    return excelBookKeeping;
+    errorsArray.push(Validations.IsValidBalance(excelBookKeeping.Balance));
+
+    errorsArray.push(Validations.IsValidText(excelBookKeeping.Text));
+
+    return errorsArray;
   }
 
-  static validateCSVBookKeeping(csvBookKeeping: IBookKeeping): IBookKeeping {
-    if (!Validations.IsValidDate(csvBookKeeping.Dato)) {
-      csvBookKeeping.errors.push({
-        index: 0,
-        errorMessage: 'Date is wrong'
-      });
-    }
+  static validateCSVBookKeeping(csvBookKeeping: IBookKeeping): string[] {
 
-    if (!Validations.IsValidCurrency(csvBookKeeping.valutakod)) {
-      csvBookKeeping.errors.push({
-        index: 7,
-        errorMessage: 'Currency is invalid'
-      });
-    }
+    const errorsArray = [];
 
-    return csvBookKeeping;
+    errorsArray.push(Validations.IsValidDate(csvBookKeeping.Dato));
+    errorsArray.push(Validations.IsValidCurrency(csvBookKeeping.valutakod));
+
+    return errorsArray;
   }
 
   private static IsValidDate(date: string): string[] {

@@ -65,7 +65,8 @@ export class ExcelParserService {
   validateBookingsList() {
 
     this.dataList.forEach(row => {
-      row = Validations.validateExcelBookKeeping(row);
+      // row = Validations.validateExcelBookKeeping(row);
+      Validations.validateExcelBookKeeping(row);
     });
 
   }
