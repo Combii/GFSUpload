@@ -154,24 +154,24 @@ export class Validations {
   private static IsValidIDKT(
     IDKT: string,
     isFebosOrBookingUpload: boolean
-  ): boolean {
+  ): string[] {
+
+    const errorsArray = [];
 
     if (!Validations.isNotEmptyString(IDKT)) {
-      return false;
+      errorsArray.push('Is empty');
     }
 
     if (isFebosOrBookingUpload) {
       if (IDKT.length > 10) {
-        return false;
-      } else {
-        return true;
+        errorsArray.push('Is longer than 10 characters');
       }
     } else {
       if (IDKT.length > 14) {
-        return false;
+        errorsArray.push('Is longer than 14 characters');
       }
     }
-    return true;
+    return errorsArray;
   }
 
   private static IsValidProjectCode(projectCode: string): boolean {
