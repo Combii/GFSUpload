@@ -1,4 +1,31 @@
+import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
+
 export class Validations {
+
+
+
+  static validateExcelBookKeeping(excelBookKeeping: IExcelBookKeeping): IExcelBookKeeping {
+    if (!Validations.IsValidDate(excelBookKeeping.AccountingDate)) {
+      excelBookKeeping.errors.push({
+        index : 0,
+        errorMessage : 'Date is wrong'
+      });
+    }
+
+    // Validations.IsValidRegNumber(row.RegistrationNo);
+
+
+    if (!Validations.IsValidCurrency(excelBookKeeping.Currency)) {
+      excelBookKeeping.errors.push({
+        index : 7,
+        errorMessage : 'Currency is invalid'
+      });
+    }
+
+    return excelBookKeeping;
+  }
+
+
   static IsValidDate(date: string): boolean {
     // https://stackoverflow.com/questions/10638529/how-to-parse-a-date-in-format-yyyymmdd-in-javascript
     // Must a string of 8 digits only
@@ -36,7 +63,6 @@ export class Validations {
     return true;
   }
 
-
   static IsValidCurrency(currency: string): boolean {
 
     const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
@@ -54,11 +80,21 @@ export class Validations {
   static IsValidRegNumber(regNumber: string): boolean {
 
     const firstNumber = Number(regNumber.toString().substring(0, 2));
+    const firstLastNumberOrChar = regNumber.toString().substring(2, 3);
+    const secondLastNumberOrChar = regNumber.toString().substring(3, 4);
+
 
     if (regNumber.length !== 4 || firstNumber < 30 || firstNumber > 49) {
       return false;
     }
 
+    if (isNaN(Number(firstLastNumberOrChar)) && isNaN(Number(secondLastNumberOrChar))) {
+      return false;
+    }
+
+    if (!isNaN(Number(firstLastNumberOrChar)) && !isNaN(Number(secondLastNumberOrChar))) {
+      return false;
+    }
 
     return true;
   }

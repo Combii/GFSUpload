@@ -63,24 +63,12 @@ export class ExcelParserService {
   }
 
   validateBookingsList() {
+
+    console.log(Validations.IsValidRegNumber(this.dataList[0].RegistrationNo));
+
     this.dataList.forEach(row => {
-      if (!Validations.IsValidDate(row.AccountingDate)) {
-        row.errors.push({
-          index : 0,
-          errorMessage : 'Date is wrong'
-        });
-      }
-
-      if (!Validations.IsValidCurrency(row.Currency)) {
-        row.errors.push({
-          index : 7,
-          errorMessage : 'Currency is invalid'
-        });
-      }
-      
-
+      row = Validations.validateExcelBookKeeping(row);
     });
-
 
   }
 }
