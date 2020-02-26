@@ -34,15 +34,15 @@
 			  <tbody>
 					
 				<tr *ngFor="let record of data">
-				  <td [ngStyle]="(record.errors.AccountingDate.length > 0) && {'background-color': 'red'}">{{ record.AccountingDate }}</td>
-				  <td [ngStyle]="(record.errors.RegistrationNo.length > 0) && {'background-color': 'red'}">{{ record.RegistrationNo }}</td>
-				  <td [ngStyle]="(record.errors.IDKT.length > 0) && {'background-color': 'red'}">{{ record.IDKT }}</td>
-				  <td [ngStyle]="(record.errors.OriginalIDKT.length > 0) && {'background-color': 'red'}">{{ record.OriginalIDKT }}</td>
-				  <td [ngStyle]="(record.errors.CounterAccountIDKT.length > 0) && {'background-color': 'red'}">{{ record.CounterAccountIDKT }}</td>
-				  <td [ngStyle]="(record.errors.Text.length > 0) && {'background-color': 'red'}">{{ record.Text }}</td>
-				  <td [ngStyle]="(record.errors.ProjectCode.length > 0) && {'background-color': 'red'}">{{ record.ProjectCode }}</td>
-				  <td [ngStyle]="(record.errors.Currency.length > 0) && {'background-color': 'red'}">{{ record.Currency }}</td>
-				  <td [ngStyle]="(record.errors.Balance.length > 0) && {'background-color': 'red'}">{{ record.Balance }}</td>
+				  <td appErrorNotification="['232','23423']">{{ record.AccountingDate }}</td>
+				  <td >{{ record.RegistrationNo }}</td>
+				  <td >{{ record.IDKT }}</td>
+				  <td >{{ record.OriginalIDKT }}</td>
+				  <td >{{ record.CounterAccountIDKT }}</td>
+				  <td >{{ record.Text }}</td>
+				  <td >{{ record.ProjectCode }}</td>
+				  <td [appErrorNotification]="record.errors.Currency">{{ record.Currency }}</td>
+				  <td >{{ record.Balance }}</td>
 				</tr>
 			  </tbody>
 			</table>
