@@ -9,17 +9,11 @@ export class Validations {
     const errorsArray = [];
 
     errorsArray.push(Validations.IsValidDate(excelBookKeeping.AccountingDate));
-
     errorsArray.push(Validations.IsValidRegNumber(excelBookKeeping.RegistrationNo));
-
     errorsArray.push(Validations.IsValidCurrency(excelBookKeeping.Currency));
-
     errorsArray.push(Validations.IsValidIDKT(excelBookKeeping.IDKT, false));
-
     errorsArray.push(Validations.IsValidProjectCode(excelBookKeeping.ProjectCode));
-
     errorsArray.push(Validations.IsValidBalance(excelBookKeeping.Balance));
-
     errorsArray.push(Validations.IsValidText(excelBookKeeping.Text));
 
     return errorsArray;
