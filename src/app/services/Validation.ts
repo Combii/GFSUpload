@@ -75,11 +75,13 @@ export class Validations {
     return csvBookKeeping;
   }
 
-  private static IsValidDate(date: string): boolean {
+  private static IsValidDate(date: string): string[] {
+
+    const errorsArray = [];
+
     // https://stackoverflow.com/questions/10638529/how-to-parse-a-date-in-format-yyyymmdd-in-javascript
-    // Must a string of 8 digits only
     if (!/^(\d){8}$/.test(date)) {
-      return false;
+      errorsArray.push('Date must be 8 digits only');
     }
 
     const year = Number(date.toString().substring(0, 4));
@@ -98,7 +100,7 @@ export class Validations {
     // Saturday === 0
     // Sunday === 1
     if (dayOfWeek === 0 || dayOfWeek === 1) {
-      return false;
+      errorsArray.push('Date is a saturday or sunday');
     }
 
     // Check if first of January
@@ -106,10 +108,10 @@ export class Validations {
     const dayOfMonth = parsedDate.getDate();
 
     if (month === 0 && dayOfMonth === 1) {
-      return false;
+      errorsArray.push('Date is first of January');
     }
 
-    return true;
+    return errorsArray;
   }
 
   private static IsValidCurrency(currency: string): string[] {
