@@ -4,16 +4,13 @@ import { Directive, ElementRef, Input, OnInit, HostBinding } from '@angular/core
   selector: '[appErrorNotification]'
 })
 export class ErrorNotificationDirective implements OnInit {
-  defaultColor = 'transparent';
   @Input('appErrorNotification') errorsArray: string[];
   @HostBinding('style.backgroundColor') backgroundColor: string;
 
   constructor(private elRef: ElementRef) {}
 
   ngOnInit(): void {
-    this.backgroundColor = this.defaultColor;
     this.checkIfErrorsOrNot();
-    // console.log(this.errorsArray);
   }
 
   checkIfErrorsOrNot() {
