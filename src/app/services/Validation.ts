@@ -165,16 +165,16 @@ export class Validations {
   private static IsValidBalance(balance: string): string[] {
     // NOT DONE YET
 
-    const errorsArray : string[] = [] ;
+    const errorsArray: string[] = [];
 
-    if(balance.length > 16) {
-      errorsArray.push('Balance must not exceed 16 characters')
+    if (balance.length > 16) {
+      errorsArray.push("Balance must not exceed 16 characters");
     }
 
     if (!/^\d+(,\d+)?$/.test(balance)) {
       errorsArray.push("Is not a valid digit");
     }
-    
+
     return errorsArray;
   }
 
