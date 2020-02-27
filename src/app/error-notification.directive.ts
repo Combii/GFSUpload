@@ -11,6 +11,7 @@ export class ErrorNotificationDirective implements OnInit {
 
   ngOnInit(): void {
     this.checkIfErrorsOrNot();
+    this.elRef.nativeElement.style.position = 'relative';
   }
 
   checkIfErrorsOrNot() {

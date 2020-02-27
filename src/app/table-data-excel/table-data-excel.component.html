@@ -39,7 +39,10 @@
 			  <tbody>
 					
 				<tr *ngFor="let record of data">
-				  <td [appErrorNotification]="record.errors.AccountingDate">{{ record.AccountingDate }}</td>
+				  <td class="custom-tooltip" [appErrorNotification]="record.errors.AccountingDate">
+					  {{ record.AccountingDate }}
+					  <span class="tooltiptext">Tooltip text</span>
+					</td>
 				  <td [appErrorNotification]="record.errors.RegistrationNo">{{ record.RegistrationNo }}</td>
 				  <td [appErrorNotification]="record.errors.IDKT">{{ record.IDKT }}</td>
 				  <td [appErrorNotification]="record.errors.OriginalIDKT">{{ record.OriginalIDKT }}</td>
