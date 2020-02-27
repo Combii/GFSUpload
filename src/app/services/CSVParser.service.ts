@@ -9,7 +9,7 @@ export class CSVParserService {
 
   parseCSV(files: File[]) {
     if (files[0]) {
-      console.log(files[0]);
+      //console.log(files[0]);
       Papa.parse(files[0], {
         header: true,
         skipEmptyLines: true,
@@ -36,7 +36,7 @@ export class CSVParserService {
             });
           });
           this.validateBookingsList();
-          console.log(this.dataList);
+          //console.log(this.dataList);
         }
       });
     }
