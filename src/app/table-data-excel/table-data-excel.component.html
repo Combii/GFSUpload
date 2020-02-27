@@ -34,15 +34,15 @@
 			  <tbody>
 					
 				<tr *ngFor="let record of data">
-				  <td appErrorNotification="['232','23423']">{{ record.AccountingDate }}</td>
-				  <td >{{ record.RegistrationNo }}</td>
-				  <td >{{ record.IDKT }}</td>
-				  <td >{{ record.OriginalIDKT }}</td>
-				  <td >{{ record.CounterAccountIDKT }}</td>
-				  <td >{{ record.Text }}</td>
-				  <td >{{ record.ProjectCode }}</td>
+				  <td [appErrorNotification]="record.errors.AccountingDate">{{ record.AccountingDate }}</td>
+				  <td [appErrorNotification]="record.errors.RegistrationNo">{{ record.RegistrationNo }}</td>
+				  <td [appErrorNotification]="record.errors.IDKT">{{ record.IDKT }}</td>
+				  <td [appErrorNotification]="record.errors.OriginalIDKT">{{ record.OriginalIDKT }}</td>
+				  <td [appErrorNotification]="record.errors.CounterAccountIDKT">{{ record.CounterAccountIDKT }}</td>
+				  <td [appErrorNotification]="record.errors.Text">{{ record.Text }}</td>
+				  <td [appErrorNotification]="record.errors.ProjectCode">{{ record.ProjectCode }}</td>
 				  <td [appErrorNotification]="record.errors.Currency">{{ record.Currency }}</td>
-				  <td >{{ record.Balance }}</td>
+				  <td [appErrorNotification]="record.errors.Balance">{{ record.Balance }}</td>
 				</tr>
 			  </tbody>
 			</table>
