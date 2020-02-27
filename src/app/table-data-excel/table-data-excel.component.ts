@@ -1,12 +1,11 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import * as XLSX from "xlsx";
-import { ExcelParserService } from "../services/excelParser.service";
-import { IExcelBookKeeping } from "src/models/IExcelBookKeeping";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ExcelParserService } from '../services/excelParser.service';
+import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
 
 @Component({
-  selector: "app-table-data-excel",
-  templateUrl: "./table-data-excel.component.html",
-  styleUrls: ["./table-data-excel.component.css"]
+  selector: 'app-table-data-excel',
+  templateUrl: './table-data-excel.component.html',
+  styleUrls: ['./table-data-excel.component.css']
 })
 export class TableDataExcelComponent {
   data: IExcelBookKeeping[] = [];
@@ -40,7 +39,7 @@ export class TableDataExcelComponent {
       this.isTrue = false;
     });
     this.data = this.tempArrayData;
-    //console.log(this.data);
+    // console.log(this.data);
   }
 
   onClickShowErros() {
