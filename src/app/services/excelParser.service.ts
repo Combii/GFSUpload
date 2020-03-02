@@ -1,32 +1,42 @@
-import { Injectable } from "@angular/core";
-import * as XLSX from "xlsx";
-import { Subject } from "rxjs";
-import { IExcelBookKeeping } from "../../models/IExcelBookKeeping";
-import { Validations } from "../services/Validation";
+import { Injectable } from '@angular/core';
+import * as XLSX from 'xlsx';
+import { Subject } from 'rxjs';
+import { IExcelBookKeeping } from '../../models/IExcelBookKeeping';
+import { Validations } from '../services/Validation';
+import { IBookKeeping } from 'src/models/IbookKeeping';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class ExcelParserService {
-  onExcelFileParsed = new Subject<IExcelBookKeeping[]>();
+  onExcelFileParsedIExcelBookKeeping = new Subject<IExcelBookKeeping[]>();
+  onExcelFileParsedIBookKeeping = new Subject<IBookKeeping[]>();
 
   private tempDataArr = [[], []];
   dataList: IExcelBookKeeping[] = [];
 
-  wopts: XLSX.WritingOptions = { bookType: "xlsx", type: "array" };
+  wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
 
   private isFirst = false;
 
-  parseExcelFile(evt: any) {
+  parseFile(evt: any, type: string){
+
+    if(type === 'excel'){
+      this.parseExcelFileIExcelBookKeeping(evt, type);
+    }
+
+  }
+
+  private parseExcelFileIExcelBookKeeping(evt: any, type: string) {
     // https://stackblitz.com/edit/angular-excel-read-table?file=src%2Fapp%2Fsheet.component.ts
     /* wire up file reader */
     const target: DataTransfer = evt.target as DataTransfer;
     if (target.files.length !== 1) {
-      throw new Error("Cannot use multiple files");
+      throw new Error('Cannot use multiple files');
     }
     const reader: FileReader = new FileReader();
     reader.onload = (e: any) => {
       /* read workbook */
       const bstr: string = e.target.result;
-      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: "binary" });
+      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
 
       /* grab first sheet */
       const wsname: string = wb.SheetNames[0];
@@ -37,7 +47,10 @@ export class ExcelParserService {
 
       this.insertDataIntoBookingList();
       this.validateBookingsList();
-      this.onExcelFileParsed.next(this.dataList);
+
+      if(type === 'excel'){
+        this.onExcelFileParsedIExcelBookKeeping.next(this.dataList);
+      }
     };
 
     reader.readAsBinaryString(target.files[0]);
@@ -70,6 +83,5 @@ export class ExcelParserService {
     this.dataList.forEach(row => {
       row.errors = Validations.validateExcelBookKeeping(row);
     });
-    //console.log(this.dataList);
   }
 }
