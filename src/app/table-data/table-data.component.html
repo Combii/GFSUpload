@@ -11,6 +11,18 @@
     value="process"
   />
 
+  <div class="form-group">
+    <input
+    type="file"
+    name="files"
+    class="form-control"
+    #uploads
+    (change)="onFileChange($event)"
+    multiple
+    value="process"
+    />
+  </div>
+
   <div class="table-responsive">
     <table class="table table-bordered">
       <thead>

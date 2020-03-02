@@ -11,18 +11,15 @@ export class ExcelParserService {
   onExcelFileParsedIBookKeeping = new Subject<IBookKeeping[]>();
 
   private tempDataArr = [[], []];
-  dataList: IExcelBookKeeping[] = [];
+  dataListIExcelBookKeeping: IExcelBookKeeping[] = [];
+  dataListIBookKeeping: IBookKeeping[] = [];
 
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
 
   private isFirst = false;
 
-  parseFile(evt: any, type: string){
-
-    if(type === 'excel'){
-      this.parseExcelFileIExcelBookKeeping(evt, type);
-    }
-
+  parseFile(evt: any, type: string) {
+    this.parseExcelFileIExcelBookKeeping(evt, type);
   }
 
   private parseExcelFileIExcelBookKeeping(evt: any, type: string) {
@@ -45,24 +42,29 @@ export class ExcelParserService {
       /* save data */
       this.tempDataArr = XLSX.utils.sheet_to_json(ws, { header: 1 });
 
-      this.insertDataIntoBookingList();
-      this.validateBookingsList();
+      if (type === 'excel') {
+        this.insertDataIntoListIExcelBookKeeping();
+        this.validateBookingsList();
 
-      if(type === 'excel'){
-        this.onExcelFileParsedIExcelBookKeeping.next(this.dataList);
+        this.onExcelFileParsedIExcelBookKeeping.next(this.dataListIExcelBookKeeping);
+      }
+      if (type === 'csv') {
+        this.insertDataIntoListIBookKeeping();
+
+        this.onExcelFileParsedIBookKeeping.next(this.dataListIBookKeeping);
       }
     };
 
     reader.readAsBinaryString(target.files[0]);
   }
 
-  insertDataIntoBookingList() {
+  insertDataIntoListIExcelBookKeeping() {
     this.tempDataArr.forEach(row => {
       if (this.isFirst) {
         // Validation goes here
 
         if (row.length > 0) {
-          this.dataList.push({
+          this.dataListIExcelBookKeeping.push({
             AccountingDate: row[0],
             RegistrationNo: row[1],
             IDKT: row[2],
@@ -79,8 +81,39 @@ export class ExcelParserService {
     });
   }
 
+  insertDataIntoListIBookKeeping() {
+    this.tempDataArr.forEach(row => {
+      if (this.isFirst) {
+        // Validation goes here
+
+        if (row.length > 0) {
+          this.dataListIBookKeeping.push({
+            Dato: row[0],
+            RegNr: row[1],
+            regnskabstype: row[2],
+            dkkbass: row[3],
+            skema_id: row[4],
+            skemarakke: row[5],
+            valutakod: row[6],
+            ldkd: row[7],
+            kngr: row[8],
+            kngr_typ: row[9],
+            pdst: row[10],
+            sum_rgopid: row[11],
+            opdater_lev: row[12],
+            leveran_kor: row[13],
+            leveran_type: row[14],
+            saldo: row[15],
+            Tekst: row[16]
+          });
+        }
+      }
+      this.isFirst = true;
+    });
+  }
+
   validateBookingsList() {
-    this.dataList.forEach(row => {
+    this.dataListIExcelBookKeeping.forEach(row => {
       row.errors = Validations.validateExcelBookKeeping(row);
     });
   }
