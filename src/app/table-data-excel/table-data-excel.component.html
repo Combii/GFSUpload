@@ -1,56 +1,98 @@
-	<div class="container-fluid">
-		<h3>Excel File</h3>
-	  
-		<div class="form-group">
-			<input
-			type="file"
-			name="files"
-			class="form-control"
-			#uploads
-			(change)="onFileChange($event)"
-			multiple
-			value="process"
-		  />
-		</div>
+<div class="container-fluid">
+  <h3>Excel File</h3>
 
+  <div class="form-group">
+    <input
+      type="file"
+      name="files"
+      class="form-control"
+      #uploads
+      (change)="onFileChange($event)"
+      multiple
+      value="process"
+    />
+  </div>
 
-		<p *ngIf="loading">Loading...</p>
+  <p *ngIf="loading">Loading...</p>
 
-		<button class="btn btn-danger" (click)="onClickShowErros()">
-			Show Errors
-		  </button>
-		  <p>
+  <button class="btn btn-danger" (click)="onClickShowErros()">
+    Show Errors
+  </button>
+  <p></p>
 
-		<div class="table-responsive">
-			<table class="table table-bordered">
-			  <thead>
-				<tr>
-					<th>Accounting date</th>
-					<th>Registration No</th>
-					<th>IDKT</th>
-					<th>Original IDKT</th>
-					<th>Counter Account IDKT</th>
-					<th>Text</th>
-					<th>Project code</th>
-					<th>Currency</th>
-					<th>Balance</th>
-				</tr>
-			  </thead>
-			  <tbody>
-					
-				<tr *ngFor="let record of data">
-				  <app-table-data-cell [errors]="record.errors.Accounting" [data]="record.Accounting"></app-table-data-cell>
-				  <app-table-data-cell [errors]="record.errors.RegistrationNo" [data]="record.RegistrationNo"></app-table-data-cell>
-				  <app-table-data-cell [errors]="record.errors.IDKT" [data]="record.IDKT"></app-table-data-cell>
-				  <app-table-data-cell [errors]="record.errors.OriginalIDKT" [data]="record.OriginalIDKT"></app-table-data-cell>
-				  <app-table-data-cell [errors]="record.errors.CounterAccountIDKT" [data]="record.CounterAccountIDKT"></app-table-data-cell>
-				  <app-table-data-cell [errors]="record.errors.Text" [data]="record.Text"></app-table-data-cell>
-				  <app-table-data-cell [errors]="record.errors.ProjectCode" [data]="record.ProjectCode"></app-table-data-cell>
-				  <app-table-data-cell [errors]="record.errors.Currency" [data]="record.Currency"></app-table-data-cell>
-				  <app-table-data-cell [errors]="record.errors.Balance" [data]="record.Balance"></app-table-data-cell>
-				</tr>
-			  </tbody>
-			</table>
-		  </div>
-	  </div>
-	  
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Accounting date</th>
+          <th>Registration No</th>
+          <th>IDKT</th>
+          <th>Original IDKT</th>
+          <th>Counter Account IDKT</th>
+          <th>Text</th>
+          <th>Project code</th>
+          <th>Currency</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let record of data">
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.AccountingDate"
+              [data]="record.AccountingDate"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.RegistrationNo"
+              [data]="record.RegistrationNo"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.IDKT"
+              [data]="record.IDKT"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.OriginalIDKT"
+              [data]="record.OriginalIDKT"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.CounterAccountIDKT"
+              [data]="record.CounterAccountIDKT"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.Text"
+              [data]="record.Text"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.ProjectCode"
+              [data]="record.ProjectCode"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.Currency"
+              [data]="record.Currency"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.Balance"
+              [data]="record.Balance"
+            ></app-table-data-cell>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
