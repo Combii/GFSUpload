@@ -1,0 +1,10 @@
+<td class="custom-tooltip" [appErrorNotification]="errors">
+    {{ data }}
+    <ol *ngIf="errors.length > 0" class="tooltip-list">
+        <li *ngFor="let error of errors">
+            {{error}}
+        </li>
+    </ol>
+    
+</td>
+

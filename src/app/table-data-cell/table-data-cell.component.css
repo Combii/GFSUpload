@@ -1,0 +1,20 @@
+.custom-tooltip {
+  position: relative;
+}
+
+.tooltip-list {
+  display: none;
+  background-color: tomato;
+  list-style-position: inside;
+  position: absolute;
+  width: 300px;
+  left: 0;
+  top: -100px;
+  left: 40px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.custom-tooltip:hover .tooltip-list {
+  display: block;
+}
