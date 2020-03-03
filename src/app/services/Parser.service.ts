@@ -6,7 +6,7 @@ import { Validations } from '../services/Validation';
 import { IBookKeeping } from 'src/models/IbookKeeping';
 
 @Injectable({ providedIn: 'root' })
-export class ExcelParserService {
+export class ParserService {
   onExcelFileParsedIExcelBookKeeping = new Subject<IExcelBookKeeping[]>();
   onExcelFileParsedIBookKeeping = new Subject<IBookKeeping[]>();
 
