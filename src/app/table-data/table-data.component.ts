@@ -12,12 +12,12 @@ export class TableDataComponent {
   dataList: IBookKeeping[] = [];
 
   constructor(
-    private excelparser: ParserService
+    private parser: ParserService
   ) {}
 
   onFileChange(evt: any) {
-    this.excelparser.parseExcelFile(evt, 'csv');
-    this.excelparser.onExcelFileParsedIBookKeeping.subscribe(rData => {
+    this.parser.parseFile(evt, 'chart');
+    this.parser.onExcelFileParsedIBookKeeping.subscribe(rData => {
       this.dataList = rData;
     });
   }

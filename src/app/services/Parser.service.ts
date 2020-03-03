@@ -17,7 +17,7 @@ export class ParserService {
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   isFirst = false;
 
-  parseExcelFile(evt: any, type: string) {
+  parseFile(evt: any, type: string) {
     // https://stackblitz.com/edit/angular-excel-read-table?file=src%2Fapp%2Fsheet.component.ts
     /* wire up file reader */
     const target: DataTransfer = evt.target as DataTransfer;

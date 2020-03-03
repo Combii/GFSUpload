@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ExcelParserService } from '../services/excelParser.service';
+import { ParserService } from '../services/Parser.service';
 import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
 
 @Component({
@@ -15,12 +15,12 @@ export class TableDataExcelComponent {
   showOnlyErrors = false;
   isTrue = false;
 
-  constructor(private excelparser: ExcelParserService) {}
+  constructor(private parser: ParserService) {}
 
   onFileChange(evt: any) {
     this.loading = true;
-    this.excelparser.parseExcelFile(evt, 'excel');
-    this.excelparser.onExcelFileParsedIExcelBookKeeping.subscribe(rData => {
+    this.parser.parseFile(evt, 'account');
+    this.parser.onExcelFileParsedIExcelBookKeeping.subscribe(rData => {
       this.loading = false;
       this.data = rData;
     });
