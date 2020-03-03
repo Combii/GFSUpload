@@ -1,4 +1,7 @@
-<div class="custom-tooltip" tooltip='{{errors}}' [appErrorNotification]="errors">
+<div *ngIf="errors.length > 0" class="custom-tooltip" tooltip='{{errors}}' [appErrorNotification]="errors">
     {{ data }}
 </div>
 
+<div *ngIf="errors.length <= 0" class="custom-tooltip">
+    {{ data }}
+</div>
