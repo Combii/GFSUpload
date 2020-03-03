@@ -8,6 +8,9 @@ import { MenuComponent } from './menu/menu.component';
 import { TableDataExcelComponent } from './table-data-excel/table-data-excel.component';
 import { HeaderComponent } from './header/header.component';
 import { ErrorNotificationDirective } from './error-notification.directive';
+import { TableDataCellComponent } from './table-data-cell/table-data-cell.component';
+
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 @NgModule({
   declarations: [
@@ -16,11 +19,13 @@ import { ErrorNotificationDirective } from './error-notification.directive';
     MenuComponent,
     TableDataExcelComponent,
     HeaderComponent,
-    ErrorNotificationDirective
+    ErrorNotificationDirective,
+    TableDataCellComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
