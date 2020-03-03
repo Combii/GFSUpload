@@ -3,13 +3,13 @@
 
   <div class="form-group">
     <input
-    type="file"
-    name="files"
-    class="form-control"
-    #uploads
-    (change)="onFileChange($event)"
-    multiple
-    value="process"
+      type="file"
+      name="files"
+      class="form-control"
+      #uploads
+      (change)="onFileChange($event)"
+      multiple
+      value="process"
     />
   </div>
 
@@ -37,22 +37,108 @@
       </thead>
       <tbody>
         <tr *ngFor="let record of dataList">
-          <td>{{ record.Dato }}</td>
-          <td>{{ record.RegNr }}</td>
-          <td>{{ record.regnskabstype }}</td>
-          <td>{{ record.dkkbass }}</td>
-          <td>{{ record.skema_id }}</td>
-          <td>{{ record.skemarakke }}</td>
-          <td>{{ record.valutakod }}</td>
-          <td>{{ record.ldkd }}</td>
-          <td>{{ record.kngr }}</td>
-          <td>{{ record.kngr_typ }}</td>
-          <td>{{ record.sum_rgopid }}</td>
-          <td>{{ record.opdater_lev }}</td>
-          <td>{{ record.leveran_kor }}</td>
-          <td>{{ record.leveran_type }}</td>
-          <td>{{ record.saldo }}</td>
-          <td>{{ record.Tekst }}</td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.Dato"
+              [data]="record.Dato"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.RegNr"
+              [data]="record.RegNr"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.regnskabstype"
+              [data]="record.regnskabstype"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.dkkbass"
+              [data]="record.dkkbass"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.skema_id"
+              [data]="record.skema_id"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.skemarakke"
+              [data]="record.skemarakke"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.valutakod"
+              [data]="record.valutakod"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.ldkd"
+              [data]="record.ldkd"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.kngr"
+              [data]="record.kngr"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.kngr_typ"
+              [data]="record.kngr_typ"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.pdst"
+              [data]="record.pdst"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.sum_rgopid"
+              [data]="record.sum_rgopid"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.opdater_lev"
+              [data]="record.opdater_lev"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.leveran_kor"
+              [data]="record.leveran_kor"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.leveran_type"
+              [data]="record.leveran_type"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.saldo"
+              [data]="record.saldo"
+            ></app-table-data-cell>
+          </td>
+          <td>
+            <app-table-data-cell
+              [errors]="record.errors.Tekst"
+              [data]="record.Tekst"
+            ></app-table-data-cell>
+          </td>
         </tr>
       </tbody>
     </table>
