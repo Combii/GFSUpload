@@ -13,6 +13,12 @@
   left: 40px;
   padding: 10px;
   border-radius: 8px;
+  z-index:999999;
+}
+
+.last {
+    top: -100px;
+    left: -40px;
 }
 
 .custom-tooltip:hover .tooltip-list {

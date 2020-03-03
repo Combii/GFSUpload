@@ -1,10 +1,9 @@
 <div class="custom-tooltip" [appErrorNotification]="errors">
     {{ data }}
-    <ol *ngIf="errors.length > 0" class="tooltip-list">
+    <ol *ngIf="errors.length > 0" class="tooltip-list" [ngClass]="{'last': true}">
         <li *ngFor="let error of errors">
             {{error}}
         </li>
     </ol>
-    
 </div>
 
