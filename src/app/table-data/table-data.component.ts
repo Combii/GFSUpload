@@ -16,7 +16,7 @@ export class TableDataComponent {
   ) {}
 
   onFileChange(evt: any) {
-    this.parser.parseFile(evt, 'chart');
+    this.parser.parseFile(evt, 'chartGFS');
     this.parser.onExcelFileParsedIBookKeeping.subscribe(rData => {
       this.dataList = rData;
     });
