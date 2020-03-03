@@ -39,12 +39,15 @@ export class ParserService {
 
       if (type === 'account') {
         this.insertDataIntoListIExcelBookKeeping();
-        this.validateBookingsList();
+        this.validateExcelBookingsList();
 
-        this.onExcelFileParsedIExcelBookKeeping.next(this.dataListIExcelBookKeeping);
+        this.onExcelFileParsedIExcelBookKeeping.next(
+          this.dataListIExcelBookKeeping
+        );
       }
       if (type === 'chartGFS') {
         this.insertDataIntoListIBookKeeping();
+        this.validateBookingsList();
 
         this.onExcelFileParsedIBookKeeping.next(this.dataListIBookKeeping);
       }
@@ -57,8 +60,6 @@ export class ParserService {
     this.isFirst = false;
     this.tempDataArr.forEach(row => {
       if (this.isFirst) {
-        // Validation goes here
-
         if (row.length > 0) {
           this.dataListIExcelBookKeeping.push({
             AccountingDate: row[0],
@@ -81,8 +82,6 @@ export class ParserService {
     this.isFirst = false;
     this.tempDataArr.forEach(row => {
       if (this.isFirst) {
-        // Validation goes here
-
         if (row.length > 0) {
           this.dataListIBookKeeping.push({
             Dato: row[0],
@@ -109,9 +108,15 @@ export class ParserService {
     });
   }
 
-  validateBookingsList() {
+  validateExcelBookingsList() {
     this.dataListIExcelBookKeeping.forEach(row => {
       row.errors = Validations.validateExcelBookKeeping(row);
+    });
+  }
+
+  validateBookingsList() {
+    this.dataListIBookKeeping.forEach(row => {
+      row.errors = Validations.validateCSVBookKeeping(row);
     });
   }
 }
