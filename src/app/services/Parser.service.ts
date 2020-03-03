@@ -37,13 +37,13 @@ export class ParserService {
       /* save data */
       this.tempDataArr = XLSX.utils.sheet_to_json(ws, { header: 1 });
 
-      if (type === 'excel') {
+      if (type === 'account') {
         this.insertDataIntoListIExcelBookKeeping();
         this.validateBookingsList();
 
         this.onExcelFileParsedIExcelBookKeeping.next(this.dataListIExcelBookKeeping);
       }
-      if (type === 'csv') {
+      if (type === 'chartGFS') {
         this.insertDataIntoListIBookKeeping();
 
         this.onExcelFileParsedIBookKeeping.next(this.dataListIBookKeeping);
