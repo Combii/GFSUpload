@@ -15,8 +15,7 @@ export class ExcelParserService {
   dataListIBookKeeping: IBookKeeping[] = [];
 
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
-
-  private isFirst = false;
+  isFirst = false;
 
   parseFile(evt: any, type: string) {
     this.parseExcelFileIExcelBookKeeping(evt, type);
@@ -59,6 +58,7 @@ export class ExcelParserService {
   }
 
   insertDataIntoListIExcelBookKeeping() {
+    this.isFirst = false;
     this.tempDataArr.forEach(row => {
       if (this.isFirst) {
         // Validation goes here
@@ -82,6 +82,7 @@ export class ExcelParserService {
   }
 
   insertDataIntoListIBookKeeping() {
+    this.isFirst = false;
     this.tempDataArr.forEach(row => {
       if (this.isFirst) {
         // Validation goes here
