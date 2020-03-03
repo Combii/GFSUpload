@@ -19,7 +19,7 @@ export class TableDataExcelComponent {
 
   onFileChange(evt: any) {
     this.loading = true;
-    this.excelparser.parseFile(evt, 'excel');
+    this.excelparser.parseExcelFile(evt, 'excel');
     this.excelparser.onExcelFileParsedIExcelBookKeeping.subscribe(rData => {
       this.loading = false;
       this.data = rData;

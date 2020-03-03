@@ -18,7 +18,7 @@ export class TableDataComponent {
   ) {}
 
   onFileChange(evt: any) {
-    this.excelparser.parseFile(evt, 'csv');
+    this.excelparser.parseExcelFile(evt, 'csv');
     this.excelparser.onExcelFileParsedIBookKeeping.subscribe(rData => {
       this.dataList = rData;
     });
