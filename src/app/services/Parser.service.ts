@@ -6,7 +6,7 @@ import { Validations } from '../services/Validation';
 import { IBookKeeping } from 'src/models/IbookKeeping';
 
 @Injectable({ providedIn: 'root' })
-export class ExcelParserService {
+export class ParserService {
   onExcelFileParsedIExcelBookKeeping = new Subject<IExcelBookKeeping[]>();
   onExcelFileParsedIBookKeeping = new Subject<IBookKeeping[]>();
 
@@ -17,7 +17,7 @@ export class ExcelParserService {
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   isFirst = false;
 
-  parseExcelFile(evt: any, type: string) {
+  parseFile(evt: any, type: string) {
     // https://stackblitz.com/edit/angular-excel-read-table?file=src%2Fapp%2Fsheet.component.ts
     /* wire up file reader */
     const target: DataTransfer = evt.target as DataTransfer;
@@ -37,14 +37,17 @@ export class ExcelParserService {
       /* save data */
       this.tempDataArr = XLSX.utils.sheet_to_json(ws, { header: 1 });
 
-      if (type === 'excel') {
+      if (type === 'account') {
         this.insertDataIntoListIExcelBookKeeping();
-        this.validateBookingsList();
+        this.validateExcelBookingsList();
 
-        this.onExcelFileParsedIExcelBookKeeping.next(this.dataListIExcelBookKeeping);
+        this.onExcelFileParsedIExcelBookKeeping.next(
+          this.dataListIExcelBookKeeping
+        );
       }
-      if (type === 'csv') {
+      if (type === 'chartGFS') {
         this.insertDataIntoListIBookKeeping();
+        this.validateBookingsList();
 
         this.onExcelFileParsedIBookKeeping.next(this.dataListIBookKeeping);
       }
@@ -57,8 +60,6 @@ export class ExcelParserService {
     this.isFirst = false;
     this.tempDataArr.forEach(row => {
       if (this.isFirst) {
-        // Validation goes here
-
         if (row.length > 0) {
           this.dataListIExcelBookKeeping.push({
             AccountingDate: row[0],
@@ -81,8 +82,6 @@ export class ExcelParserService {
     this.isFirst = false;
     this.tempDataArr.forEach(row => {
       if (this.isFirst) {
-        // Validation goes here
-
         if (row.length > 0) {
           this.dataListIBookKeeping.push({
             Dato: row[0],
@@ -109,9 +108,15 @@ export class ExcelParserService {
     });
   }
 
-  validateBookingsList() {
+  validateExcelBookingsList() {
     this.dataListIExcelBookKeeping.forEach(row => {
       row.errors = Validations.validateExcelBookKeeping(row);
+    });
+  }
+
+  validateBookingsList() {
+    this.dataListIBookKeeping.forEach(row => {
+      row.errors = Validations.validateCSVBookKeeping(row);
     });
   }
 }

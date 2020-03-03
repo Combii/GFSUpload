@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as Papa from 'papaparse';
 import { IBookKeeping } from '../../models/IbookKeeping';
-import { ExcelParserService } from '../services/excelParser.service';
+import { ParserService } from '../services/Parser.service';
 
 @Component({
   selector: 'app-table-data',
@@ -12,12 +12,12 @@ export class TableDataComponent {
   dataList: IBookKeeping[] = [];
 
   constructor(
-    private excelparser: ExcelParserService
+    private parser: ParserService
   ) {}
 
   onFileChange(evt: any) {
-    this.excelparser.parseExcelFile(evt, 'csv');
-    this.excelparser.onExcelFileParsedIBookKeeping.subscribe(rData => {
+    this.parser.parseFile(evt, 'chartGFS');
+    this.parser.onExcelFileParsedIBookKeeping.subscribe(rData => {
       this.dataList = rData;
     });
   }
