@@ -1,5 +1,6 @@
 import {IExcelBookKeeping, IExcelBookKeepingError} from 'src/models/IExcelBookKeeping';
 import { IBookKeeping, IBookKeepingError } from 'src/models/IbookKeeping';
+import { NgIfContext } from '@angular/common';
 
 export class Validations {
   static validateExcelBookKeeping(
@@ -25,7 +26,7 @@ export class Validations {
   static validateCSVBookKeeping(csvBookKeeping: IBookKeeping): IBookKeepingError {
     const errors : IBookKeepingError = {
       Dato: Validations.IsValidDate(csvBookKeeping.Dato),
-      valutakod: csvBookKeeping.valutakod === 'undefined' ? Validations.IsValidCurrency(csvBookKeeping.valutakod) : [],
+      valutakod: Validations.IsValidCurrency(csvBookKeeping.valutakod),
       RegNr: [],
       regnskabstype: [],
       dkkbass: [],
@@ -85,6 +86,10 @@ export class Validations {
 
   private static IsValidCurrency(currency: string): string[] {
     const errorsArray = [];
+
+    if(typeof currency === 'undefined'){
+      return errorsArray;
+    }
 
     const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
