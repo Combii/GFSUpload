@@ -1,13 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ParserService } from '../services/Parser.service';
 import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-table-data-excel',
   templateUrl: './table-data-excel.component.html',
   styleUrls: ['./table-data-excel.component.css']
 })
-export class TableDataExcelComponent {
+export class TableDataExcelComponent implements OnInit {
   data: IExcelBookKeeping[] = [];
   tempArrayData: IExcelBookKeeping[] = [];
 
@@ -15,7 +16,14 @@ export class TableDataExcelComponent {
   showOnlyErrors = false;
   isTrue = false;
 
-  constructor(private parser: ParserService) {}
+  constructor(private parser: ParserService, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.params
+      .subscribe(params => {
+        console.log(params[1]);
+      })
+  }
 
   onFileChange(evt: any) {
     this.loading = true;
