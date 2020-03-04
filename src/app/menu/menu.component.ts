@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CheckBox } from '../services/CheckBox';
 
 @Component({
   selector: 'app-menu',
@@ -7,13 +8,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
-  uploadToGfsChecked = false;
-  bookInFebosChecked = false;
-  bookInFebosAnduploadToGfsChecked = false;
+  uploadToGfsChecked: boolean;
+  bookInFebosChecked: boolean;
+  bookInFebosAnduploadToGfsChecked: boolean;
 
   constructor(private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.uploadToGfsChecked = CheckBox.bookInFebosAnduploadToGfsChecked;
+    this.bookInFebosChecked = CheckBox.bookInFebosChecked;
+    this.bookInFebosChecked = CheckBox.bookInFebosChecked;
+  }
 
   onClickedUpload() {
     this.router.navigate(['tableAccount'], {

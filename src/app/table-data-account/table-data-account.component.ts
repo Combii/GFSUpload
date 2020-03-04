@@ -18,12 +18,12 @@ export class TableDataAccountComponent implements OnInit {
   constructor(private parser: ParserService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.queryParams
-      .subscribe(params => {
-        console.log(params.utg);
-        console.log(params.bif);
-        console.log(params.utgabif);
-      })
+    // this.route.queryParams
+    //   .subscribe(params => {
+    //     console.log(params.utg);
+    //     console.log(params.bif);
+    //     console.log(params.utgabif);
+    //   })
   }
 
   onFileChange(evt: any) {
