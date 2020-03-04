@@ -11,14 +11,19 @@ import { ParserService } from '../services/Parser.service';
 export class TableDataComponent {
   dataList: IBookKeeping[] = [];
 
+  loading = false;
+
+
   constructor(
     private parser: ParserService
   ) {}
 
   onFileChange(evt: any) {
+    this.loading = true;
     this.parser.parseFile(evt, 'chartGFS');
     this.parser.onExcelFileParsedIBookKeeping.subscribe(rData => {
       this.dataList = rData;
+      this.loading = false;
     });
   }
 
