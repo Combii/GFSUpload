@@ -36,6 +36,7 @@
           <th>kngr</th>
           <th>kngr_typ</th>
           <th>sum_rgopid</th>
+          <th>pdst</th>
           <th>opdater_lev</th>
           <th>leveran_kor</th>
           <th>leveran_type</th>
@@ -107,14 +108,14 @@
           </td>
           <td>
             <app-table-data-cell
-              [errors]="record.errors.pdst"
-              [data]="record.pdst"
+              [errors]="record.errors.sum_rgopid"
+              [data]="record.sum_rgopid"
             ></app-table-data-cell>
           </td>
           <td>
             <app-table-data-cell
-              [errors]="record.errors.sum_rgopid"
-              [data]="record.sum_rgopid"
+              [errors]="record.errors.pdst"
+              [data]="record.pdst"
             ></app-table-data-cell>
           </td>
           <td>
