@@ -21,7 +21,7 @@
   <p *ngIf="loading">Loading...</p>
 
 
-  <div class="table-responsive">
+  <div *ngIf="dataList.length > 0"  class="table-responsive">
     <table class="table table-bordered">
       <thead>
         <tr>
