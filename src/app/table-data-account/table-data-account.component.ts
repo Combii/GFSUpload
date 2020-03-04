@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ParserService } from '../services/Parser.service';
-import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
+import { IAccountBookKeeping } from 'src/models/IAccountBookKeeping';
 import { ActivatedRoute } from '@angular/router';
 import { ListSorter } from '../services/ListSorter';
 
@@ -10,7 +10,7 @@ import { ListSorter } from '../services/ListSorter';
   styleUrls: ['./table-data-account.component.css']
 })
 export class TableDataAccountComponent implements OnInit {
-  data: IExcelBookKeeping[] = [];
+  data: IAccountBookKeeping[] = [];
 
   loading = false;
   showOnlyErrors = false;
@@ -29,7 +29,7 @@ export class TableDataAccountComponent implements OnInit {
   onFileChange(evt: any) {
     this.loading = true;
     this.parser.parseFile(evt, 'account');
-    this.parser.onExcelFileParsedIExcelBookKeeping.subscribe(rData => {
+    this.parser.onAccountFileParsedIAccountBookKeeping.subscribe(rData => {
       this.loading = false;
       this.data = rData;
     });

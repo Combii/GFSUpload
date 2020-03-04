@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { Subject } from 'rxjs';
-import { IExcelBookKeeping } from '../../models/IExcelBookKeeping';
+import { IAccountBookKeeping } from '../../models/IAccountBookKeeping';
 import { Validations } from '../services/Validation';
 import { IBookKeeping } from 'src/models/IbookKeeping';
 
 @Injectable({ providedIn: 'root' })
 export class ParserService {
-  onExcelFileParsedIExcelBookKeeping = new Subject<IExcelBookKeeping[]>();
-  onExcelFileParsedIBookKeeping = new Subject<IBookKeeping[]>();
+  onAccountFileParsedIAccountBookKeeping = new Subject<IAccountBookKeeping[]>();
+  onFileParsedIBookKeeping = new Subject<IBookKeeping[]>();
 
   private tempDataArr = [[], []];
-  dataListIExcelBookKeeping: IExcelBookKeeping[] = [];
+  dataListIAccountBookKeeping: IAccountBookKeeping[] = [];
   dataListIBookKeeping: IBookKeeping[] = [];
 
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
@@ -40,30 +40,30 @@ export class ParserService {
       this.tempDataArr = XLSX.utils.sheet_to_json(ws, { header: 1 });
 
       if (type === 'account') {
-        this.insertDataIntoListIExcelBookKeeping();
-        this.validateExcelBookingsList();
+        this.insertDataIntoListIAccountBookKeeping();
+        this.validateAccountBookingsList();
 
-        this.onExcelFileParsedIExcelBookKeeping.next(
-          this.dataListIExcelBookKeeping
+        this.onAccountFileParsedIAccountBookKeeping.next(
+          this.dataListIAccountBookKeeping
         );
       }
       if (type === 'chartGFS') {
         this.insertDataIntoListIBookKeeping();
         this.validateBookingsList();
 
-        this.onExcelFileParsedIBookKeeping.next(this.dataListIBookKeeping);
+        this.onFileParsedIBookKeeping.next(this.dataListIBookKeeping);
       }
     };
 
     reader.readAsBinaryString(target.files[0]);
   }
 
-  insertDataIntoListIExcelBookKeeping() {
+  insertDataIntoListIAccountBookKeeping() {
     this.isFirst = false;
     this.tempDataArr.forEach(row => {
       if (this.isFirst) {
         if (row.length > 0) {
-          this.dataListIExcelBookKeeping.push({
+          this.dataListIAccountBookKeeping.push({
             AccountingDate: row[0],
             RegistrationNo: row[1],
             IDKT: row[2],
@@ -110,9 +110,9 @@ export class ParserService {
     });
   }
 
-  validateExcelBookingsList() {
-    this.dataListIExcelBookKeeping.forEach(row => {
-      row.errors = Validations.validateExcelBookKeeping(row);
+  validateAccountBookingsList() {
+    this.dataListIAccountBookKeeping.forEach(row => {
+      row.errors = Validations.validateAccountBookKeepingError(row);
     });
   }
 
@@ -123,11 +123,11 @@ export class ParserService {
   }
 
   private resetEveryList(){
-    this.onExcelFileParsedIExcelBookKeeping = new Subject<IExcelBookKeeping[]>();
-    this.onExcelFileParsedIBookKeeping = new Subject<IBookKeeping[]>();
+    this.onAccountFileParsedIAccountBookKeeping = new Subject<IAccountBookKeeping[]>();
+    this.onFileParsedIBookKeeping = new Subject<IBookKeeping[]>();
 
     this.tempDataArr = [[], []];
-    this.dataListIExcelBookKeeping = [];
+    this.dataListIAccountBookKeeping = [];
     this.dataListIBookKeeping = [];
   }
 }

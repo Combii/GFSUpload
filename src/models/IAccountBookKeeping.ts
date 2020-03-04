@@ -1,4 +1,4 @@
-export interface IExcelBookKeepingError {
+export interface IAccountBookKeepingError {
   AccountingDate: string[];
   RegistrationNo: string[];
   Currency: string[];
@@ -10,7 +10,7 @@ export interface IExcelBookKeepingError {
   Text: string[];
 }
 
-export interface IExcelBookKeeping {
+export interface IAccountBookKeeping {
   AccountingDate: string;
   RegistrationNo: string;
   IDKT: string;
@@ -20,5 +20,5 @@ export interface IExcelBookKeeping {
   ProjectCode: string;
   Currency: string;
   Balance: string;
-  errors?: IExcelBookKeepingError;
+  errors?: IAccountBookKeepingError;
 }

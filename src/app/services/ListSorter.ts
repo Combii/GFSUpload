@@ -1,5 +1,5 @@
 import { IBookKeeping } from 'src/models/IbookKeeping';
-import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
+import { IAccountBookKeeping } from 'src/models/IAccountBookKeeping';
 
 export class ListSorter {
 
@@ -22,9 +22,9 @@ export class ListSorter {
     return tempArrayData;
   }
 
-  static sortListForErrorsOnlyIExcelBookKeeping(listBookKeeping: IExcelBookKeeping[]): IExcelBookKeeping[] {
+  static sortListForErrorsOnlyIExcelBookKeeping(listBookKeeping: IAccountBookKeeping[]): IAccountBookKeeping[] {
     let isTrue = false;
-    const tempArrayData: IExcelBookKeeping[] = [];
+    const tempArrayData: IAccountBookKeeping[] = [];
 
     listBookKeeping.forEach(rowData => {
       Object.values(rowData.errors).forEach(error => {
