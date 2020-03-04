@@ -2,13 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { TableDataChartGfsComponent } from './table-data-chart-gfs/table-data-chart-gfs.component';
-import { TableDataExcelComponent } from './table-data-excel/table-data-excel.component';
+import { TableDataAccountComponent } from './table-data-account/table-data-account.component';
 
 
 const routes: Routes = [
   {path: '', component: MenuComponent},
   {path: 'tableChartGFS', component: TableDataChartGfsComponent},
-  {path: 'tableEx', component: TableDataExcelComponent}
+  {path: 'tableAccount', component: TableDataAccountComponent}
 ];
 
 @NgModule({

@@ -5,11 +5,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ListSorter } from '../services/ListSorter';
 
 @Component({
-  selector: 'app-table-data-excel',
-  templateUrl: './table-data-excel.component.html',
-  styleUrls: ['./table-data-excel.component.css']
+  selector: 'app-table-data-account',
+  templateUrl: './table-data-account.component.html',
+  styleUrls: ['./table-data-account.component.css']
 })
-export class TableDataExcelComponent implements OnInit {
+export class TableDataAccountComponent implements OnInit {
   data: IExcelBookKeeping[] = [];
 
   loading = false;
