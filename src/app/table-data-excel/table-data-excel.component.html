@@ -13,12 +13,14 @@
     />
   </div>
 
-  <p *ngIf="loading">Loading...</p>
-
-  <button class="btn btn-danger" (click)="onClickShowErros()">
+  <button *ngIf="data.length > 0" class="btn btn-danger" (click)="onClickShowErros()">
     Show Errors
   </button>
   <p></p>
+
+  <p *ngIf="loading">Loading...</p>
+
+ 
 
   <div class="table-responsive">
     <table class="table table-bordered">
