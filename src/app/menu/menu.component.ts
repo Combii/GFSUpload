@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+  uploadToGfsChecked = false;
+  bookInFebosChecked = false;
+  bookInFebosAnduploadToGfsChecked = false;
 
-  constructor() { }
+  constructor(private router: Router) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  onClickedUpload() {
+    this.router.navigate(['tableAccount'], {
+      queryParams: {
+        utg: this.uploadToGfsChecked,
+        bif: this.bookInFebosChecked,
+        utgabif: this.bookInFebosAnduploadToGfsChecked
+      }
+    });
   }
-
 }

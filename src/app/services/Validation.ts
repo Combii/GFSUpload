@@ -1,11 +1,9 @@
 import {IExcelBookKeeping, IExcelBookKeepingError} from 'src/models/IExcelBookKeeping';
 import { IBookKeeping, IBookKeepingError } from 'src/models/IbookKeeping';
-import { NgIfContext } from '@angular/common';
 
 export class Validations {
-  static validateExcelBookKeeping(
-    excelBookKeeping: IExcelBookKeeping
-  ): IExcelBookKeepingError {
+
+  static validateExcelBookKeeping(excelBookKeeping: IExcelBookKeeping): IExcelBookKeepingError {
     const errors: IExcelBookKeepingError = {
       AccountingDate: Validations.IsValidDate(excelBookKeeping.AccountingDate),
       RegistrationNo: Validations.IsValidRegNumber(

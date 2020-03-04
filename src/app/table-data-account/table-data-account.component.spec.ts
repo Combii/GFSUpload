@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TableDataExcelComponent } from './table-data-excel.component';
+import { TableDataAccountComponent } from './table-data-account.component';
 
-describe('TableDataExcelComponent', () => {
-  let component: TableDataExcelComponent;
-  let fixture: ComponentFixture<TableDataExcelComponent>;
+describe('TableDataAccountComponent', () => {
+  let component: TableDataAccountComponent;
+  let fixture: ComponentFixture<TableDataAccountComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableDataExcelComponent ]
+      declarations: [ TableDataAccountComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TableDataExcelComponent);
+    fixture = TestBed.createComponent(TableDataAccountComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
