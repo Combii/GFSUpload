@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ParserService } from '../services/Parser.service';
 import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
+import { ListSorter } from '../services/ListSorter';
 
 @Component({
   selector: 'app-table-data-excel',
@@ -9,11 +10,9 @@ import { IExcelBookKeeping } from 'src/models/IExcelBookKeeping';
 })
 export class TableDataExcelComponent {
   data: IExcelBookKeeping[] = [];
-  tempArrayData: IExcelBookKeeping[] = [];
 
   loading = false;
   showOnlyErrors = false;
-  isTrue = false;
 
   constructor(private parser: ParserService) {}
 
@@ -26,24 +25,8 @@ export class TableDataExcelComponent {
     });
   }
 
-  filterOnlyErrors() {
-    this.data.forEach(rowData => {
-      Object.values(rowData.errors).forEach(error => {
-        if (error.length > 0) {
-          this.isTrue = true;
-        }
-      });
-      if (this.isTrue) {
-        this.tempArrayData.push(rowData);
-      }
-      this.isTrue = false;
-    });
-    this.data = this.tempArrayData;
-    // console.log(this.data);
-  }
-
   onClickShowErros() {
     this.showOnlyErrors = !this.showOnlyErrors;
-    this.filterOnlyErrors();
+    this.data = ListSorter.sortListForErrorsOnlyIExcelBookKeeping(this.data);
   }
 }
