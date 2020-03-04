@@ -38,8 +38,8 @@ export class Validations {
       opdater_lev: [],
       leveran_kor: [],
       leveran_type: [],
-      saldo: [],
-      Tekst: []
+      saldo: Validations.IsValidBalance(csvBookKeeping.saldo.toString()),
+      Tekst: Validations.IsValidText(csvBookKeeping.Tekst)
     };
     return errors;
   }
@@ -178,7 +178,6 @@ export class Validations {
   }
 
   private static IsValidBalance(balance: string): string[] {
-    // NOT DONE YET
 
     const errorsArray: string[] = [];
 
