@@ -9,7 +9,6 @@ export class TableDataCellComponent implements OnInit {
 
   @Input('errors') errors: string[];
   @Input('data') data: string;
-  @Input('last') last = false;
 
 
 
