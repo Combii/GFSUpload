@@ -1,15 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import * as Papa from 'papaparse';
 import { IBookKeeping } from '../../models/IbookKeeping';
 import { ParserService } from '../services/Parser.service';
 import { ListSorter } from '../services/ListSorter';
 
 @Component({
-  selector: 'app-table-data',
-  templateUrl: './table-data.component.html',
-  styleUrls: ['./table-data.component.css']
+  selector: 'app-table-data-chart-gfs',
+  templateUrl: './table-data-chart-gfs.component.html',
+  styleUrls: ['./table-data-chart-gfs.component.css']
 })
-export class TableDataComponent {
+export class TableDataChartGfsComponent {
   dataList: IBookKeeping[] = [];
 
   loading = false;

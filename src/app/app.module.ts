@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TableDataComponent } from './table-data/table-data.component';
 import { MenuComponent } from './menu/menu.component';
+import { TableDataChartGfsComponent } from './table-data-chart-gfs/table-data-chart-gfs.component';
 import { TableDataExcelComponent } from './table-data-excel/table-data-excel.component';
 import { HeaderComponent } from './header/header.component';
 import { ErrorNotificationDirective } from './error-notification.directive';
@@ -15,12 +15,12 @@ import { TooltipModule } from 'ng2-tooltip-directive';
 @NgModule({
   declarations: [
     AppComponent,
-    TableDataComponent,
+    TableDataChartGfsComponent,
     MenuComponent,
     TableDataExcelComponent,
     HeaderComponent,
     ErrorNotificationDirective,
-    TableDataCellComponent
+    TableDataCellComponent,
   ],
   imports: [
     BrowserModule,
