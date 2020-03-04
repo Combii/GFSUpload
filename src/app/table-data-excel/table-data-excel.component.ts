@@ -26,6 +26,9 @@ export class TableDataExcelComponent implements OnInit {
   }
 
   onFileChange(evt: any) {
+    this.data = [];
+    this.tempArrayData = [];
+
     this.loading = true;
     this.parser.parseFile(evt, 'account');
     this.parser.onExcelFileParsedIExcelBookKeeping.subscribe(rData => {

@@ -13,14 +13,16 @@
     />
   </div>
 
-  <p *ngIf="loading">Loading...</p>
-
-  <button class="btn btn-danger" (click)="onClickShowErros()">
+  <button *ngIf="data.length > 0" class="btn btn-danger" (click)="onClickShowErros()">
     Show Errors
   </button>
   <p></p>
 
-  <div class="table-responsive">
+  <p *ngIf="loading">Loading...</p>
+
+ 
+
+  <div *ngIf="data.length > 0" class="table-responsive">
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -88,8 +90,7 @@
           <td>
             <app-table-data-cell
               [errors]="record.errors.Balance"
-			  [data]="record.Balance"
-			  [last]="true"
+			        [data]="record.Balance"
             ></app-table-data-cell>
           </td>
         </tr>
