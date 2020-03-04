@@ -19,9 +19,11 @@ export class TableDataExcelComponent implements OnInit {
   constructor(private parser: ParserService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.route.params
+    this.route.queryParams
       .subscribe(params => {
-        console.log(params[1]);
+        console.log(params.utg);
+        console.log(params.bif);
+        console.log(params.utgabif);
       })
   }
 

@@ -1,10 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: "app-menu",
-  templateUrl: "./menu.component.html",
-  styleUrls: ["./menu.component.css"]
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
   uploadToGfsChecked = false;
@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
   ngOnInit() {}
 
   onClickedUpload() {
-    this.router.navigate(["tableEx"], {
+    this.router.navigate(['tableEx'], {
       queryParams: {
         utg: this.uploadToGfsChecked,
         bif: this.bookInFebosChecked,
