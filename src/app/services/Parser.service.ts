@@ -18,6 +18,8 @@ export class ParserService {
   isFirst = false;
 
   parseFile(evt: any, type: string) {
+    this.resetEveryList();
+
     // https://stackblitz.com/edit/angular-excel-read-table?file=src%2Fapp%2Fsheet.component.ts
     /* wire up file reader */
     const target: DataTransfer = evt.target as DataTransfer;
@@ -118,5 +120,14 @@ export class ParserService {
     this.dataListIBookKeeping.forEach(row => {
       row.errors = Validations.validateCSVBookKeeping(row);
     });
+  }
+
+  private resetEveryList(){
+    this.onExcelFileParsedIExcelBookKeeping = new Subject<IExcelBookKeeping[]>();
+    this.onExcelFileParsedIBookKeeping = new Subject<IBookKeeping[]>();
+
+    this.tempDataArr = [[], []];
+    this.dataListIExcelBookKeeping = [];
+    this.dataListIBookKeeping = [];
   }
 }
