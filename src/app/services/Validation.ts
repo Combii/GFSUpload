@@ -1,21 +1,21 @@
-import {IExcelBookKeeping, IExcelBookKeepingError} from 'src/models/IExcelBookKeeping';
+import {IAccountBookKeeping, IAccountBookKeepingError} from 'src/models/IAccountBookKeeping';
 import { IBookKeeping, IBookKeepingError } from 'src/models/IbookKeeping';
 
 export class Validations {
 
-  static validateExcelBookKeeping(excelBookKeeping: IExcelBookKeeping): IExcelBookKeepingError {
-    const errors: IExcelBookKeepingError = {
-      AccountingDate: Validations.IsValidDate(excelBookKeeping.AccountingDate),
+  static validateAccountBookKeepingError(accountBookKeeping: IAccountBookKeeping): IAccountBookKeepingError {
+    const errors: IAccountBookKeepingError = {
+      AccountingDate: Validations.IsValidDate(accountBookKeeping.AccountingDate),
       RegistrationNo: Validations.IsValidRegNumber(
-        excelBookKeeping.RegistrationNo
+        accountBookKeeping.RegistrationNo
       ),
-      Currency: Validations.IsValidCurrency(excelBookKeeping.Currency),
-      IDKT: Validations.IsValidIDKT(excelBookKeeping.IDKT, false),
+      Currency: Validations.IsValidCurrency(accountBookKeeping.Currency),
+      IDKT: Validations.IsValidIDKT(accountBookKeeping.IDKT, false),
       OriginalIDKT: [],
       CounterAccountIDKT: [],
-      ProjectCode: Validations.IsValidProjectCode(excelBookKeeping.ProjectCode),
-      Balance: Validations.IsValidBalance(excelBookKeeping.Balance),
-      Text: Validations.IsValidText(excelBookKeeping.Text)
+      ProjectCode: Validations.IsValidProjectCode(accountBookKeeping.ProjectCode),
+      Balance: Validations.IsValidBalance(accountBookKeeping.Balance),
+      Text: Validations.IsValidText(accountBookKeeping.Text)
     };
 
     return errors;
