@@ -13,7 +13,7 @@
     />
   </div>
 
-  <button class="btn btn-danger" (click)="onClickShowErros()">
+  <button *ngIf="dataList.length > 0" class="btn btn-danger" (click)="onClickShowErros()">
     Show Errors
   </button>
   <p></p>
