@@ -115,7 +115,7 @@ export class ParserService {
 
   validateAccountBookingsList() {
     this.dataListIAccountBookKeeping.forEach(row => {
-      row.errors = Validations.validateAccountBookKeepingError(row);
+      row.errors = Validations.validateAccountBookKeepingError(row,this.checkBoxService);
     });
   }
 
