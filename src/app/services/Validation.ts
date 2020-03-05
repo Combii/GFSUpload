@@ -82,7 +82,7 @@ export class Validations {
     return errorsArray;
   }
 
-  private static IsValidCurrency(currency: string): string[] {
+  static IsValidCurrency(currency: string): string[] {
     const errorsArray = [];
 
     if(typeof currency === 'undefined'){
