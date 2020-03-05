@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { IAccountBookKeeping } from '../../models/IAccountBookKeeping';
 import { Validations } from '../services/Validation';
 import { IBookKeeping } from 'src/models/IbookKeeping';
+import { CheckboxService } from './checkbox.service';
 
 @Injectable({ providedIn: 'root' })
 export class ParserService {
@@ -16,6 +17,8 @@ export class ParserService {
 
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   isFirst = false;
+
+  constructor(private checkBoxService : CheckboxService) {}
 
   parseFile(evt: any, type: string) {
     this.resetEveryList();
