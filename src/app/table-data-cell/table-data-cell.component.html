@@ -1,9 +1,9 @@
 <!-- For ToolTip https://www.freakyjolly.com/angular-8-add-hover-text-tooltip-module-without-any-dependency-in-angular-web-application/ -->
 
-<div *ngIf="errors.length > 0" class="custom-tooltip" placement="top" show-delay="100" tooltip='{{errors}}' [appErrorNotification]="errors">
+<div *ngIf="errors.length > 0" placement="top" show-delay="100" tooltip='{{errors}}' [appErrorNotification]="errors">
     {{ data }}
 </div>
 
-<div *ngIf="errors.length <= 0" class="custom-tooltip">
+<div *ngIf="errors.length <= 0">
     {{ data }}
 </div>
