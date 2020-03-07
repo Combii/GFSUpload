@@ -95,10 +95,24 @@ export class Validations {
       errorsArray.push("Date cannot be first of January");
     }
 
-    // If bookInFebos is checked and it is first monday of month, the date has to be today's date or after.
-    if (Validations.isFirstMondayOfMonth() && checkBoxService.bookInFebos) {
-      if(parsedDate.getMilliseconds() < new Date().getMilliseconds())
-       errorsArray.push("The date has to be today's date or after when it is the first monday in the month and book in febos in checked.")
+    if (checkBoxService) {
+      // If bookInFebos is checked and it is first monday of month, the date has to be today's date or after.
+      if (Validations.isFirstMondayOfMonth() && checkBoxService.bookInFebos) {
+        if (parsedDate.getMilliseconds() < new Date().getMilliseconds())
+          errorsArray.push(
+            "The date has to be today's date or after when it is the first monday in the month and book in febos in checked."
+          );
+      }
+
+      if (checkBoxService.bookInFebosAndUploadToGfs) {
+        const thisDate = new Date();
+
+        if(parsedDate.getDate() === thisDate.getDay()
+        && parsedDate.getMonth() === thisDate.getMonth()
+        && parsedDate.getFullYear() === thisDate.getFullYear()) {
+          errorsArray.push('Cannot book and make corrections on the same date')
+        }
+      }
     }
 
     return errorsArray;
