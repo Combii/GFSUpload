@@ -30,4 +30,8 @@ export class TableDataAccountComponent {
     this.showOnlyErrors = !this.showOnlyErrors;
     this.data = ListSorter.sortListForErrorsOnlyIExcelBookKeeping(this.data);
   }
+
+  onClickSendToAPI(){
+    
+  }
 }
