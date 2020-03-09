@@ -7,3 +7,7 @@
 <div *ngIf="errors.length <= 0">
     {{ data }}
 </div>
+
+<div *ngIf="data == null && errors.length > 0"placement="top" show-delay="100" tooltip='{{errors}}' [appErrorNotification]="errors">
+    ‎ 
+</div>

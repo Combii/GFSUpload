@@ -134,7 +134,7 @@ export class Validations {
     return false;
   }
 
-  private static IsValidCurrency(currency: string): string[] {
+  static IsValidCurrency(currency: string): string[] {
     const errorsArray = [];
 
     if (typeof currency === "undefined") {
