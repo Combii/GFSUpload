@@ -9,7 +9,7 @@ import { ListSorter } from '../services/ListSorter';
   templateUrl: './table-data-account.component.html',
   styleUrls: ['./table-data-account.component.css']
 })
-export class TableDataAccountComponent implements OnInit {
+export class TableDataAccountComponent {
   data: IAccountBookKeeping[] = [];
 
   loading = false;
@@ -17,14 +17,6 @@ export class TableDataAccountComponent implements OnInit {
 
   constructor(private parser: ParserService, private route: ActivatedRoute) {}
 
-  ngOnInit(): void {
-    this.route.queryParams
-      .subscribe(params => {
-        console.log(params.utg);
-        console.log(params.bif);
-        console.log(params.utgabif);
-      })
-  }
 
   onFileChange(evt: any) {
     this.loading = true;

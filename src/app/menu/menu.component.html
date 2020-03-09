@@ -13,20 +13,23 @@
       <div class="col text-left">
         <input
           type="checkbox"
+          name="upload"
           [checked]="uploadToGfsChecked"
-          (change)="uploadToGfsChecked = !uploadToGfsChecked"
+          (change)="onChange($event)"
         />
         <label> Upload to GFS</label><br />
         <input
           type="checkbox"
+          name="book"
           [checked]="bookInFebosChecked"
-          (change)="bookInFebosChecked = !bookInFebosChecked"
+          (change)="onChange($event)"
         />
         <label> Book in FEBOS</label><br />
         <input
           type="checkbox"
+          name="bookAndUpload"
           [checked]="bookInFebosAnduploadToGfsChecked"
-          (change)="bookInFebosAnduploadToGfsChecked = !bookInFebosAnduploadToGfsChecked"
+          (change)="onChange($event)"
         />
         <label> Book in FEBOS and upload to GFS</label><br />
       </div>

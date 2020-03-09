@@ -38,8 +38,8 @@ export class Validations {
       opdater_lev: [],
       leveran_kor: [],
       leveran_type: [],
-      saldo: [],
-      Tekst: []
+      saldo: Validations.IsValidBalance(csvBookKeeping.saldo),
+      Tekst: Validations.IsValidText(csvBookKeeping.Tekst)
     };
     return errors;
   }
@@ -82,7 +82,7 @@ export class Validations {
     return errorsArray;
   }
 
-  private static IsValidCurrency(currency: string): string[] {
+  static IsValidCurrency(currency: string): string[] {
     const errorsArray = [];
 
     if(typeof currency === 'undefined'){
@@ -177,24 +177,13 @@ export class Validations {
     return errorsArray;
   }
 
-  private static IsValidBalance(balance: string): string[] {
-    // NOT DONE YET
-
-    const errorsArray: string[] = [];
-
-    if (balance.length > 16) {
-      errorsArray.push('Balance must not exceed 16 characters');
-    }
-
-    if (!/^\d+(,\d+)?$/.test(balance)) {
-      errorsArray.push('Is not a valid digit');
-    }
-
-    return errorsArray;
-  }
 
   private static IsValidText(text: string): string[] {
     const errorsArray = [];
+
+    if(typeof text === 'undefined'){
+      return errorsArray;
+    }
 
     if (!Validations.isNotEmptyString(text)) {
       errorsArray.push('Is empty');
@@ -213,4 +202,25 @@ export class Validations {
 
     return true;
   }
+
+  private static IsValidBalance(balance: any): string[] {
+
+    const errorsArray: string[] = [];
+
+    if(typeof balance === 'undefined'){
+      errorsArray.push('Cannot be empty');
+      return errorsArray;
+    }
+
+    if (balance.length > 16) {
+      errorsArray.push('Balance must not exceed 16 characters');
+    }
+
+    if (!/^\d+(,\d+)?$/.test(balance)) {
+      errorsArray.push('Is not a valid digit');
+    }
+
+    return errorsArray;
+  }
+
 }
