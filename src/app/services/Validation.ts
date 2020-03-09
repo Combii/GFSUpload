@@ -72,9 +72,9 @@ export class Validations {
     const month = Number(date.toString().substring(4, 6));
     const day = Number(date.toString().substring(6, 8));
 
-     // console.log('Year ' + year);
-     // console.log('Month ' + month);
-     // console.log('Day ' + day);
+      console.log('Year ' + year);
+      console.log('Month ' + month);
+      console.log('Day ' + day);
 
     const parsedDate = new Date(year, month, day);
 
@@ -91,7 +91,7 @@ export class Validations {
     const theMonth = parsedDate.getMonth();
     const dayOfMonth = parsedDate.getDate();
 
-    if (month === 0 && dayOfMonth === 1) {
+    if (month === 1 && dayOfMonth === 1) {
       errorsArray.push('Date cannot be first of January');
     }
 

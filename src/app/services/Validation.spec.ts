@@ -9,7 +9,15 @@ describe('ValidationTest', () => {
     it('ValidateCurrency', () => {
     const result = Validations.IsValidCurrency('DKKK')
 
-    expect(result[0]).toEqual('Currency is not three chars long');
+    let isValid = false;
+
+    result.forEach(err => {
+        if(err === 'Currency is not three chars long'){
+            isValid = true;
+        }
+    });
+
+    expect(isValid).toEqual(true);
     });
 
     it('ValidateDate Sunday or Saturday', () => {
@@ -21,8 +29,6 @@ describe('ValidationTest', () => {
         checkboxService.uploadToGfs = true;
 
         const result = Validations.IsValidDate('20200307', checkboxService);
-
-        console.log(result)
 
         let isValid = false;
 
@@ -39,9 +45,6 @@ describe('ValidationTest', () => {
 
         const result = Validations.IsValidDate('20200101');
 
-        console.log(result)
-
-
         let isValid = false;
 
         result.forEach(err => {
@@ -57,8 +60,6 @@ describe('ValidationTest', () => {
 
         const result = Validations.IsValidDate('20190101');
 
-        console.log(result)
-
         let isValid = false;
 
         result.forEach(err => {
@@ -73,8 +74,6 @@ describe('ValidationTest', () => {
     it('ValidateDate first of January V3', () => {
 
         const result = Validations.IsValidDate('20070101');
-
-        console.log(result)
 
         let isValid = false;
 
