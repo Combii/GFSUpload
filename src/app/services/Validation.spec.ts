@@ -21,14 +21,7 @@ describe('ValidationTest', () => {
     });
 
     it('ValidateDate Sunday or Saturday', () => {
-
-        const checkboxService = new CheckboxService();
-
-        checkboxService.bookInFebos = true;
-        checkboxService.bookInFebosAndUploadToGfs = true;
-        checkboxService.uploadToGfs = true;
-
-        const result = Validations.IsValidDate('20200307', checkboxService);
+        const result = Validations.IsValidDate('20200307');
 
         let isValid = false;
 
@@ -79,6 +72,27 @@ describe('ValidationTest', () => {
 
         result.forEach(err => {
             if(err === 'Date cannot be first of January'){
+                isValid = true;
+            }
+        });
+
+        expect(isValid).toEqual(true);
+    });
+
+    it('ValidateDate bookInFebosfirstmondayofmonth', () => {
+
+        const checkboxService = new CheckboxService();
+
+        checkboxService.bookInFebos = true;
+        checkboxService.bookInFebosAndUploadToGfs = false;
+        checkboxService.uploadToGfs = false;
+
+        const result = Validations.IsValidDate('20200302', checkboxService);
+
+        let isValid = false;
+
+        result.forEach(err => {
+            if(err === 'The date has to be today\'s date or after when it is the first monday in the month and book in febos in checked.'){
                 isValid = true;
             }
         });
