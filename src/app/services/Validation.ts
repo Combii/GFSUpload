@@ -1,11 +1,20 @@
-import {IAccountBookKeeping, IAccountBookKeepingError} from 'src/models/IAccountBookKeeping';
-import { IBookKeeping, IBookKeepingError } from 'src/models/IbookKeeping';
+import {
+  IAccountBookKeeping,
+  IAccountBookKeepingError
+} from "src/models/IAccountBookKeeping";
+import { IBookKeeping, IBookKeepingError } from "src/models/IbookKeeping";
+import { CheckboxService } from "./checkbox.service";
 
 export class Validations {
-
-  static validateAccountBookKeepingError(accountBookKeeping: IAccountBookKeeping): IAccountBookKeepingError {
+  static validateAccountBookKeepingError(
+    accountBookKeeping: IAccountBookKeeping,
+    checkBoxService: CheckboxService
+  ): IAccountBookKeepingError {
     const errors: IAccountBookKeepingError = {
-      AccountingDate: Validations.IsValidDate(accountBookKeeping.AccountingDate),
+      AccountingDate: Validations.IsValidDate(
+        accountBookKeeping.AccountingDate,
+        checkBoxService
+      ),
       RegistrationNo: Validations.IsValidRegNumber(
         accountBookKeeping.RegistrationNo
       ),
@@ -13,7 +22,9 @@ export class Validations {
       IDKT: Validations.IsValidIDKT(accountBookKeeping.IDKT, false),
       OriginalIDKT: [],
       CounterAccountIDKT: [],
-      ProjectCode: Validations.IsValidProjectCode(accountBookKeeping.ProjectCode),
+      ProjectCode: Validations.IsValidProjectCode(
+        accountBookKeeping.ProjectCode
+      ),
       Balance: Validations.IsValidBalance(accountBookKeeping.Balance),
       Text: Validations.IsValidText(accountBookKeeping.Text)
     };
@@ -21,8 +32,10 @@ export class Validations {
     return errors;
   }
 
-  static validateCSVBookKeeping(csvBookKeeping: IBookKeeping): IBookKeepingError {
-    const errors : IBookKeepingError = {
+  static validateCSVBookKeeping(
+    csvBookKeeping: IBookKeeping
+  ): IBookKeepingError {
+    const errors: IBookKeepingError = {
       Dato: Validations.IsValidDate(csvBookKeeping.Dato),
       valutakod: Validations.IsValidCurrency(csvBookKeeping.valutakod),
       RegNr: [],
@@ -44,12 +57,15 @@ export class Validations {
     return errors;
   }
 
-  private static IsValidDate(date: string): string[] {
+  private static IsValidDate(
+    date: string,
+    checkBoxService?: CheckboxService
+  ): string[] {
     const errorsArray = [];
 
     // https://stackoverflow.com/questions/10638529/how-to-parse-a-date-in-format-yyyymmdd-in-javascript
     if (!/^(\d){8}$/.test(date)) {
-      errorsArray.push('Date must be 8 digits only');
+      errorsArray.push("Date must be 8 digits only");
     }
 
     const year = Number(date.toString().substring(0, 4));
@@ -68,7 +84,7 @@ export class Validations {
     // Saturday === 0
     // Sunday === 1
     if (dayOfWeek === 0 || dayOfWeek === 1) {
-      errorsArray.push('Date cannot be saturday or sunday');
+      errorsArray.push("Date cannot be saturday or sunday");
     }
 
     // Check if first of January
@@ -76,27 +92,63 @@ export class Validations {
     const dayOfMonth = parsedDate.getDate();
 
     if (month === 0 && dayOfMonth === 1) {
-      errorsArray.push('Date cannot be first of January');
+      errorsArray.push("Date cannot be first of January");
+    }
+
+    if (checkBoxService) {
+      // If bookInFebos is checked and it is first monday of month, the date has to be today's date or after.
+      if (Validations.isFirstMondayOfMonth() && checkBoxService.bookInFebos) {
+        if (parsedDate.getMilliseconds() < new Date().getMilliseconds())
+          errorsArray.push(
+            "The date has to be today's date or after when it is the first monday in the month and book in febos in checked."
+          );
+      }
+
+      if (checkBoxService.bookInFebosAndUploadToGfs) {
+        const thisDate = new Date();
+
+        if(parsedDate.getDate() === thisDate.getDay()
+        && parsedDate.getMonth() === thisDate.getMonth()
+        && parsedDate.getFullYear() === thisDate.getFullYear()) {
+          errorsArray.push('Cannot book and make corrections on the same date')
+        }
+      }
     }
 
     return errorsArray;
   }
 
+  private static isFirstMondayOfMonth(): boolean {
+    const d = new Date();
+    const currentMonth = d.getMonth();
+
+    // if it is monday
+    if (d.getDay() === 1) {
+      // Then check if we are still in the same month if we go 7 days back in time. If we're not, then it is the first monday
+      d.setDate(d.getDate() - 7);
+      if (currentMonth !== d.getMonth()) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   static IsValidCurrency(currency: string): string[] {
     const errorsArray = [];
 
-    if(typeof currency === 'undefined'){
+    if (typeof currency === "undefined") {
       return errorsArray;
     }
 
     const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
     if (currency.toString().length !== 3) {
-      errorsArray.push('Currency is not three chars long');
+      errorsArray.push("Currency is not three chars long");
     }
 
     if (specialChar.test(currency)) {
-      errorsArray.push('Currency includes special characters');
+      errorsArray.push("Currency includes special characters");
     }
 
     return errorsArray;
@@ -114,11 +166,11 @@ export class Validations {
     const secondLastNumberOrChar = regNumber.toString().substring(3, 4);
 
     if (regNumber.toString().length !== 4) {
-      errorsArray.push('Is not 4 in length');
+      errorsArray.push("Is not 4 in length");
     }
 
     if (firstNumber < 30 || firstNumber > 49) {
-      errorsArray.push('First two digits are not between 30 and 49');
+      errorsArray.push("First two digits are not between 30 and 49");
     }
 
     if (
@@ -126,7 +178,7 @@ export class Validations {
       isNaN(Number(secondLastNumberOrChar))
     ) {
       errorsArray.push(
-        'second last char and last char cannot both be digits or characters'
+        "second last char and last char cannot both be digits or characters"
       );
     }
 
@@ -135,7 +187,7 @@ export class Validations {
       !isNaN(Number(secondLastNumberOrChar))
     ) {
       errorsArray.push(
-        'second last char and last char cannot both be digits or characters'
+        "second last char and last char cannot both be digits or characters"
       );
     }
 
@@ -149,16 +201,16 @@ export class Validations {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(IDKT)) {
-      errorsArray.push('Is empty');
+      errorsArray.push("Is empty");
     }
 
     if (isFebosOrBookingUpload) {
       if (IDKT.length > 10) {
-        errorsArray.push('Is longer than 10 characters');
+        errorsArray.push("Is longer than 10 characters");
       }
     } else {
       if (IDKT.length > 14) {
-        errorsArray.push('Is longer than 14 characters');
+        errorsArray.push("Is longer than 14 characters");
       }
     }
     return errorsArray;
@@ -168,28 +220,27 @@ export class Validations {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(projectCode)) {
-      errorsArray.push('Is empty');
+      errorsArray.push("Is empty");
     }
-    if (projectCode !== '078') {
-      errorsArray.push('Project Code must be 078');
+    if (projectCode !== "078") {
+      errorsArray.push("Project Code must be 078");
     }
 
     return errorsArray;
   }
 
-
   private static IsValidText(text: string): string[] {
     const errorsArray = [];
 
-    if(typeof text === 'undefined'){
+    if (typeof text === "undefined") {
       return errorsArray;
     }
 
     if (!Validations.isNotEmptyString(text)) {
-      errorsArray.push('Is empty');
+      errorsArray.push("Is empty");
     }
     if (text.length > 40) {
-      errorsArray.push('Text must not be longer than 40 characters');
+      errorsArray.push("Text must not be longer than 40 characters");
     }
 
     return errorsArray;
@@ -204,23 +255,21 @@ export class Validations {
   }
 
   private static IsValidBalance(balance: any): string[] {
-
     const errorsArray: string[] = [];
 
-    if(typeof balance === 'undefined'){
-      errorsArray.push('Cannot be empty');
+    if (typeof balance === "undefined") {
+      errorsArray.push("Cannot be empty");
       return errorsArray;
     }
 
     if (balance.length > 16) {
-      errorsArray.push('Balance must not exceed 16 characters');
+      errorsArray.push("Balance must not exceed 16 characters");
     }
 
     if (!/^\d+(,\d+)?$/.test(balance)) {
-      errorsArray.push('Is not a valid digit');
+      errorsArray.push("Is not a valid digit");
     }
 
     return errorsArray;
   }
-
 }
