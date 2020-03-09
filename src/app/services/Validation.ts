@@ -57,7 +57,7 @@ export class Validations {
     return errors;
   }
 
-  private static IsValidDate(
+  static IsValidDate(
     date: string,
     checkBoxService?: CheckboxService
   ): string[] {

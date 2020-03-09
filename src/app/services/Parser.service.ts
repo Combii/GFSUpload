@@ -114,6 +114,7 @@ export class ParserService {
   }
 
   validateAccountBookingsList() {
+    console.log('CHECKBOX: ' + this.checkBoxService.bookInFebos + ' ' + this.checkBoxService.bookInFebosAndUploadToGfs + ' ' + this.checkBoxService.uploadToGfs + ' ')
     this.dataListIAccountBookKeeping.forEach(row => {
       row.errors = Validations.validateAccountBookKeepingError(row,this.checkBoxService);
     });

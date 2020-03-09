@@ -1,11 +1,11 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { CheckboxService } from "../services/checkbox.service";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CheckboxService } from '../services/checkbox.service';
 
 @Component({
-  selector: "app-menu",
-  templateUrl: "./menu.component.html",
-  styleUrls: ["./menu.component.css"]
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
   uploadToGfsChecked: boolean;
@@ -23,15 +23,15 @@ export class MenuComponent implements OnInit {
     this.bookInFebosAnduploadToGfsChecked = this.checkBoxService.bookInFebosAndUploadToGfs;
   }
 
-  onChange(e) {
+  onChange(e: { target: { name: any; checked: boolean; }; }) {
     switch (e.target.name) {
-      case "upload":
+      case 'upload':
         this.checkBoxService.uploadToGfs = e.target.checked;
         break;
-      case "book":
+      case 'book':
         this.checkBoxService.bookInFebos = e.target.checked;
         break;
-      case "bookAndUpload":
+      case 'bookAndUpload':
         this.checkBoxService.bookInFebosAndUploadToGfs = e.target.checked;
     }
   }
@@ -45,4 +45,5 @@ export class MenuComponent implements OnInit {
       }
     });
   }
+
 }
