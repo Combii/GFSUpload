@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ParserService } from '../services/Parser.service';
 import { IAccountBookKeeping } from 'src/models/IAccountBookKeeping';
 import { ListSorter } from '../services/ListSorter';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-table-data-account',
@@ -14,7 +15,7 @@ export class TableDataAccountComponent {
   loading = false;
   showOnlyErrors = false;
 
-  constructor(private parser: ParserService) {}
+  constructor(private parser: ParserService, private http: HttpClient) {}
 
 
   onFileChange(evt: any) {
@@ -32,6 +33,6 @@ export class TableDataAccountComponent {
   }
 
   onClickSendToAPI(){
-    
+    this.http.post('http://localhost:5000', this.data).subscribe(r => console.log('SENT POST WITH DATA ARRAY'));
   }
 }

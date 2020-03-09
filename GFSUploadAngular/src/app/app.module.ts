@@ -9,6 +9,7 @@ import { TableDataAccountComponent } from './table-data-account/table-data-accou
 import { HeaderComponent } from './header/header.component';
 import { ErrorNotificationDirective } from './error-notification.directive';
 import { TableDataCellComponent } from './table-data-cell/table-data-cell.component';
+import { HttpClientModule } from '@angular/common/http';
 
 import { TooltipModule } from 'ng2-tooltip-directive';
 
@@ -25,7 +26,8 @@ import { TooltipModule } from 'ng2-tooltip-directive';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    TooltipModule
+    TooltipModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
