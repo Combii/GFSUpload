@@ -1,9 +1,9 @@
 import {
   IAccountBookKeeping,
   IAccountBookKeepingError
-} from "src/models/IAccountBookKeeping";
-import { IBookKeeping, IBookKeepingError } from "src/models/IbookKeeping";
-import { CheckboxService } from "./checkbox.service";
+} from 'src/models/IAccountBookKeeping';
+import { IBookKeeping, IBookKeepingError } from 'src/models/IbookKeeping';
+import { CheckboxService } from './checkbox.service';
 
 export class Validations {
   static validateAccountBookKeepingError(
@@ -57,7 +57,7 @@ export class Validations {
     return errors;
   }
 
-  private static IsValidDate(
+  static IsValidDate(
     date: string,
     checkBoxService?: CheckboxService
   ): string[] {
@@ -65,7 +65,7 @@ export class Validations {
 
     // https://stackoverflow.com/questions/10638529/how-to-parse-a-date-in-format-yyyymmdd-in-javascript
     if (!/^(\d){8}$/.test(date)) {
-      errorsArray.push("Date must be 8 digits only");
+      errorsArray.push('Date must be 8 digits only');
     }
 
     const year = Number(date.toString().substring(0, 4));
@@ -84,15 +84,15 @@ export class Validations {
     // Saturday === 0
     // Sunday === 1
     if (dayOfWeek === 0 || dayOfWeek === 1) {
-      errorsArray.push("Date cannot be saturday or sunday");
+      errorsArray.push('Date cannot be saturday or sunday');
     }
 
     // Check if first of January
     const theMonth = parsedDate.getMonth();
     const dayOfMonth = parsedDate.getDate();
 
-    if (month === 0 && dayOfMonth === 1) {
-      errorsArray.push("Date cannot be first of January");
+    if (month === 1 && dayOfMonth === 1) {
+      errorsArray.push('Date cannot be first of January');
     }
 
     if (checkBoxService) {
@@ -100,7 +100,7 @@ export class Validations {
       if (Validations.isFirstMondayOfMonth() && checkBoxService.bookInFebos) {
         if (parsedDate.getMilliseconds() < new Date().getMilliseconds())
           errorsArray.push(
-            "The date has to be today's date or after when it is the first monday in the month and book in febos in checked."
+            'The date has to be today\'s date or after when it is the first monday in the month and book in febos in checked.'
           );
       }
 
@@ -137,18 +137,18 @@ export class Validations {
   static IsValidCurrency(currency: string): string[] {
     const errorsArray = [];
 
-    if (typeof currency === "undefined") {
+    if (typeof currency === 'undefined') {
       return errorsArray;
     }
 
     const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
     if (currency.toString().length !== 3) {
-      errorsArray.push("Currency is not three chars long");
+      errorsArray.push('Currency is not three chars long');
     }
 
     if (specialChar.test(currency)) {
-      errorsArray.push("Currency includes special characters");
+      errorsArray.push('Currency includes special characters');
     }
 
     return errorsArray;
@@ -166,11 +166,11 @@ export class Validations {
     const secondLastNumberOrChar = regNumber.toString().substring(3, 4);
 
     if (regNumber.toString().length !== 4) {
-      errorsArray.push("Is not 4 in length");
+      errorsArray.push('Is not 4 in length');
     }
 
     if (firstNumber < 30 || firstNumber > 49) {
-      errorsArray.push("First two digits are not between 30 and 49");
+      errorsArray.push('First two digits are not between 30 and 49');
     }
 
     if (
@@ -178,7 +178,7 @@ export class Validations {
       isNaN(Number(secondLastNumberOrChar))
     ) {
       errorsArray.push(
-        "second last char and last char cannot both be digits or characters"
+        'second last char and last char cannot both be digits or characters'
       );
     }
 
@@ -187,7 +187,7 @@ export class Validations {
       !isNaN(Number(secondLastNumberOrChar))
     ) {
       errorsArray.push(
-        "second last char and last char cannot both be digits or characters"
+        'second last char and last char cannot both be digits or characters'
       );
     }
 
@@ -201,16 +201,16 @@ export class Validations {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(IDKT)) {
-      errorsArray.push("Is empty");
+      errorsArray.push('Is empty');
     }
 
     if (isFebosOrBookingUpload) {
       if (IDKT.length > 10) {
-        errorsArray.push("Is longer than 10 characters");
+        errorsArray.push('Is longer than 10 characters');
       }
     } else {
       if (IDKT.length > 14) {
-        errorsArray.push("Is longer than 14 characters");
+        errorsArray.push('Is longer than 14 characters');
       }
     }
     return errorsArray;
@@ -220,10 +220,10 @@ export class Validations {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(projectCode)) {
-      errorsArray.push("Is empty");
+      errorsArray.push('Is empty');
     }
-    if (projectCode !== "078") {
-      errorsArray.push("Project Code must be 078");
+    if (projectCode !== '078') {
+      errorsArray.push('Project Code must be 078');
     }
 
     return errorsArray;
@@ -232,15 +232,15 @@ export class Validations {
   private static IsValidText(text: string): string[] {
     const errorsArray = [];
 
-    if (typeof text === "undefined") {
+    if (typeof text === 'undefined') {
       return errorsArray;
     }
 
     if (!Validations.isNotEmptyString(text)) {
-      errorsArray.push("Is empty");
+      errorsArray.push('Is empty');
     }
     if (text.length > 40) {
-      errorsArray.push("Text must not be longer than 40 characters");
+      errorsArray.push('Text must not be longer than 40 characters');
     }
 
     return errorsArray;
@@ -257,17 +257,17 @@ export class Validations {
   private static IsValidBalance(balance: any): string[] {
     const errorsArray: string[] = [];
 
-    if (typeof balance === "undefined") {
-      errorsArray.push("Cannot be empty");
+    if (typeof balance === 'undefined') {
+      errorsArray.push('Cannot be empty');
       return errorsArray;
     }
 
     if (balance.length > 16) {
-      errorsArray.push("Balance must not exceed 16 characters");
+      errorsArray.push('Balance must not exceed 16 characters');
     }
 
     if (!/^\d+(,\d+)?$/.test(balance)) {
-      errorsArray.push("Is not a valid digit");
+      errorsArray.push('Is not a valid digit');
     }
 
     return errorsArray;

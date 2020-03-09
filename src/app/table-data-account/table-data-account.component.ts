@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ParserService } from '../services/Parser.service';
 import { IAccountBookKeeping } from 'src/models/IAccountBookKeeping';
-import { ActivatedRoute } from '@angular/router';
 import { ListSorter } from '../services/ListSorter';
 
 @Component({
@@ -15,7 +14,7 @@ export class TableDataAccountComponent {
   loading = false;
   showOnlyErrors = false;
 
-  constructor(private parser: ParserService, private route: ActivatedRoute) {}
+  constructor(private parser: ParserService) {}
 
 
   onFileChange(evt: any) {
