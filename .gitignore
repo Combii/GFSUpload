@@ -45,7 +45,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-
 # Created by https://www.gitignore.io/api/angular,dotnetcore
 # Edit at https://www.gitignore.io/?templates=angular,dotnetcore
 
