@@ -20,7 +20,7 @@ namespace GFSUploadAPI.Controllers
         [HttpPost]
         public ActionResult Post(AccountBookKeeping accountBookKeeping)
         {
-            return StatusCode(200);
+            return Ok(accountBookKeeping);
         }
 
         [HttpGet]

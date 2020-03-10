@@ -33,6 +33,6 @@ export class TableDataAccountComponent {
   }
 
   onClickSendToAPI(){
-    this.http.post('http://localhost:5000/', this.data).subscribe(r => console.log('SENT POST WITH DATA ARRAY'));
+    this.http.post('http://localhost:5000/api/GFSAccount', this.data).subscribe(r => console.log('SENT POST WITH DATA ARRAY'));
   }
 }
