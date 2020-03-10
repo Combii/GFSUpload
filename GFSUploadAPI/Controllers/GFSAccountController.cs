@@ -20,7 +20,7 @@ namespace GFSUploadAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] AccountBookKeeping request)
+        public IActionResult Post([FromBody] AccountBookKeepingArray request)
         {
           /*var returnArray = new List<AccountBookKeeping>();
 

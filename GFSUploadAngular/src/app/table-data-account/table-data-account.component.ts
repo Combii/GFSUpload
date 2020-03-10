@@ -79,12 +79,17 @@ export class TableDataAccountComponent {
       }
     })
 
-    console.log(stringify(this.data[0]))
 
+    const jsonString: string[] = [];
 
+    this.data.forEach(element => {
+      jsonString.push(stringify(this.data[0]));
+    });
+
+    console.log(JSON.stringify(jsonString))
 
     this.http.post('http://localhost:5000/api/GFSAccount',
-    stringify(this.data[0]),
+    JSON.stringify(jsonString),
      httpOptions).subscribe(reponse =>
     console.log(reponse));
   }
