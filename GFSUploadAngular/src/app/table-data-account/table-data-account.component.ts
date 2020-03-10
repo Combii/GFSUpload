@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ParserService } from '../services/Parser.service';
 import { IAccountBookKeeping } from 'src/models/IAccountBookKeeping';
+import { IAccountBookKeepingAPI } from 'src/models/IAccountBookKeepingAPI';
 import { ListSorter } from '../services/ListSorter';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-table-data-account',
@@ -35,6 +36,40 @@ export class TableDataAccountComponent {
   // If using Chrome you need to paste this in your url to get it to work
   // chrome://flags/#allow-insecure-localhost
   onClickSendToAPI(){
-    this.http.post('http://localhost:5000/api/GFSAccount', this.data).subscribe(r => console.log('SENT POST WITH DATA ARRAY'));
+
+    const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json'})
+    }
+
+    // const newArray = this.removeErrorsArray(this.data);
+    // console.log(JSON.stringify(newArray))
+     console.log(JSON.stringify(this.data[0]))
+
+    this.http.post('http://localhost:5000/api/GFSAccount',
+    JSON.stringify(this.data[0]),
+     httpOptions).subscribe(reponse =>
+    console.log(reponse));
+  }
+
+
+  removeErrorsArray(accountBookKeepingArray: IAccountBookKeeping[]) : IAccountBookKeepingAPI[] {
+
+    const dataAPI: IAccountBookKeepingAPI[] = [];
+
+    accountBookKeepingArray.forEach(accountBooking => {
+      dataAPI.push({
+        AccountingDate: accountBooking.AccountingDate,
+        RegistrationNo: accountBooking.RegistrationNo,
+        IDKT: accountBooking.IDKT,
+        OriginalIDKT: 'test',
+        CounterAccountIDKT: accountBooking.CounterAccountIDKT,
+        Text: accountBooking.Text,
+        ProjectCode: accountBooking.ProjectCode,
+        Currency: accountBooking.Currency,
+        Balance: accountBooking.Balance
+      });
+    });
+
+    return dataAPI;
   }
 }

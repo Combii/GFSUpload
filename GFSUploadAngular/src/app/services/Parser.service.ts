@@ -70,7 +70,7 @@ export class ParserService {
             AccountingDate: row[0],
             RegistrationNo: row[1],
             IDKT: row[2],
-            OriginalIDKT: row[3],
+            OriginalIDKT: 'test',
             CounterAccountIDKT: row[4],
             Text: row[5],
             ProjectCode: row[6],

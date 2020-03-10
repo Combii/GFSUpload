@@ -4,7 +4,7 @@ namespace GFSUploadAPI
 {
     public class AccountBookKeeping
     {
-        public string AccountingDate { get; set; }
+        public int AccountingDate { get; set; }
         public string RegistrationNo { get; set; }
         public string IDKT { get; set; }
         public string OriginalIDKT { get; set; }
@@ -12,6 +12,6 @@ namespace GFSUploadAPI
         public string Text { get; set; }
         public string ProjectCode { get; set; }
         public string Currency { get; set; }
-        public string Balance { get; set; }
+        public float Balance { get; set; }
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GFSUploadAPI.Controllers
 {
@@ -18,9 +20,15 @@ namespace GFSUploadAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(AccountBookKeeping accountBookKeeping)
+        public IActionResult Post([FromBody] AccountBookKeeping request)
         {
-            return Ok(accountBookKeeping);
+          /*var returnArray = new List<AccountBookKeeping>();
+
+          foreach (var accountBook in accountBookKeepingArray)
+          {
+              returnArray.Add(accountBook);
+          }*/
+          return Ok(request);
         }
 
         [HttpGet]
