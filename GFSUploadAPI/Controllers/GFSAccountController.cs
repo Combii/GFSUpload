@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GFSUploadAPI.Controllers
 {
+    [Route("api/[controller]")]
     public class GFSAccountController : ControllerBase
     {
         private readonly ILogger<GFSAccountController> _logger;
@@ -17,9 +18,15 @@ namespace GFSUploadAPI.Controllers
         }
 
         [HttpPost]
-        public void Post(AccountBookKeeping accountBookKeeping)
+        public ActionResult Post(AccountBookKeeping accountBookKeeping)
         {
-            Console.WriteLine(accountBookKeeping);
+            return StatusCode(200);
+        }
+
+        [HttpGet]
+        public ActionResult Get()
+        {
+            return StatusCode(200);
         }
     }
 }
