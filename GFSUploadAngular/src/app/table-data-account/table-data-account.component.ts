@@ -4,6 +4,7 @@ import { IAccountBookKeeping } from 'src/models/IAccountBookKeeping';
 import { IAccountBookKeepingAPI } from 'src/models/IAccountBookKeepingAPI';
 import { ListSorter } from '../services/ListSorter';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import * as fastJson from 'fast-json-stringify';
 
 @Component({
   selector: 'app-table-data-account',
@@ -43,10 +44,47 @@ export class TableDataAccountComponent {
 
     // const newArray = this.removeErrorsArray(this.data);
     // console.log(JSON.stringify(newArray))
-     console.log(JSON.stringify(this.data[0]))
+
+
+     const stringify = fastJson({
+      type: 'object',
+      properties: {
+        AccountingDate: {
+          type: 'string'
+        },
+        RegistrationNo: {
+          type: 'string'
+        },
+        Currency: {
+          type: 'string'
+        },
+        IDKT: {
+          type: 'string'
+        },
+        OriginalIDKT: {
+          type: 'string'
+        },
+        CounterAccountIDKT: {
+          type: 'string'
+        },
+        ProjectCode: {
+          type: 'string'
+        },
+        Balance: {
+          type: 'string'
+        },
+        Text: {
+          type: 'string'
+        }
+      }
+    })
+
+    console.log(stringify(this.data[0]))
+
+
 
     this.http.post('http://localhost:5000/api/GFSAccount',
-    JSON.stringify(this.data[0]),
+    stringify(this.data[0]),
      httpOptions).subscribe(reponse =>
     console.log(reponse));
   }
