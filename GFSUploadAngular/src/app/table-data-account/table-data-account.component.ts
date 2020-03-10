@@ -32,6 +32,8 @@ export class TableDataAccountComponent {
     this.data = ListSorter.sortListForErrorsOnlyIExcelBookKeeping(this.data);
   }
 
+  // If using Chrome you need to paste this in your url to get it to work
+  // chrome://flags/#allow-insecure-localhost
   onClickSendToAPI(){
     this.http.post('http://localhost:5000/api/GFSAccount', this.data).subscribe(r => console.log('SENT POST WITH DATA ARRAY'));
   }
