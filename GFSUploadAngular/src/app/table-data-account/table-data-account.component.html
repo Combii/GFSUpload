@@ -13,12 +13,12 @@
       />
     </div>
   
-    <button *ngIf="data.length > 0" class="btn btn-danger" (click)="onClickShowErros()">
+    <button *ngIf="data.length > 0 && !areErrors" class="btn btn-danger" (click)="onClickShowErros()">
       Show Errors
     </button>
 
     <div class="divider"></div>
-    <button *ngIf="areErrors" class="btn btn-primary" (click)="onClickSendToAPI()">
+    <button *ngIf="areErrors && data.length > 0" class="btn btn-primary" (click)="onClickSendToAPI()">
       Send to API
     </button>
     <p></p>

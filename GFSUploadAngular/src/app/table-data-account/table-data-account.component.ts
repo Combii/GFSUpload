@@ -16,7 +16,7 @@ export class TableDataAccountComponent {
 
   loading = false;
   showOnlyErrors = false;
-  areErrors = true;
+  areErrors = false;
 
   constructor(private parser: ParserService, private http: HttpClient) {}
 
@@ -120,11 +120,6 @@ export class TableDataAccountComponent {
   }
 
   checkIfErrorsInArray(listOfArray: IAccountBookKeeping[]): boolean {
-    this.data = ListSorter.sortListForErrorsOnlyIExcelBookKeeping(this.data);
-
-    if(this.data.length > 0){
-      return true;
-    }
-    return false;
+    return ListSorter.sortListForErrorsOnlyIExcelBookKeeping(this.data).length > 0;
   }
 }
