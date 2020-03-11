@@ -67,15 +67,15 @@ export class ParserService {
       if (this.isFirst) {
         if (row.length > 0) {
           this.dataListIAccountBookKeeping.push({
-            AccountingDate: row[0],
-            RegistrationNo: row[1],
-            IDKT: row[2],
-            OriginalIDKT: 'test',
-            CounterAccountIDKT: row[4],
-            Text: row[5],
-            ProjectCode: row[6],
-            Currency: row[7],
-            Balance: row[8]
+            AccountingDate: ''+row[0],
+            RegistrationNo: ''+row[1],
+            IDKT: ''+row[2],
+            OriginalIDKT: ''+row[3],
+            CounterAccountIDKT: ''+row[4],
+            Text: ''+row[5],
+            ProjectCode: ''+row[6],
+            Currency: ''+row[7],
+            Balance: ''+row[8]
           });
         }
       }

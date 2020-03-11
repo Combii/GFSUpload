@@ -19,22 +19,17 @@ namespace GFSUploadAPI.Controllers
             _logger = logger;
         }
 
-        [HttpPost]
-        public IActionResult Post([FromBody] AccountBookKeepingArray request)
-        {
-          /*var returnArray = new List<AccountBookKeeping>();
+    [HttpPost]
+    public IActionResult Post([FromBody] IEnumerable<AccountBookKeeping> request)
+    {
+        System.Console.WriteLine(request);
+        return Ok(request);
+    }
 
-          foreach (var accountBook in accountBookKeepingArray)
-          {
-              returnArray.Add(accountBook);
-          }*/
-          return Ok(request);
-        }
-
-        [HttpGet]
-        public ActionResult Get()
-        {
-            return StatusCode(200);
-        }
+    [HttpGet]
+    public ActionResult Get()
+    {
+        return StatusCode(200);
+    }
     }
 }
