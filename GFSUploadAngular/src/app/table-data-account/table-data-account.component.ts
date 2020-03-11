@@ -16,6 +16,7 @@ export class TableDataAccountComponent {
 
   loading = false;
   showOnlyErrors = false;
+  areErrors = true;
 
   constructor(private parser: ParserService, private http: HttpClient) {}
 
@@ -27,6 +28,8 @@ export class TableDataAccountComponent {
       this.loading = false;
       this.data = rData;
     });
+
+    this.areErrors = this.checkIfErrorsInArray(this.data);
   }
 
   onClickShowErros() {
@@ -114,5 +117,14 @@ export class TableDataAccountComponent {
     });
 
     return dataAPI;
+  }
+
+  checkIfErrorsInArray(listOfArray: IAccountBookKeeping[]): boolean {
+    this.data = ListSorter.sortListForErrorsOnlyIExcelBookKeeping(this.data);
+
+    if(this.data.length > 0){
+      return true;
+    }
+    return false;
   }
 }
