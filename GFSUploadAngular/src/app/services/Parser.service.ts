@@ -67,15 +67,15 @@ export class ParserService {
       if (this.isFirst) {
         if (row.length > 0) {
           this.dataListIAccountBookKeeping.push({
-            AccountingDate: ''+row[0],
-            RegistrationNo: ''+row[1],
-            IDKT: ''+row[2],
-            OriginalIDKT: ''+row[3],
-            CounterAccountIDKT: ''+row[4],
-            Text: ''+row[5],
-            ProjectCode: ''+row[6],
-            Currency: ''+row[7],
-            Balance: ''+row[8]
+            AccountingDate: typeof ''+row[0] === 'undefined' ? '' : ''+row[0],
+            RegistrationNo: typeof ''+row[1] === 'undefined' ? '' : ''+row[1],
+            IDKT: typeof ''+row[2] === 'undefined' ? '' : ''+row[2],
+            OriginalIDKT: typeof ''+row[3] === 'undefined' ? '' : ''+row[3],
+            CounterAccountIDKT: typeof ''+row[4] === 'undefined' ? '' : ''+row[4],
+            Text: typeof ''+row[5] === 'undefined' ? '' : ''+row[5],
+            ProjectCode: typeof ''+row[6] === 'undefined' ? '' : ''+row[6],
+            Currency: typeof ''+row[7] === 'undefined' ? '' : ''+row[7],
+            Balance: typeof ''+row[8] === 'undefined' ? '' : ''+row[8]
           });
         }
       }
