@@ -27,9 +27,9 @@ export class TableDataAccountComponent {
     this.parser.onAccountFileParsedIAccountBookKeeping.subscribe(rData => {
       this.loading = false;
       this.data = rData;
-    });
 
-    this.areErrors = this.checkIfErrorsInArray(this.data);
+      this.areErrors = this.checkIfErrorsInArray(this.data);
+    });
   }
 
   onClickShowErros() {
