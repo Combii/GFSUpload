@@ -12,10 +12,10 @@ export class AuthComponent implements OnInit {
   ngOnInit(): void {}
 
   onSignUp(email: string, password: string) {
-/*     this.http.post("https://", {
+    return this.http.post("https://", {
       email,
       password
-    }); */
+    });
   }
 
   onSignIn(email: string, password: string) {
