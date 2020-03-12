@@ -10,7 +10,8 @@ namespace GFSUploadAPI.Migrations
                 name: "AccountBookKeeping",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
                     AccountingDate = table.Column<string>(nullable: true),
                     RegistrationNo = table.Column<string>(nullable: true),
                     Currency = table.Column<string>(nullable: true),
