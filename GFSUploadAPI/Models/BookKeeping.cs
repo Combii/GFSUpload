@@ -1,9 +1,12 @@
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     namespace GFSUploadAPI.Models
     {
         public class BookKeeping
         {
+          [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+          public int Id { get; set; }
           public string Dato { get; set; }
           public string RegNr { get; set; }
           public string regnskabstype { get; set; }

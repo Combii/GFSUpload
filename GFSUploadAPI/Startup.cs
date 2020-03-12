@@ -30,6 +30,7 @@ namespace GFSUploadAPI
         public void ConfigureServices(IServiceCollection services)
         {
           services.AddScoped<IAccountBookingRepository, AccountBookingRepository>();
+          services.AddScoped<IBookingRepository, BookingRepository>();
 
           services.AddDbContext<DataContext>(x =>
             x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
