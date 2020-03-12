@@ -15,21 +15,22 @@ namespace GFSUploadAPI.Data
       _context = context;
     }
 
-    public Task<IEnumerable<AccountBookKeeping>> GetAccountBookings()
+    public async Task<IEnumerable<AccountBookKeeping>> GetAccountBookings()
     {
-      throw new System.NotImplementedException();
+      return _context.AccountBookKeeping.AsQueryable().ToList();
     }
 
     public async Task<IEnumerable<AccountBookKeeping>> PostAccountBookKeepingList(IEnumerable<AccountBookKeeping> accountBookKeepingList)
     {
-      foreach (var accountBookKeeping in accountBookKeepingList)
+      var postAccountBookKeepingList = accountBookKeepingList.ToList();
+      foreach (var accountBookKeeping in postAccountBookKeepingList)
       {
         _context.AccountBookKeeping.Add(accountBookKeeping);
       }
 
       await _context.SaveChangesAsync();
 
-      return accountBookKeepingList;
+      return postAccountBookKeepingList;
     }
 
     public async Task<AccountBookKeeping> PostAccountBookKeeping(AccountBookKeeping accountBookKeeping)
