@@ -30,8 +30,7 @@ namespace GFSUploadAPI.Controllers
     public async Task<IActionResult> Post([FromBody] IEnumerable<AccountBookKeeping> request)
     {
       var listAddedToDb = await _accountBookingRepository.PostAccountBookKeepingList(request);
-      var listfromDb = await _accountBookingRepository.GetAccountBookings();
-      return Ok(listfromDb);
+      return Ok(listAddedToDb);
     }
 
     [HttpGet]
