@@ -23,6 +23,7 @@ namespace GFSUploadAPI.Controllers
     [HttpPost]
     public IActionResult Post([FromBody] IEnumerable<BookKeeping> request)
     {
+
         return Ok(request);
     }
 
