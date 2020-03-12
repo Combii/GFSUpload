@@ -11,17 +11,17 @@ using Newtonsoft.Json.Linq;
 namespace GFSUploadAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class GfsAccountController : ControllerBase
+    public class GfsChartController : ControllerBase
     {
-        private readonly ILogger<GfsAccountController> _logger;
+        private readonly ILogger<GfsChartController> _logger;
 
-        public GfsAccountController(ILogger<GfsAccountController> logger)
+        public GfsChartController(ILogger<GfsChartController> logger)
         {
             _logger = logger;
         }
 
     [HttpPost]
-    public IActionResult Post([FromBody] IEnumerable<AccountBookKeeping> request)
+    public IActionResult Post([FromBody] IEnumerable<BookKeeping> request)
     {
         return Ok(request);
     }
