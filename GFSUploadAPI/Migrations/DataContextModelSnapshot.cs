@@ -49,7 +49,7 @@ namespace GFSUploadAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("accountBookKeeping");
+                    b.ToTable("AccountBookKeeping");
                 });
 #pragma warning restore 612, 618
         }

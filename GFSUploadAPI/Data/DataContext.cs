@@ -8,9 +8,6 @@ namespace GFSUploadAPI.Data
   {
     public DataContext(DbContextOptions<DataContext>  options) : base (options) {}
 
-    public DbSet<AccountBookKeeping> accountBookKeeping { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-      => options.UseSqlite("Data Source=GfsUpload.db");
+    public DbSet<AccountBookKeeping> AccountBookKeeping { get; set; }
   }
 }

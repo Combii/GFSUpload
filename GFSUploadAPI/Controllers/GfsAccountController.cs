@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GFSUploadAPI.Data;
 using GFSUploadAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,16 +15,22 @@ namespace GFSUploadAPI.Controllers
     public class GfsAccountController : ControllerBase
     {
         private readonly ILogger<GfsAccountController> _logger;
+        private readonly IAccountBookingRepository _accountBookingRepository;
+        private readonly DataContext _context;
 
-        public GfsAccountController(ILogger<GfsAccountController> logger)
+        public GfsAccountController(ILogger<GfsAccountController> logger, DataContext context,
+          IAccountBookingRepository accountBookingRepository)
         {
-            _logger = logger;
+          _context = context;
+          _accountBookingRepository = accountBookingRepository;
+          _logger = logger;
         }
 
     [HttpPost]
-    public IActionResult Post([FromBody] IEnumerable<AccountBookKeeping> request)
+    public async Task<IActionResult> Post([FromBody] IEnumerable<AccountBookKeeping> request)
     {
-        return Ok(request);
+      var listAddedToDb = await _accountBookingRepository.PostAccountBookKeepingList(request);
+      return Ok(listAddedToDb);
     }
 
     [HttpGet]

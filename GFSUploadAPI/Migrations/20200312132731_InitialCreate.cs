@@ -7,7 +7,7 @@ namespace GFSUploadAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "accountBookKeeping",
+                name: "AccountBookKeeping",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
@@ -23,14 +23,14 @@ namespace GFSUploadAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_accountBookKeeping", x => x.Id);
+                    table.PrimaryKey("PK_AccountBookKeeping", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "accountBookKeeping");
+                name: "AccountBookKeeping");
         }
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GFSUploadAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200312125823_InitialCreate")]
+    [Migration("20200312132731_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,7 +51,7 @@ namespace GFSUploadAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("accountBookKeeping");
+                    b.ToTable("AccountBookKeeping");
                 });
 #pragma warning restore 612, 618
         }
