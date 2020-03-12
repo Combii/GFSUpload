@@ -20,17 +20,17 @@ namespace GFSUploadAPI.Controllers
             _logger = logger;
         }
 
-    [HttpPost]
-    public IActionResult Post([FromBody] IEnumerable<BookKeeping> request)
-    {
+        [HttpPost]
+        public IActionResult Post([FromBody] IEnumerable<BookKeeping> request)
+        {
 
-        return Ok(request);
-    }
+            return Ok(request);
+        }
 
-    [HttpGet]
-    public ActionResult Get()
-    {
-        return StatusCode(200);
-    }
+        [HttpGet]
+        public ActionResult Get()
+        {
+            return StatusCode(200);
+        }
     }
 }
