@@ -9,6 +9,5 @@ namespace GFSUploadAPI.Data
     Task<IEnumerable<AccountBookKeeping>> GetAccountBookings();
     Task<IEnumerable<AccountBookKeeping>> PostAccountBookKeepingList(IEnumerable<AccountBookKeeping> accountBookKeepingList);
     Task<AccountBookKeeping> PostAccountBookKeeping(AccountBookKeeping accountBookKeeping);
-
   }
 }

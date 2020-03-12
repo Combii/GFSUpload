@@ -1,9 +1,19 @@
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     namespace GFSUploadAPI.Models
     {
         public class BookKeeping
         {
+
+          public BookKeeping()
+          {
+            CreatedDate  = DateTime.Now;
+          }
+
+          [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+          public int Id { get; set; }
+          public DateTime CreatedDate { get; }
           public string Dato { get; set; }
           public string RegNr { get; set; }
           public string regnskabstype { get; set; }

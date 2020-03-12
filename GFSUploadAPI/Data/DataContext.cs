@@ -9,5 +9,6 @@ namespace GFSUploadAPI.Data
     public DataContext(DbContextOptions<DataContext>  options) : base (options) {}
 
     public DbSet<AccountBookKeeping> AccountBookKeeping { get; set; }
+    public DbSet<BookKeeping> BookKeeping { get; set; }
   }
 }

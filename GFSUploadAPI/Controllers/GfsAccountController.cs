@@ -21,23 +21,22 @@ namespace GFSUploadAPI.Controllers
         public GfsAccountController(ILogger<GfsAccountController> logger, DataContext context,
           IAccountBookingRepository accountBookingRepository)
         {
-          _context = context;
-          _accountBookingRepository = accountBookingRepository;
-          _logger = logger;
+            _context = context;
+            _accountBookingRepository = accountBookingRepository;
+            _logger = logger;
         }
 
-    [HttpPost]
-    public async Task<IActionResult> Post([FromBody] IEnumerable<AccountBookKeeping> request)
-    {
-      var listAddedToDb = await _accountBookingRepository.PostAccountBookKeepingList(request);
-      var listfromDb = await _accountBookingRepository.GetAccountBookings();
-      return Ok(listfromDb);
-    }
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] IEnumerable<AccountBookKeeping> request)
+        {
+            var listAddedToDb = await _accountBookingRepository.PostAccountBookKeepingList(request);
+            return Ok(listAddedToDb);
+        }
 
-    [HttpGet]
-    public ActionResult Get()
-    {
-        return StatusCode(200);
-    }
+        [HttpGet]
+        public ActionResult Get()
+        {
+            return StatusCode(200);
+        }
     }
 }
