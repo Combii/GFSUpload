@@ -4,6 +4,7 @@
     {
         public class AccountBookKeeping
         {
+            public string Id { get; set; }
             public string AccountingDate { get; set; }
             public string RegistrationNo { get; set; }
             public string Currency { get; set; }

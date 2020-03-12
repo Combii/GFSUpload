@@ -41,7 +41,9 @@ export class TableDataAccountComponent {
   onClickSendToAPI() {
     this.http
       .post('http://localhost:5000/api/GFSAccount', this.data)
-      .subscribe(reponse => console.log(reponse));
+      .subscribe(reponse => {
+        console.log(reponse);
+      });
   }
 
   checkIfErrorsInArray(listOfArray: IAccountBookKeeping[]): boolean {
