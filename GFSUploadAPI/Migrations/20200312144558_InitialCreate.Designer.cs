@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GFSUploadAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200312132731_InitialCreate")]
+    [Migration("20200312144558_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,8 +19,9 @@ namespace GFSUploadAPI.Migrations
 
             modelBuilder.Entity("GFSUploadAPI.Models.AccountBookKeeping", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("AccountingDate")
                         .HasColumnType("TEXT");

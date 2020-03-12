@@ -17,8 +17,9 @@ namespace GFSUploadAPI.Migrations
 
             modelBuilder.Entity("GFSUploadAPI.Models.AccountBookKeeping", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("AccountingDate")
                         .HasColumnType("TEXT");

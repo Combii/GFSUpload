@@ -1,10 +1,12 @@
     using System;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     namespace GFSUploadAPI.Models
     {
         public class AccountBookKeeping
         {
-            public string Id { get; set; }
+            [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+            public int Id { get; set; }
             public string AccountingDate { get; set; }
             public string RegistrationNo { get; set; }
             public string Currency { get; set; }

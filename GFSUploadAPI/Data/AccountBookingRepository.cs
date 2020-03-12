@@ -22,12 +22,9 @@ namespace GFSUploadAPI.Data
 
     public async Task<IEnumerable<AccountBookKeeping>> PostAccountBookKeepingList(IEnumerable<AccountBookKeeping> accountBookKeepingList)
     {
-      int counter = 0;
       foreach (var accountBookKeeping in accountBookKeepingList)
       {
-        accountBookKeeping.Id = "" + counter;
         _context.AccountBookKeeping.Add(accountBookKeeping);
-        counter++;
       }
 
       await _context.SaveChangesAsync();
