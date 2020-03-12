@@ -34,7 +34,7 @@ export interface IBookKeeping {
   opdater_lev: string;
   leveran_kor: string;
   leveran_type: string;
-  saldo: number;
+  saldo: string;
   Tekst: string;
   errors?: IBookKeepingError;
 }

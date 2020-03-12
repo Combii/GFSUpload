@@ -43,6 +43,7 @@ export class TableDataChartGfsComponent {
   }
 
   onClickSendToAPI() {
+    console.log(this.dataList);
     this.http
       .post('http://localhost:5000/api/GfsChart', this.dataList)
       .subscribe(reponse => console.log(reponse));
