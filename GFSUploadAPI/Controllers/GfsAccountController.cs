@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GFSUploadAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -10,11 +11,11 @@ using Newtonsoft.Json.Linq;
 namespace GFSUploadAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class GFSAccountController : ControllerBase
+    public class GfsAccountController : ControllerBase
     {
-        private readonly ILogger<GFSAccountController> _logger;
+        private readonly ILogger<GfsAccountController> _logger;
 
-        public GFSAccountController(ILogger<GFSAccountController> logger)
+        public GfsAccountController(ILogger<GfsAccountController> logger)
         {
             _logger = logger;
         }
@@ -22,7 +23,6 @@ namespace GFSUploadAPI.Controllers
     [HttpPost]
     public IActionResult Post([FromBody] IEnumerable<AccountBookKeeping> request)
     {
-        System.Console.WriteLine(request);
         return Ok(request);
     }
 
