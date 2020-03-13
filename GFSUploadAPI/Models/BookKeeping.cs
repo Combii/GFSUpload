@@ -31,5 +31,15 @@
           public string leveran_type { get; set; }
           public string saldo { get; set; }
           public string Tekst { get; set; }
+
+          public override string ToString()
+          {
+            return Dato + "        " + RegNr + "        " + regnskabstype + "        " + dkkbass +
+                   "        " + skema_id + "        " + skemarakke + "        " + valutakod +
+                   "        " + valutakod + "        " + ldkd + "        " + kngr + "        " + kngr_typ + "        " + pdst
+                   + "        " + sum_rgopid + "        " + opdater_lev + "        " + leveran_kor + "        " + leveran_type
+                   + "        " + saldo + "        " + Tekst;
+          }
+
         }
     }
