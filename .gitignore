@@ -107,3 +107,5 @@ e2e/*.map
 .history
 
 # End of https://www.gitignore.io/api/visualstudiocode
+GFSUploadAPI/hostDataFileAccountBookKeepings.txt
+GFSUploadAPI/GfsUpload.db
