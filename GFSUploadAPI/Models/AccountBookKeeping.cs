@@ -23,5 +23,13 @@
             public string ProjectCode { get; set; }
             public string Balance { get; set; }
             public string Text { get; set; }
+
+
+            public override string ToString()
+            {
+              return AccountingDate + "        " + RegistrationNo + "        " + Currency + "        " + IDKT +
+                     "        " + OriginalIDKT + "        " + CounterAccountIDKT + "        " + ProjectCode +
+                     "        " + Balance + "        " + Text;
+            }
         }
     }

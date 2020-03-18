@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GFSUploadAPI.Data;
+using GFSUploadAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +32,7 @@ namespace GFSUploadAPI
         {
           services.AddScoped<IAccountBookingRepository, AccountBookingRepository>();
           services.AddScoped<IBookingRepository, BookingRepository>();
+          services.AddScoped<IAccountBookKeepingToFileParser,AccountBookKeepingToFileParser>();
 
           services.AddDbContext<DataContext>(x =>
             x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
