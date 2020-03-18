@@ -7,6 +7,7 @@ using GFSUploadAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -37,6 +38,9 @@ namespace GFSUploadAPI
           services.AddDbContext<DataContext>(x =>
             x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
+          services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddEntityFrameworkStores<DataContext>();
+
             services.AddControllers();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
                 {
@@ -61,6 +65,8 @@ namespace GFSUploadAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
