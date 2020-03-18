@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { TooltipModule } from 'ng2-tooltip-directive';
 import { AuthComponent } from './auth/auth/auth.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { AuthComponent } from './auth/auth/auth.component';
     BrowserModule,
     AppRoutingModule,
     TooltipModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
