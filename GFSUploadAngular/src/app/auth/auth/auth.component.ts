@@ -9,6 +9,8 @@ import { NgForm } from '@angular/forms';
 export class AuthComponent implements OnInit {
   constructor() {}
 
+  isLoginMode = false;
+
   ngOnInit(): void {}
 
   onSubmit(form: NgForm){
@@ -16,5 +18,7 @@ export class AuthComponent implements OnInit {
     form.reset();
   }
 
-  onSwitchMode() {}
+  onSwitchMode() {
+    this.isLoginMode = !this.isLoginMode;
+  }
 }
