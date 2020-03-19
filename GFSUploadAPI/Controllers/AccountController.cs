@@ -1,5 +1,4 @@
 using System.Threading.Tasks;
-using AutoMapper;
 using GFSUploadAPI.Dtos;
 using GFSUploadAPI.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -14,15 +13,12 @@ namespace GFSUploadAPI.Controllers
   {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
-    private IMapper _mapper;
 
     public AccountController(UserManager<IdentityUser> userManager,
-      SignInManager<IdentityUser> signInManager,
-      IMapper mapper)
+      SignInManager<IdentityUser> signInManager)
     {
       _userManager = userManager;
       _signInManager = signInManager;
-      _mapper = mapper;
     }
 
     [HttpGet]

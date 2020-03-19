@@ -32,24 +32,23 @@ namespace GFSUploadAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-          services.AddScoped<IAccountBookingRepository, AccountBookingRepository>();
-          services.AddScoped<IBookingRepository, BookingRepository>();
-          services.AddScoped<IAccountBookKeepingToFileParser,AccountBookKeepingToFileParser>();
+            services.AddScoped<IAccountBookingRepository, AccountBookingRepository>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<IAccountBookKeepingToFileParser, AccountBookKeepingToFileParser>();
 
-          services.AddDbContext<DataContext>(x =>
-            x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(x =>
+              x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-          services.AddIdentity<IdentityUser, IdentityRole>()
-            .AddEntityFrameworkStores<DataContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+              .AddEntityFrameworkStores<DataContext>();
 
-          services.AddAutoMapper(typeof(DataContext).Assembly);
 
             services.AddControllers();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
                 {
-                builder.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
+                    builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
                 }));
         }
 
