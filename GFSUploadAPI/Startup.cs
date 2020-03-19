@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using AutoMapper;
 
 namespace GFSUploadAPI
 {
@@ -40,6 +41,8 @@ namespace GFSUploadAPI
 
           services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<DataContext>();
+
+          services.AddAutoMapper(typeof(DataContext).Assembly);
 
             services.AddControllers();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
