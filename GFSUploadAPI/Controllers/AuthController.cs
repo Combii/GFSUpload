@@ -54,7 +54,6 @@ namespace GFSUploadAPI.Controllers
             return Unauthorized();
         }
 
-        // https://youtu.be/TfarnVqnhX0?t=237
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
