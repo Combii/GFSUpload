@@ -41,7 +41,8 @@ namespace GFSUploadAPI.Controllers
     [HttpPost("register")]
     public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
     {
-      var result = await _userManager.CreateAsync(new IdentityUser(userForRegisterDto.Username), userForRegisterDto.Password);
+      var userToCreate = new IdentityUser(userForRegisterDto.Username);
+      var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
 
       return Ok(new
       {
@@ -54,7 +55,7 @@ namespace GFSUploadAPI.Controllers
     {
       var claims = new List<Claim>
       {
-        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+        new Claim(ClaimTypes.NameIdentifier, user.Id),
         new Claim(ClaimTypes.Name, user.UserName)
       };
 
