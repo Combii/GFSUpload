@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace GFSUploadAPI.Controllers
 {
@@ -31,10 +31,27 @@ namespace GFSUploadAPI.Controllers
             _signInManager = signInManager;
         }
 
-        [HttpGet]
-        public IActionResult Register()
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
         {
-            return Ok();
+            var user = await _userManager.FindByNameAsync(userForLoginDto.Username);
+
+            var result = await _signInManager
+                .CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
+
+            if (result.Succeeded)
+            {
+                var appUser = await _userManager.Users
+                    .FirstOrDefaultAsync(u => u.NormalizedUserName == userForLoginDto.Username.ToUpper());
+
+                return Ok(new
+                {
+                    token = GenerateJwtToken(appUser).Result,
+                    user = appUser
+                });
+            }
+
+            return Unauthorized();
         }
 
         // https://youtu.be/TfarnVqnhX0?t=237
