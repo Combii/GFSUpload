@@ -17,13 +17,13 @@ namespace GFSUploadAPI.Controllers
 {
   [AllowAnonymous]
   [Route("api/[controller]")]
-  public class AccountController : Controller
+  public class AuthController : Controller
   {
     private readonly IConfiguration _config;
     private readonly UserManager<IdentityUser> _userManager;
     private readonly SignInManager<IdentityUser> _signInManager;
 
-    public AccountController(IConfiguration config, UserManager<IdentityUser> userManager,
+    public AuthController(IConfiguration config, UserManager<IdentityUser> userManager,
       SignInManager<IdentityUser> signInManager)
     {
       _config = config;
