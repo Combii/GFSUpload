@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GFSUploadAPI.Data;
 using GFSUploadAPI.Models;
 using GFSUploadAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -12,6 +13,7 @@ using Newtonsoft.Json.Linq;
 
 namespace GFSUploadAPI.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     public class GfsChartController : ControllerBase
     {

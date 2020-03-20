@@ -15,74 +15,74 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace GFSUploadAPI.Controllers
 {
-  [AllowAnonymous]
-  [Route("api/[controller]")]
-  public class AuthController : Controller
-  {
-    private readonly IConfiguration _config;
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly SignInManager<IdentityUser> _signInManager;
-
-    public AuthController(IConfiguration config, UserManager<IdentityUser> userManager,
-      SignInManager<IdentityUser> signInManager)
+    [AllowAnonymous]
+    [Route("api/[controller]")]
+    public class AuthController : Controller
     {
-      _config = config;
-      _userManager = userManager;
-      _signInManager = signInManager;
-    }
+        private readonly IConfiguration _config;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-    [HttpGet]
-    public IActionResult Register()
-    {
-      return Ok();
-    }
+        public AuthController(IConfiguration config, UserManager<IdentityUser> userManager,
+          SignInManager<IdentityUser> signInManager)
+        {
+            _config = config;
+            _userManager = userManager;
+            _signInManager = signInManager;
+        }
 
-    // https://youtu.be/TfarnVqnhX0?t=237
-    [HttpPost("register")]
-    public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
-    {
-      var userToCreate = new IdentityUser(userForRegisterDto.Username);
-      var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return Ok();
+        }
 
-      return Ok(new
-      {
-        token = GenerateJwtToken(userToCreate).Result,
-        user = result
-      });
-    }
+        // https://youtu.be/TfarnVqnhX0?t=237
+        [HttpPost("register")]
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
+        {
+            var userToCreate = new IdentityUser(userForRegisterDto.Username);
+            var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
 
-    private async Task<string> GenerateJwtToken(IdentityUser user)
-    {
-      var claims = new List<Claim>
+            return Ok(new
+            {
+                token = GenerateJwtToken(userToCreate).Result,
+                user = result
+            });
+        }
+
+        private async Task<string> GenerateJwtToken(IdentityUser user)
+        {
+            var claims = new List<Claim>
       {
         new Claim(ClaimTypes.NameIdentifier, user.Id),
         new Claim(ClaimTypes.Name, user.UserName)
       };
 
-      var roles = await _userManager.GetRolesAsync(user);
+            var roles = await _userManager.GetRolesAsync(user);
 
-      foreach (var role in roles)
-      {
-        claims.Add(new Claim(ClaimTypes.Role, role));
-      }
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
 
-      var key = new SymmetricSecurityKey(Encoding.UTF8
-        .GetBytes(_config.GetSection("AppSettings:Token").Value));
+            var key = new SymmetricSecurityKey(Encoding.UTF8
+              .GetBytes(_config.GetSection("AppSettings:Token").Value));
 
-      var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-      var tokenDescriptor = new SecurityTokenDescriptor
-      {
-        Subject = new ClaimsIdentity(claims),
-        Expires = DateTime.Now.AddDays(1),
-        SigningCredentials = creds
-      };
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = creds
+            };
 
-      var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenHandler = new JwtSecurityTokenHandler();
 
-      var token = tokenHandler.CreateToken(tokenDescriptor);
+            var token = tokenHandler.CreateToken(tokenDescriptor);
 
-      return tokenHandler.WriteToken(token);
+            return tokenHandler.WriteToken(token);
+        }
     }
-  }
 }
