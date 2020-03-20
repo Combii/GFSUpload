@@ -55,7 +55,7 @@ namespace GFSUploadAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
+        public async Task<IActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto)
         {
             var userToCreate = new IdentityUser(userForRegisterDto.Username);
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
