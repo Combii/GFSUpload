@@ -12,6 +12,8 @@ import { TableDataCellComponent } from './table-data-cell/table-data-cell.compon
 import { HttpClientModule } from '@angular/common/http';
 
 import { TooltipModule } from 'ng2-tooltip-directive';
+import { AuthComponent } from './auth/auth/auth.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,12 +24,14 @@ import { TooltipModule } from 'ng2-tooltip-directive';
     HeaderComponent,
     ErrorNotificationDirective,
     TableDataCellComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     TooltipModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

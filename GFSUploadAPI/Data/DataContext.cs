@@ -1,10 +1,10 @@
 using GFSUploadAPI.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Sqlite;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace GFSUploadAPI.Data
 {
-  public class DataContext : DbContext
+  public class DataContext : IdentityDbContext
   {
     public DataContext(DbContextOptions<DataContext>  options) : base (options) {}
 

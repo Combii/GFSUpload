@@ -7,12 +7,14 @@ using GFSUploadAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using AutoMapper;
 
 namespace GFSUploadAPI
 {
@@ -30,19 +32,23 @@ namespace GFSUploadAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-          services.AddScoped<IAccountBookingRepository, AccountBookingRepository>();
-          services.AddScoped<IBookingRepository, BookingRepository>();
-          services.AddScoped<IAccountBookKeepingToFileParser,AccountBookKeepingToFileParser>();
+            services.AddScoped<IAccountBookingRepository, AccountBookingRepository>();
+            services.AddScoped<IBookingRepository, BookingRepository>();
+            services.AddScoped<IAccountBookKeepingToFileParser, AccountBookKeepingToFileParser>();
 
-          services.AddDbContext<DataContext>(x =>
-            x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(x =>
+              x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+              .AddEntityFrameworkStores<DataContext>();
+
 
             services.AddControllers();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
                 {
-                builder.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
+                    builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
                 }));
         }
 
@@ -61,6 +67,8 @@ namespace GFSUploadAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
