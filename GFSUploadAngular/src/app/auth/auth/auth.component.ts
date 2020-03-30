@@ -20,7 +20,12 @@ export class AuthComponent implements OnInit {
     console.log(form.value.password);
     //form.reset();
 
-    this.auth.signup(form);
+    if(this.isLoginMode) {
+      this.auth.login(form.value.email,form.value.password)
+    } else {
+      this.auth.signup(form);
+    }
+
   }
 
   onSwitchMode() {

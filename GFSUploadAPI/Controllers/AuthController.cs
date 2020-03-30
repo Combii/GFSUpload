@@ -32,7 +32,7 @@ namespace GFSUploadAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
+        public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
         {
             var user = await _userManager.FindByNameAsync(userForLoginDto.Username);
 
@@ -70,10 +70,10 @@ namespace GFSUploadAPI.Controllers
         private async Task<string> GenerateJwtToken(IdentityUser user)
         {
             var claims = new List<Claim>
-      {
-        new Claim(ClaimTypes.NameIdentifier, user.Id),
-        new Claim(ClaimTypes.Name, user.UserName)
-      };
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Name, user.UserName)
+            };
 
             var roles = await _userManager.GetRolesAsync(user);
 
