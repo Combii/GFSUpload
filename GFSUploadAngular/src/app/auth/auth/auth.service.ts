@@ -20,7 +20,7 @@ export class AuthService {
           Password: form.value.password
       })
       .pipe(tap(resData => {
-        this.token.next(resData.token)
+        //this.token.next(resData.token)
 
       }))
       .subscribe(reponse => {
@@ -30,17 +30,19 @@ export class AuthService {
 
   login(username: string, password:string) {
     this.http
-    .post<{token:string}>('http://localhost:5000/api/auth/login', {
+    .post('http://localhost:5000/api/auth/login', {
         Username:username,
         Password:password
     })
     .pipe(tap(resData => {
-      const expirationDate = new Date().setDate(new Date().getDate()+1);
-      //this.user.next()
+      const expirationDate = new Date().setDate(new Date().getDate()+1)
+      console.log(resData)
+      /* this.user.next(new User(resData.id)) */
+
 
     }))
     .subscribe(resData => {
-      console.log(resData)
+      
     })
 
   }

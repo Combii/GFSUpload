@@ -12,6 +12,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace GFSUploadAPI.Controllers
 {
@@ -22,13 +23,16 @@ namespace GFSUploadAPI.Controllers
         private readonly IConfiguration _config;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IMapper _mapper;
+
 
         public AuthController(IConfiguration config, UserManager<IdentityUser> userManager,
-          SignInManager<IdentityUser> signInManager)
+          SignInManager<IdentityUser> signInManager, IMapper mapper)
         {
             _config = config;
             _userManager = userManager;
             _signInManager = signInManager;
+            _mapper = mapper;
         }
 
         [HttpPost("login")]
@@ -39,6 +43,8 @@ namespace GFSUploadAPI.Controllers
             var result = await _signInManager
                 .CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
 
+            
+            
             if (result.Succeeded)
             {
                 var appUser = await _userManager.Users
