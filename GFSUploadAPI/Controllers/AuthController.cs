@@ -43,15 +43,15 @@ namespace GFSUploadAPI.Controllers
             var result = await _signInManager
                 .CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
 
-            
-            
+
+
             if (result.Succeeded)
             {
                 var appUser = await _userManager.Users
                     .FirstOrDefaultAsync(u => u.NormalizedUserName == userForLoginDto.Username.ToUpper());
 
-                var loggedInUser = _mapper.Map<IdentityUser,UserForLoggedInDto>(appUser);
-                
+                var loggedInUser = _mapper.Map<IdentityUser, UserForLoggedInDto>(appUser);
+
                 return Ok(new
                 {
                     token = GenerateJwtToken(appUser).Result,
@@ -68,11 +68,16 @@ namespace GFSUploadAPI.Controllers
             var userToCreate = new IdentityUser(userForRegisterDto.Username);
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
 
-            return Ok(new
+
+            if (result.Succeeded)
             {
-                token = GenerateJwtToken(userToCreate).Result,
-                user = result
-            });
+                return Ok(new
+                {
+                    token = GenerateJwtToken(userToCreate).Result,
+                    user = result
+                });
+            }
+
         }
 
         private async Task<string> GenerateJwtToken(IdentityUser user)
