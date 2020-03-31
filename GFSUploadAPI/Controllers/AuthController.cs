@@ -50,10 +50,12 @@ namespace GFSUploadAPI.Controllers
                 var appUser = await _userManager.Users
                     .FirstOrDefaultAsync(u => u.NormalizedUserName == userForLoginDto.Username.ToUpper());
 
+                var loggedInUser = _mapper.Map<IdentityUser,UserForLoggedInDto>(appUser);
+                
                 return Ok(new
                 {
                     token = GenerateJwtToken(appUser).Result,
-                    user = appUser
+                    user = loggedInUser
                 });
             }
 
