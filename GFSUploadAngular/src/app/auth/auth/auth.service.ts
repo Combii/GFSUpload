@@ -5,7 +5,7 @@ import { Subject, BehaviorSubject } from "rxjs";
 import { tap } from "rxjs/operators";
 import { User } from "./user.model";
 
-interface AuthResponseData {
+export interface AuthResponseData {
   token: string;
   user: {
     id: string;
@@ -19,23 +19,23 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  signup(form: NgForm) {
-    this.http
+  signup(username: string, password: string) {
+    return this.http
       .post<AuthResponseData>("http://localhost:5000/api/auth/register", {
-        Username: form.value.email,
-        Password: form.value.password
+        Username: username,
+        Password: password
       })
       .pipe(
         tap(resData => {
           //this.token.next(resData.token)
         })
-      )
-      .subscribe(reponse => {
-        console.log(reponse);
-      });
+      );
   }
 
   login(username: string, password: string) {
+
+    console.log('in here');
+    
     return this.http
       .post<AuthResponseData>("http://localhost:5000/api/auth/login", {
         Username: username,
@@ -46,6 +46,7 @@ export class AuthService {
           const expirationDate = new Date(
             new Date().setDate(new Date().getDate() + 1)
           );
+
           this.user.next(
             new User(
               resData.user.username,
@@ -54,6 +55,8 @@ export class AuthService {
               expirationDate
             )
           );
+
+          console.log("in tap");
         })
       );
   }

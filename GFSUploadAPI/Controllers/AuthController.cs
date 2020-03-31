@@ -68,15 +68,11 @@ namespace GFSUploadAPI.Controllers
             var userToCreate = new IdentityUser(userForRegisterDto.Username);
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
 
-
-            if (result.Succeeded)
+            return Ok(new
             {
-                return Ok(new
-                {
-                    token = GenerateJwtToken(userToCreate).Result,
-                    user = result
-                });
-            }
+                token = GenerateJwtToken(userToCreate).Result,
+                user = result
+            });
 
         }
 

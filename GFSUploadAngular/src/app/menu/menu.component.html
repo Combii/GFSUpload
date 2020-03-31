@@ -3,7 +3,15 @@
     Welcome to GFS (KRS) upload
   </h1>
 
-  <div class="row">
+  <div class="row" *ngIf="!isAuthenticated">
+    <div class="col text-center">
+      <button routerLink="/auth" class="btn btn-primary" type="button">
+        Login
+      </button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="isAuthenticated">
     <div class="col text-center align-self-end">
       <button routerLink="/tableChartGFS" class="btn btn-primary" type="button">
         Upload chart to GFS
@@ -39,7 +47,7 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" *ngIf="isAuthenticated">
     <div class="col text-center">
       <label>Registration Number: </label>
       <input type="text" /><br /><br />
