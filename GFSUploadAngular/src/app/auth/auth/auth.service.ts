@@ -33,9 +33,6 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-
-    console.log('in here');
-    
     return this.http
       .post<AuthResponseData>("http://localhost:5000/api/auth/login", {
         Username: username,
@@ -55,8 +52,6 @@ export class AuthService {
               expirationDate
             )
           );
-
-          console.log("in tap");
         })
       );
   }

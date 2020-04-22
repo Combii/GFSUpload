@@ -31,6 +31,8 @@ export class AuthComponent implements OnInit {
 
     authResponse.subscribe(user => {
       
+    }, errors => {
+      console.log(errors); // TODO Show error message in html
     })
 
 
