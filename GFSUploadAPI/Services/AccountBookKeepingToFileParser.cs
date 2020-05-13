@@ -11,7 +11,9 @@ namespace GFSUploadAPI.Services
             using var sw = new StreamWriter("hostDataFileAccountBookKeepings.txt");
             foreach (var accountBookKeeping in accountBookKeepings)
             {
-                sw.WriteLine(accountBookKeeping.ToString());
+                     var row = string.Format("{0,-47}{1,5}{2,14}{3,22}{4,8}{5,24}{6,13}{7,7}",
+                        accountBookKeeping.,"11EUR","LV","00","FEBLOVAPA01BJKPL","1643575,32LATVIA", "JANUARY 2020", "UPLOAD");
+                sw.WriteLine(row;
             }
         }
 
