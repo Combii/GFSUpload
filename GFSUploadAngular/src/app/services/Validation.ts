@@ -19,8 +19,8 @@ export class Validations {
         accountBookKeeping.RegistrationNo
       ),
       Currency: Validations.IsValidCurrency(accountBookKeeping.Currency),
-      IDKT: Validations.IsValidIDKT(accountBookKeeping.IDKT, false),
-      OriginalIDKT: [],
+      IDKT: Validations.IsValidIDKT(accountBookKeeping.IDKT, checkBoxService),
+      OriginalIDKT: Validations.IsValidOriginalIDKT(accountBookKeeping.OriginalIDKT),
       CounterAccountIDKT: Validations.IsValidCounterAccountIDKT(accountBookKeeping.CounterAccountIDKT,checkBoxService),
       ProjectCode: Validations.IsValidProjectCode(
         accountBookKeeping.ProjectCode
@@ -64,6 +64,15 @@ export class Validations {
       Tekst: Validations.IsValidText(csvBookKeeping.Tekst),
     };
     return errors;
+  }
+
+
+  static IsValidOriginalIDKT(OriginalIDKT: string): string[] {
+    const errorsArray: string[] = [];
+
+    // kan være udfyldt eller blank
+
+    return errorsArray;
   }
 
   static IsValidCounterAccountIDKT(counterAccountIDKT: string, checkboxService: CheckboxService): string[] {
@@ -419,7 +428,7 @@ export class Validations {
 
   private static IsValidIDKT(
     IDKT: string,
-    isFebosOrBookingUpload: boolean
+    checkboxService: CheckboxService
   ): string[] {
     const errorsArray = [];
 
@@ -427,7 +436,7 @@ export class Validations {
       errorsArray.push('Is empty');
     }
 
-    if (isFebosOrBookingUpload) {
+    if (checkboxService.bookInFebosAndUploadToGfs) {
       if (IDKT.length > 10) {
         errorsArray.push('Is longer than 10 characters');
       }
