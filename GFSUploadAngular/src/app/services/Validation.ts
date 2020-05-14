@@ -37,7 +37,7 @@ export class Validations {
       Dato: Validations.IsValidDate(csvBookKeeping.Dato),
       valutakod: Validations.IsValidCurrency(csvBookKeeping.valutakod),
       RegNr: Validations.IsValidRegNumber(csvBookKeeping.RegNr),
-      regnskabstype: [],
+      regnskabstype: Validations.IsValidRegnskabstype(csvBookKeeping.regnskabstype),
       dkkbass: [],
       skema_id: [],
       skemarakke: [],
@@ -250,6 +250,12 @@ export class Validations {
     if (dataString.length <= 0) {
       return false;
     }
+    else if(dataString === ' '){
+      return false;
+    }
+    else if(dataString === ' ‏‏‎ '){
+      return false;
+    }
 
     return true;
   }
@@ -272,4 +278,16 @@ export class Validations {
 
     return errorsArray;
   }
+
+  private static IsValidRegnskabstype(regnskabstype: any): string[] {
+      const errorsArray = [];
+
+      if (!Validations.isNotEmptyString(regnskabstype)) {
+        errorsArray.push('Is empty');
+      }
+      if (regnskabstype.length > 6) {
+        errorsArray.push('Cannot be more than 6 characters long');
+      }
+      return errorsArray;
+    }
 }
