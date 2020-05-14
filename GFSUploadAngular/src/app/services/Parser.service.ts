@@ -1,13 +1,13 @@
-import { Injectable } from "@angular/core";
-import * as XLSX from "xlsx";
-import { Subject } from "rxjs";
-import { IAccountBookKeeping } from "../../models/IAccountBookKeeping";
-import { Validations } from "../services/Validation";
-import { IBookKeeping } from "src/models/IbookKeeping";
-import { CheckboxService } from "./checkbox.service";
-import { DefaultValueService } from "./default-value.service";
+import { Injectable } from '@angular/core';
+import * as XLSX from 'xlsx';
+import { Subject } from 'rxjs';
+import { IAccountBookKeeping } from '../../models/IAccountBookKeeping';
+import { Validations } from '../services/Validation';
+import { IBookKeeping } from 'src/models/IbookKeeping';
+import { CheckboxService } from './checkbox.service';
+import { DefaultValueService } from './default-value.service';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class ParserService {
   onAccountFileParsedIAccountBookKeeping = new Subject<IAccountBookKeeping[]>();
   onFileParsedIBookKeeping = new Subject<IBookKeeping[]>();
@@ -16,7 +16,7 @@ export class ParserService {
   dataListIAccountBookKeeping: IAccountBookKeeping[] = [];
   dataListIBookKeeping: IBookKeeping[] = [];
 
-  wopts: XLSX.WritingOptions = { bookType: "xlsx", type: "array" };
+  wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   isFirst = false;
 
   constructor(
@@ -31,13 +31,13 @@ export class ParserService {
     /* wire up file reader */
     const target: DataTransfer = evt.target as DataTransfer;
     if (target.files.length !== 1) {
-      throw new Error("Cannot use multiple files");
+      throw new Error('Cannot use multiple files');
     }
     const reader: FileReader = new FileReader();
     reader.onload = (e: any) => {
       /* read workbook */
       const bstr: string = e.target.result;
-      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: "binary" });
+      const wb: XLSX.WorkBook = XLSX.read(bstr, { type: 'binary' });
 
       /* grab first sheet */
       const wsname: string = wb.SheetNames[0];
@@ -46,7 +46,7 @@ export class ParserService {
       /* save data */
       this.tempDataArr = XLSX.utils.sheet_to_json(ws, { header: 1 });
 
-      if (type === "account") {
+      if (type === 'account') {
         this.insertDataIntoListIAccountBookKeeping();
         this.validateAccountBookingsList();
 
@@ -54,7 +54,7 @@ export class ParserService {
           this.dataListIAccountBookKeeping
         );
       }
-      if (type === "chartGFS") {
+      if (type === 'chartGFS') {
         this.insertDataIntoListIBookKeeping();
         this.validateBookingsList();
 
@@ -71,15 +71,15 @@ export class ParserService {
       if (this.isFirst) {
         if (row.length > 0) {
           this.dataListIAccountBookKeeping.push({
-            AccountingDate: !row[0] ? " ‏‏‎ " : "" + row[0],
-            RegistrationNo: !row[1] ? " ‏‏‎ " : "" + row[1],
-            IDKT: !row[2] ? " ‏‏‎ " : "" + row[2],
-            OriginalIDKT: !row[3] ? " ‏‏‎ " : "" + row[3],
-            CounterAccountIDKT: !row[4] ? " ‏‏‎ " : "" + row[4],
-            Text: !row[5] ? " ‏‏‎ " : "" + row[5],
-            ProjectCode: !row[6] ? " ‏‏‎ " : "" + row[6],
-            Currency: !row[7] ? " ‏‏‎ " : "" + row[7],
-            Balance: !row[8] ? " ‏‏‎ " : "" + row[8],
+            AccountingDate: !row[0] ? ' ‏‏‎ ' : '' + row[0],
+            RegistrationNo: !row[1] ? ' ‏‏‎ ' : '' + row[1],
+            IDKT: !row[2] ? ' ‏‏‎ ' : '' + row[2],
+            OriginalIDKT: !row[3] ? ' ‏‏‎ ' : '' + row[3],
+            CounterAccountIDKT: !row[4] ? ' ‏‏‎ ' : '' + row[4],
+            Text: !row[5] ? ' ‏‏‎ ' : '' + row[5],
+            ProjectCode: !row[6] ? ' ‏‏‎ ' : '' + row[6],
+            Currency: !row[7] ? ' ‏‏‎ ' : '' + row[7],
+            Balance: !row[8] ? ' ‏‏‎ ' : '' + row[8],
           });
         }
       }
@@ -93,7 +93,7 @@ export class ParserService {
       if (this.isFirst) {
         if (row.length > 0) {
           this.dataListIBookKeeping.push(
-            this.defaultValueService.insertDefault({
+            this.defaultValueService.insertDefaultChart({
               Dato: row[0],
               RegNr: row[1],
               regnskabstype: row[2],

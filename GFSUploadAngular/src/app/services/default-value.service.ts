@@ -7,7 +7,7 @@ import { IBookKeeping } from 'src/models/IbookKeeping';
 export class DefaultValueService {
   constructor() {}
 
-  insertDefault(bookKeeping: IBookKeeping): IBookKeeping {
+  insertDefaultChart(bookKeeping: IBookKeeping): IBookKeeping {
 
     Object.keys(bookKeeping).forEach((key) => {
       bookKeeping[key] = this.defaultValue(bookKeeping[key]);
