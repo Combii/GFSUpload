@@ -5,6 +5,7 @@ import { IAccountBookKeeping } from '../../models/IAccountBookKeeping';
 import { Validations } from '../services/Validation';
 import { IBookKeeping } from 'src/models/IbookKeeping';
 import { CheckboxService } from './checkbox.service';
+import { DefaultValueService } from './default-value.service';
 
 @Injectable({ providedIn: 'root' })
 export class ParserService {
@@ -18,7 +19,7 @@ export class ParserService {
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   isFirst = false;
 
-  constructor(private checkBoxService : CheckboxService) {}
+  constructor(private checkBoxService : CheckboxService, private defaultValueService : DefaultValueService) {}
 
   parseFile(evt: any, type: string) {
     this.resetEveryList();
@@ -88,7 +89,7 @@ export class ParserService {
     this.tempDataArr.forEach(row => {
       if (this.isFirst) {
         if (row.length > 0) {
-          this.dataListIBookKeeping.push({
+          this.dataListIBookKeeping.push(this.defaultValueService.insertDefault({
             Dato: !row[0] ? ' ‏‏‎ ' : ''+row[0],
             RegNr: !row[1] ? '‎ ‏‏‎ ' : ''+row[1],
             regnskabstype: !row[2] ? ' ‏‏‎ ' : ''+row[2],
@@ -106,7 +107,7 @@ export class ParserService {
             leveran_type: !row[14] ? ' ‏‏‎ ' : ''+row[14],
             saldo: !row[15] ? ' ‏‏‎ ' : ''+row[15],
             Tekst: !row[16] ? ' ‏‏‎ ' : ''+row[16]
-          });
+          }));
         }
       }
       this.isFirst = true;

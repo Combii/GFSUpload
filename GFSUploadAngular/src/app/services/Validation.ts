@@ -32,12 +32,16 @@ export class Validations {
     return errors;
   }
 
-  static validateCSVBookKeeping(csvBookKeeping: IBookKeeping): IBookKeepingError {
+  static validateCSVBookKeeping(
+    csvBookKeeping: IBookKeeping
+  ): IBookKeepingError {
     const errors: IBookKeepingError = {
       Dato: Validations.IsValidDate(csvBookKeeping.Dato),
       valutakod: Validations.IsValidCurrency(csvBookKeeping.valutakod),
       RegNr: Validations.IsValidRegNumber(csvBookKeeping.RegNr),
-      regnskabstype: Validations.IsValidRegnskabstype(csvBookKeeping.regnskabstype),
+      regnskabstype: Validations.IsValidRegnskabstype(
+        csvBookKeeping.regnskabstype
+      ),
       dkkbass: [],
       skema_id: [],
       skemarakke: [],
@@ -47,7 +51,11 @@ export class Validations {
       pdst: Validations.IsValidPdst(csvBookKeeping.pdst),
       sum_rgopid: Validations.IsValidSum(csvBookKeeping.sum_rgopid),
       opdater_lev: Validations.IsValidOpdateLev(csvBookKeeping.opdater_lev),
-      leveran_kor: Validations.IsValidKor(csvBookKeeping.leveran_kor, csvBookKeeping.sum_rgopid, csvBookKeeping.pdst),
+      leveran_kor: Validations.IsValidKor(
+        csvBookKeeping.leveran_kor,
+        csvBookKeeping.sum_rgopid,
+        csvBookKeeping.pdst
+      ),
       leveran_type: Validations.IsValidLeveranType(csvBookKeeping.leveran_type),
       saldo: Validations.IsValidBalance(csvBookKeeping.saldo),
       Tekst: Validations.IsValidText(csvBookKeeping.Tekst),
@@ -55,25 +63,21 @@ export class Validations {
     return errors;
   }
   static IsValidKngr(kngr: string): string[] {
-    const errorsArray : string[] = [];
+    const errorsArray: string[] = [];
 
-    if(Validations.isNotEmptyString(kngr_typ)){
-      errorsArray.push('Cannot be empty');
-    }
-    else if (kngr_typ.length === 3){
-      errorsArray.push('Must be 3 characters');
-    }
+    // hvis tom default til 00 (nul nul)
+    // hvis 1 karakter lang , konkaterer den med et foranstillet 0 (nul)
+    // må ikke være over 2 karakter lang , konflikter med output defination som er 8 lang
 
     return errorsArray;
   }
 
   static IsValidKngrTyp(kngr_typ: string): string[] {
-    const errorsArray : string[] = [];
+    const errorsArray: string[] = [];
 
-    if(Validations.isNotEmptyString(kngr_typ)){
+    if (!Validations.isNotEmptyString(kngr_typ)) {
       errorsArray.push('Cannot be empty');
-    }
-    else if (kngr_typ.length === 3){
+    } else if (kngr_typ.length === 3) {
       errorsArray.push('Must be 3 characters');
     }
 
@@ -81,24 +85,24 @@ export class Validations {
   }
 
   static IsValidPdst(pdst: string): string[] {
-    const errorsArray : string[] = [];
+    const errorsArray: string[] = [];
 
     // må være blank (melemrum) eller tom
     // må være 8 karakter
     // må være 6 karakter
     // hvis 6 karakter lang skal det være tal
 
-    if(pdst.length === 8){
+    if (pdst.length === 8) {
       return errorsArray;
     }
 
-    if(pdst.length === 6){
-      if(/^\d{6}$/.test(pdst)){
+    if (pdst.length === 6) {
+      if (/^\d{6}$/.test(pdst)) {
         errorsArray.push('pdst must be number when 6 char long');
       }
     }
 
-    if(pdst.length !== 8 && pdst.length !== 6){
+    if (pdst.length !== 8 && pdst.length !== 6) {
       errorsArray.push('pdst must be number when 8 char long or 6');
     }
 
@@ -106,27 +110,29 @@ export class Validations {
   }
 
   static IsValidSum(sum_rgopid: string): string[] {
-    const errorsArray : string[] = [];
+    const errorsArray: string[] = [];
 
-    if(sum_rgopid !== 'B')
-    {
+    if (sum_rgopid !== 'B') {
       errorsArray.push('sum_rgopid must be equal B');
     }
     return errorsArray;
   }
 
   static IsValidOpdateLev(opdater_lev: string): string[] {
-    const errorsArray : string[] = [];
+    const errorsArray: string[] = [];
 
-    if(opdater_lev === 'J' || opdater_lev === 'N')
-    {
+    if (opdater_lev === 'J' || opdater_lev === 'N') {
       return errorsArray;
     }
     errorsArray.push('opdater_lev must be equal to either J or N');
     return errorsArray;
   }
 
-  static IsValidKor(leveran_kor: string, sum_rgopid: string, pdst: string): string[] {
+  static IsValidKor(
+    leveran_kor: string,
+    sum_rgopid: string,
+    pdst: string
+  ): string[] {
     const errorsArray = [];
 
     // skal være enten "L" eller "K" eller "B"
@@ -134,13 +140,15 @@ export class Validations {
     // L = sum_rgopid
     // K = pdst
 
-
-    if(leveran_kor === 'L' || leveran_kor === 'K' || leveran_kor === 'B')
-    {
-      if(leveran_kor === 'L')
-      {
-        if(Validations.isNotEmptyString(sum_rgopid) && !Validations.isNotEmptyString(pdst)){
-          errorsArray.push('If value is L then column pdst can not be specified');
+    if (leveran_kor === 'L' || leveran_kor === 'K' || leveran_kor === 'B') {
+      if (leveran_kor === 'L') {
+        if (
+          !Validations.isNotEmptyString(sum_rgopid) &&
+          Validations.isNotEmptyString(pdst)
+        ) {
+          errorsArray.push(
+            'If value is L then column pdst can not be specified'
+          );
         }
       }
       return errorsArray;
@@ -148,17 +156,13 @@ export class Validations {
 
     errorsArray.push('leveran_kor must be equal to either K or B or L');
 
-
-
     return errorsArray;
   }
 
   private static IsValidLeveranType(leveran_type: string): string[] {
- 
-    const errorsArray : string[] = [];
+    const errorsArray: string[] = [];
 
-    if(leveran_type === 'MB' || leveran_type === 'PL')
-    {
+    if (leveran_type === 'MB' || leveran_type === 'PL') {
       return errorsArray;
     }
     errorsArray.push('leveran_type must be equal to either PL or MB');
@@ -359,11 +363,9 @@ export class Validations {
   private static isNotEmptyString(dataString: string): boolean {
     if (dataString.length <= 0) {
       return false;
-    }
-    else if(dataString === ' '){
+    } else if (dataString === ' ') {
       return false;
-    }
-    else if(dataString === ' ‏‏‎ '){
+    } else if (dataString === ' ‏‏‎ ') {
       return false;
     }
 
@@ -390,14 +392,14 @@ export class Validations {
   }
 
   private static IsValidRegnskabstype(regnskabstype: any): string[] {
-      const errorsArray = [];
+    const errorsArray = [];
 
-      if (!Validations.isNotEmptyString(regnskabstype)) {
-        errorsArray.push('Is empty');
-      }
-      if (regnskabstype.length > 6) {
-        errorsArray.push('Cannot be more than 6 characters long');
-      }
-      return errorsArray;
+    if (!Validations.isNotEmptyString(regnskabstype)) {
+      errorsArray.push('Is empty');
     }
+    if (regnskabstype.length > 6) {
+      errorsArray.push('Cannot be more than 6 characters long');
+    }
+    return errorsArray;
+  }
 }
