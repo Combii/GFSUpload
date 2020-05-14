@@ -42,8 +42,8 @@ export class Validations {
       skema_id: [],
       skemarakke: [],
       ldkd: [],
-      kngr: [],
-      kngr_typ: Validations.IsValidkngrTyp(csvBookKeeping.kngr_typ),
+      kngr: Validations.IsValidKngr(csvBookKeeping.kngr),
+      kngr_typ: Validations.IsValidKngrTyp(csvBookKeeping.kngr_typ),
       pdst: Validations.IsValidPdst(csvBookKeeping.pdst),
       sum_rgopid: Validations.IsValidSum(csvBookKeeping.sum_rgopid),
       opdater_lev: Validations.IsValidOpdateLev(csvBookKeeping.opdater_lev),
@@ -54,7 +54,20 @@ export class Validations {
     };
     return errors;
   }
-  static IsValidkngrTyp(kngr_typ: string): string[] {
+  static IsValidKngr(kngr: string): string[] {
+    const errorsArray : string[] = [];
+
+    if(Validations.isNotEmptyString(kngr_typ)){
+      errorsArray.push('Cannot be empty');
+    }
+    else if (kngr_typ.length === 3){
+      errorsArray.push('Must be 3 characters');
+    }
+
+    return errorsArray;
+  }
+
+  static IsValidKngrTyp(kngr_typ: string): string[] {
     const errorsArray : string[] = [];
 
     if(Validations.isNotEmptyString(kngr_typ)){
