@@ -20,8 +20,13 @@ export class Validations {
       ),
       Currency: Validations.IsValidCurrency(accountBookKeeping.Currency),
       IDKT: Validations.IsValidIDKT(accountBookKeeping.IDKT, checkBoxService),
-      OriginalIDKT: Validations.IsValidOriginalIDKT(accountBookKeeping.OriginalIDKT),
-      CounterAccountIDKT: Validations.IsValidCounterAccountIDKT(accountBookKeeping.CounterAccountIDKT,checkBoxService),
+      OriginalIDKT: Validations.IsValidOriginalIDKT(
+        accountBookKeeping.OriginalIDKT
+      ),
+      CounterAccountIDKT: Validations.IsValidCounterAccountIDKT(
+        accountBookKeeping.CounterAccountIDKT,
+        checkBoxService
+      ),
       ProjectCode: Validations.IsValidProjectCode(
         accountBookKeeping.ProjectCode
       ),
@@ -33,7 +38,7 @@ export class Validations {
   }
 
   static validateCSVBookKeeping(
-    csvBookKeeping: IBookKeeping,
+    csvBookKeeping: IBookKeeping
   ): IBookKeepingError {
     const errors: IBookKeepingError = {
       Dato: Validations.IsValidDate(csvBookKeeping.Dato),
@@ -66,7 +71,6 @@ export class Validations {
     return errors;
   }
 
-
   static IsValidOriginalIDKT(OriginalIDKT: string): string[] {
     const errorsArray: string[] = [];
 
@@ -75,22 +79,24 @@ export class Validations {
     return errorsArray;
   }
 
-  static IsValidCounterAccountIDKT(counterAccountIDKT: string, checkboxService: CheckboxService): string[] {
+  static IsValidCounterAccountIDKT(
+    counterAccountIDKT: string,
+    checkboxService: CheckboxService
+  ): string[] {
     const errorsArray: string[] = [];
 
     // skal være udfyldt
-    // HVIS (BookinFebos || BookandUpload) må længen kun være 10 karakterer lang 
-    // hvis ikke en af de 2 er sande må længen være op til 14 karakterer lang 
+    // HVIS (BookinFebos || BookandUpload) må længen kun være 10 karakterer lang
+    // hvis ikke en af de 2 er sande må længen være op til 14 karakterer lang
 
     if (!Validations.isNotEmptyString(counterAccountIDKT)) {
       errorsArray.push('Cannot be empty');
-    } else if (checkboxService.bookInFebosAndUploadToGfs){
-      if(counterAccountIDKT.length > 10){
+    } else if (checkboxService.bookInFebosAndUploadToGfs) {
+      if (counterAccountIDKT.length > 10) {
         errorsArray.push('Cannot be over 10 characters');
       }
-    }
-    else{
-      if(counterAccountIDKT.length > 14){
+    } else {
+      if (counterAccountIDKT.length > 14) {
         errorsArray.push('Cannot be over 14 characters');
       }
     }
