@@ -46,7 +46,7 @@ export class Validations {
       kngr_typ: [],
       pdst: [],
       sum_rgopid: [],
-      opdater_lev: [],
+      opdater_lev: Validations.IsValidOpdateLev(csvBookKeeping.opdater_lev),
       leveran_kor: Validations.IsValidKor(csvBookKeeping.leveran_kor, csvBookKeeping.sum_rgopid, csvBookKeeping.pdst),
       leveran_type: Validations.IsValidLeveranType(csvBookKeeping.leveran_type),
       saldo: Validations.IsValidBalance(csvBookKeeping.saldo),
@@ -54,6 +54,17 @@ export class Validations {
     };
     return errors;
   }
+  static IsValidOpdateLev(opdater_lev: string): string[] {
+    const errorsArray : string[] = [];
+
+    if(opdater_lev === 'J' || opdater_lev === 'N')
+    {
+      return errorsArray;
+    }
+    errorsArray.push('opdater_lev must be equal to either J or N');
+    return errorsArray;
+  }
+
   static IsValidKor(leveran_kor: string, sum_rgopid: string, pdst: string): string[] {
     const errorsArray = [];
 
@@ -80,6 +91,7 @@ export class Validations {
 
     return errorsArray;
   }
+
   private static IsValidLeveranType(leveran_type: string): string[] {
  
     const errorsArray : string[] = [];
