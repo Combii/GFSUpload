@@ -44,8 +44,8 @@ export class Validations {
       ),
       dkkbass: [],
       skema_id: [],
-      skemarakke: [],
-      ldkd: [],
+      skemarakke: Validations.IsValidSkemarakke(csvBookKeeping.skemarakke),
+      ldkd: Validations.IsValidLdkd(csvBookKeeping.ldkd),
       kngr: Validations.IsValidKngr(csvBookKeeping.kngr),
       kngr_typ: Validations.IsValidKngrTyp(csvBookKeeping.kngr_typ),
       pdst: Validations.IsValidPdst(csvBookKeeping.pdst),
@@ -62,13 +62,53 @@ export class Validations {
     };
     return errors;
   }
+  static IsValidSkemarakke(skemarakke: string): string[] {
+    const errorsArray: string[] = [];
+
+    // hvis tom skal den default til "NOCHARTNAME"
+    // hvis tom skal kolonne G default til  "0"
+    // hvis udfyldt skal det være et tal mellem 1 og 99999
+
+    // G = valutakode
+    // K = pdst
+
+    if(Validations.isNotEmptyString(skemarakke)){
+      if(Number(skemarakke) > 99999 || Number(skemarakke) < 1){
+        errorsArray.push('Must be 2 or more characters');
+      }
+    }
+
+    return errorsArray;
+  }
+
+  static IsValidLdkd(ldkd: string): string[] {
+    const errorsArray: string[] = [];
+
+    // skal være udfyldt
+    // være enten 2 karakter eller større
+    // må ikke indeholde tal eller speciel tegn
+
+    if (!Validations.isNotEmptyString(ldkd)) {
+      errorsArray.push('Cannot be empty');
+    } else if (ldkd.length < 2) {
+      errorsArray.push('Must be 2 or more characters');
+    }
+
+    if(!/^[A-Za-z]+$/.test(ldkd)){
+      errorsArray.push('Cannot have special characters');
+    }
+
+    return errorsArray;
+  }
+
   static IsValidKngr(kngr: string): string[] {
     const errorsArray: string[] = [];
 
-    // hvis tom default til 00 (nul nul)
-    // hvis 1 karakter lang , konkaterer den med et foranstillet 0 (nul)
     // må ikke være over 2 karakter lang , konflikter med output defination som er 8 lang
 
+    if (kngr.length > 2) {
+      errorsArray.push('Cannot be over 2 characters');
+    }
     return errorsArray;
   }
 
