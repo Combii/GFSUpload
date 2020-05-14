@@ -45,7 +45,7 @@ export class Validations {
       kngr: [],
       kngr_typ: [],
       pdst: [],
-      sum_rgopid: [],
+      sum_rgopid: Validations.IsValidSum(csvBookKeeping.sum_rgopid),
       opdater_lev: Validations.IsValidOpdateLev(csvBookKeeping.opdater_lev),
       leveran_kor: Validations.IsValidKor(csvBookKeeping.leveran_kor, csvBookKeeping.sum_rgopid, csvBookKeeping.pdst),
       leveran_type: Validations.IsValidLeveranType(csvBookKeeping.leveran_type),
@@ -54,6 +54,17 @@ export class Validations {
     };
     return errors;
   }
+
+  static IsValidSum(sum_rgopid: string): string[] {
+    const errorsArray : string[] = [];
+
+    if(sum_rgopid !== 'B')
+    {
+      errorsArray.push('sum_rgopid must be equal B');
+    }
+    return errorsArray;
+  }
+  
   static IsValidOpdateLev(opdater_lev: string): string[] {
     const errorsArray : string[] = [];
 
