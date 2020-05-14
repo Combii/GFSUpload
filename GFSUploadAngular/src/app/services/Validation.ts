@@ -42,8 +42,11 @@ export class Validations {
       regnskabstype: Validations.IsValidRegnskabstype(
         csvBookKeeping.regnskabstype
       ),
-      dkkbass: [],
-      skema_id: [],
+      dkkbass: Validations.IsValidDkkBass(csvBookKeeping.dkkbass),
+      skema_id: Validations.IsValidSkemaid(
+        csvBookKeeping.skema_id,
+        csvBookKeeping.pdst
+      ),
       skemarakke: Validations.IsValidSkemarakke(csvBookKeeping.skemarakke),
       ldkd: Validations.IsValidLdkd(csvBookKeeping.ldkd),
       kngr: Validations.IsValidKngr(csvBookKeeping.kngr),
@@ -62,6 +65,45 @@ export class Validations {
     };
     return errors;
   }
+  static IsValidDkkBass(dkkbass: string): string[] {
+    const errorsArray: string[] = [];
+
+    // skal være udfyldt
+    // skal være 1 eller 2
+
+    if (!Validations.isNotEmptyString(dkkbass)) {
+      errorsArray.push('Cannot be empty');
+      return errorsArray;
+    } else if (dkkbass === '1' || dkkbass === '2') {
+      return errorsArray;
+    }
+    errorsArray.push('Must be 2 or 1');
+    return errorsArray;
+  }
+
+  static IsValidSkemaid(skemarakke: string, pdst: string): string[] {
+    const errorsArray: string[] = [];
+
+    // kan være tom hvis kolonne K er udfyldt, eller ikke
+    // skal være udfyldt
+    // må ikke være over 20 karaktere lang
+    // K = pdst
+
+    if (
+      Validations.isNotEmptyString(pdst) &&
+      !Validations.isNotEmptyString(skemarakke)
+    ) {
+      return errorsArray;
+    }
+    if (!Validations.isNotEmptyString(skemarakke)) {
+      errorsArray.push('Cannot be empty');
+    } else if (skemarakke.length > 20) {
+      errorsArray.push('Cannot be over 20 ');
+    }
+
+    return errorsArray;
+  }
+
   static IsValidSkemarakke(skemarakke: string): string[] {
     const errorsArray: string[] = [];
 
@@ -72,8 +114,8 @@ export class Validations {
     // G = valutakode
     // K = pdst
 
-    if(Validations.isNotEmptyString(skemarakke)){
-      if(Number(skemarakke) > 99999 || Number(skemarakke) < 1){
+    if (Validations.isNotEmptyString(skemarakke)) {
+      if (Number(skemarakke) > 99999 || Number(skemarakke) < 1) {
         errorsArray.push('Must be 2 or more characters');
       }
     }
@@ -94,7 +136,7 @@ export class Validations {
       errorsArray.push('Must be 2 or more characters');
     }
 
-    if(!/^[A-Za-z]+$/.test(ldkd)){
+    if (!/^[A-Za-z\s]+$/.test(ldkd)) {
       errorsArray.push('Cannot have special characters');
     }
 
@@ -298,6 +340,9 @@ export class Validations {
     const specialChar = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
     if (currency.toString().length !== 3) {
+      if (currency.toString() === '0') {
+        return errorsArray;
+      }
       errorsArray.push('Currency is not three chars long');
     }
 

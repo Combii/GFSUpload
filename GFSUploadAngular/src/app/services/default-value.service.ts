@@ -26,7 +26,7 @@ export class DefaultValueService {
     // G = valutakode
     // K = pdst
 
-    if (!this.isNotEmptyString(bookKeeping.kngr)) {
+    if (!this.isNotEmptyString(bookKeeping.skemarakke)) {
       bookKeeping.skemarakke = 'NOCHARTNAME';
       bookKeeping.valutakod = '0';
     }
