@@ -1,6 +1,6 @@
 import {
   IAccountBookKeeping,
-  IAccountBookKeepingError
+  IAccountBookKeepingError,
 } from 'src/models/IAccountBookKeeping';
 import { IBookKeeping, IBookKeepingError } from 'src/models/IbookKeeping';
 import { CheckboxService } from './checkbox.service';
@@ -26,19 +26,17 @@ export class Validations {
         accountBookKeeping.ProjectCode
       ),
       Balance: Validations.IsValidBalance(accountBookKeeping.Balance),
-      Text: Validations.IsValidText(accountBookKeeping.Text)
+      Text: Validations.IsValidText(accountBookKeeping.Text),
     };
 
     return errors;
   }
 
-  static validateCSVBookKeeping(
-    csvBookKeeping: IBookKeeping
-  ): IBookKeepingError {
+  static validateCSVBookKeeping(csvBookKeeping: IBookKeeping): IBookKeepingError {
     const errors: IBookKeepingError = {
       Dato: Validations.IsValidDate(csvBookKeeping.Dato),
       valutakod: Validations.IsValidCurrency(csvBookKeeping.valutakod),
-      RegNr: [],
+      RegNr: Validations.IsValidRegNumber(csvBookKeeping.RegNr),
       regnskabstype: [],
       dkkbass: [],
       skema_id: [],
@@ -52,7 +50,7 @@ export class Validations {
       leveran_kor: [],
       leveran_type: [],
       saldo: Validations.IsValidBalance(csvBookKeeping.saldo),
-      Tekst: Validations.IsValidText(csvBookKeeping.Tekst)
+      Tekst: Validations.IsValidText(csvBookKeeping.Tekst),
     };
     return errors;
   }
@@ -107,10 +105,12 @@ export class Validations {
       if (checkBoxService.bookInFebosAndUploadToGfs) {
         const thisDate = new Date();
 
-        if(parsedDate.getDate() === thisDate.getDay()
-        && parsedDate.getMonth() === thisDate.getMonth()
-        && parsedDate.getFullYear() === thisDate.getFullYear()) {
-          errorsArray.push('Cannot book and make corrections on the same date')
+        if (
+          parsedDate.getDate() === thisDate.getDay() &&
+          parsedDate.getMonth() === thisDate.getMonth() &&
+          parsedDate.getFullYear() === thisDate.getFullYear()
+        ) {
+          errorsArray.push('Cannot book and make corrections on the same date');
         }
       }
     }
