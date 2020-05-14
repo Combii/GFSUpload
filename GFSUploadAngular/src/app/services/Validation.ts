@@ -55,18 +55,14 @@ export class Validations {
     return errors;
   }
   private static IsValidLeveranType(leveran_type: string): string[] {
-    
+ 
     const errorsArray : string[] = [];
 
-    
-    
-    if(leveran_type !== 'MB')
+    if(leveran_type === 'MB' || leveran_type === 'PL')
     {
-      errorsArray.push('leveran_type must be equal to either PL or MB');
-    } else if (leveran_type !== 'PL'){
-      errorsArray.push('leveran_type must be equal to either PL or MB');
+      return errorsArray;
     }
-
+    errorsArray.push('leveran_type must be equal to either PL or MB');
     return errorsArray;
   }
 
