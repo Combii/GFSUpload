@@ -48,11 +48,26 @@ export class Validations {
       sum_rgopid: [],
       opdater_lev: [],
       leveran_kor: [],
-      leveran_type: [],
+      leveran_type: Validations.IsValidLeveranType(csvBookKeeping.leveran_type),
       saldo: Validations.IsValidBalance(csvBookKeeping.saldo),
       Tekst: Validations.IsValidText(csvBookKeeping.Tekst),
     };
     return errors;
+  }
+  private static IsValidLeveranType(leveran_type: string): string[] {
+    
+    const errorsArray : string[] = [];
+
+    
+    
+    if(leveran_type !== 'MB')
+    {
+      errorsArray.push('leveran_type must be equal to either PL or MB');
+    } else if (leveran_type !== 'PL'){
+      errorsArray.push('leveran_type must be equal to either PL or MB');
+    }
+
+    return errorsArray;
   }
 
   static IsValidDate(
