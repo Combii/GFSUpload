@@ -13,7 +13,10 @@ insertDefault(bookKeeping : IBookKeeping): IBookKeeping {
   Object.keys(bookKeeping).forEach(key => {
     switch(key) {
       case 'kngr':
-        bookKeeping[key] = this.defaultKngr(bookKeeping[key])
+        bookKeeping[key] = this.defaultKngr(bookKeeping[key]);
+        break;
+      default:
+        bookKeeping[key] = this.defaultValue(bookKeeping[key]);
     }
   })
 
@@ -22,6 +25,13 @@ insertDefault(bookKeeping : IBookKeeping): IBookKeeping {
 
   return bookKeeping
 }
+  defaultValue(value: string): string {
+    if(!this.isNotEmptyString(value)){
+    return ' ‏‏‎ ';
+    }
+
+    return value;
+  }
 
 defaultKngr(kngr: string): string {
   // hvis tom default til 00 (nul nul)
@@ -39,7 +49,10 @@ defaultKngr(kngr: string): string {
 }
 
 private isNotEmptyString(dataString: string): boolean {
-  if (dataString.length <= 0) {
+  if(dataString === undefined){
+    return false;
+  }
+  else if (dataString.length <= 0) {
     return false;
   } else if (dataString === ' ') {
     return false;
