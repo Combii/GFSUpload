@@ -44,7 +44,7 @@ export class Validations {
       ldkd: [],
       kngr: [],
       kngr_typ: [],
-      pdst: [],
+      pdst: Validations.IsValidPdst(csvBookKeeping.pdst),
       sum_rgopid: Validations.IsValidSum(csvBookKeeping.sum_rgopid),
       opdater_lev: Validations.IsValidOpdateLev(csvBookKeeping.opdater_lev),
       leveran_kor: Validations.IsValidKor(csvBookKeeping.leveran_kor, csvBookKeeping.sum_rgopid, csvBookKeeping.pdst),
@@ -53,6 +53,30 @@ export class Validations {
       Tekst: Validations.IsValidText(csvBookKeeping.Tekst),
     };
     return errors;
+  }
+  static IsValidPdst(pdst: string): string[] {
+    const errorsArray : string[] = [];
+
+    // må være blank (melemrum) eller tom
+    // må være 8 karakter
+    // må være 6 karakter
+    // hvis 6 karakter lang skal det være tal
+
+    if(pdst.length === 8){
+      return errorsArray;
+    }
+
+    if(pdst.length === 6){
+      if(/^\d{6}$/.test(pdst)){
+        errorsArray.push('pdst must be number when 6 char long');
+      }
+    }
+
+    if(pdst.length !== 8 && pdst.length !== 6){
+      errorsArray.push('pdst must be number when 8 char long or 6');
+    }
+
+    return errorsArray;
   }
 
   static IsValidSum(sum_rgopid: string): string[] {
@@ -64,7 +88,7 @@ export class Validations {
     }
     return errorsArray;
   }
-  
+
   static IsValidOpdateLev(opdater_lev: string): string[] {
     const errorsArray : string[] = [];
 
