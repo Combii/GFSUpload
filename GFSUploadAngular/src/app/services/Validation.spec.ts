@@ -99,4 +99,46 @@ describe('ValidationTest', () => {
 
         expect(isValid).toEqual(true);
     });
+
+    it('ValidateCounterAccountIDKT', () => {
+
+        const checkboxService = new CheckboxService();
+
+        checkboxService.bookInFebosAndUploadToGfs = true;
+
+        // skal være udfyldt
+        // HVIS (BookinFebos || BookandUpload) må længen kun være 10 karakterer lang
+        // hvis ikke en af de 2 er sande må længen være op til 14 karakterer lang
+
+        const result = Validations.IsValidCounterAccountIDKT('34HS9808763', checkboxService);
+
+        let isValid = false;
+
+        result.forEach(err => {
+            if(err === 'Cannot be over 10 characters'){
+                isValid = true;
+            }
+        });
+
+        expect(isValid).toEqual(true);
+    });
+
+    it('ValidDkkBass', () => {
+        // skal være udfyldt
+        // skal være 1 eller 2
+
+        expect(Validations.IsValidDkkBass('4')[0]).toBe('Must be 2 or 1');
+        expect(Validations.IsValidDkkBass('')[0]).toBe('Cannot be empty');
+    });
+
+    it('ValidSkemaid', () => {
+
+        // kan være tom hvis kolonne K er udfyldt
+        // skal være udfyldt
+        // må ikke være over 20 karaktere lang
+        // K = pdst
+
+        expect(Validations.IsValidSkemaid('RES010401111111111111', '')[0]).toBe('Cannot be over 20');
+        expect(Validations.IsValidSkemaid('', '')[0]).toBe('Cannot be empty');
+    });
 });

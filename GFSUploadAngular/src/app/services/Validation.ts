@@ -123,7 +123,7 @@ export class Validations {
   static IsValidSkemaid(skemarakke: string, pdst: string): string[] {
     const errorsArray: string[] = [];
 
-    // kan være tom hvis kolonne K er udfyldt, eller ikke
+    // kan være tom hvis kolonne K er udfyldt
     // skal være udfyldt
     // må ikke være over 20 karaktere lang
     // K = pdst
@@ -137,7 +137,7 @@ export class Validations {
     if (!Validations.isNotEmptyString(skemarakke)) {
       errorsArray.push('Cannot be empty');
     } else if (skemarakke.length > 20) {
-      errorsArray.push('Cannot be over 20 ');
+      errorsArray.push('Cannot be over 20');
     }
 
     return errorsArray;
