@@ -305,18 +305,15 @@ export class Validations {
     const month = Number(date.toString().substring(4, 6));
     const day = Number(date.toString().substring(6, 8));
 
-    // console.log('Year ' + year);
-    // console.log('Month ' + month);
-    // console.log('Day ' + day);
-
     const parsedDate = new Date(year, month, day);
 
     // Check if sunday or saturday
     const dayOfWeek = parsedDate.getDay();
+  
 
-    // Saturday === 0
+    // Saturday === 6
     // Sunday === 1
-    if (dayOfWeek === 0 || dayOfWeek === 1) {
+    if (dayOfWeek === 6 || dayOfWeek === 1) {
       errorsArray.push('Date cannot be saturday or sunday');
     }
 
