@@ -21,7 +21,7 @@ describe('ValidationTest', () => {
     });
 
     it('ValidateDate Sunday or Saturday', () => {
-        const result = Validations.IsValidDate('20200307');
+        const result = Validations.IsValidDate('20200207');
 
         let isValid = false;
 
@@ -36,7 +36,7 @@ describe('ValidationTest', () => {
 
     it('ValidateDate first of January', () => {
 
-        const result = Validations.IsValidDate('20200101');
+        const result = Validations.IsValidDate('20200001');
 
         let isValid = false;
 
@@ -51,7 +51,7 @@ describe('ValidationTest', () => {
 
     it('ValidateDate first of January V2', () => {
 
-        const result = Validations.IsValidDate('20190101');
+        const result = Validations.IsValidDate('20190001');
 
         let isValid = false;
 
@@ -66,7 +66,7 @@ describe('ValidationTest', () => {
 
     it('ValidateDate first of January V3', () => {
 
-        const result = Validations.IsValidDate('20070101');
+        const result = Validations.IsValidDate('20070001');
 
         let isValid = false;
 
