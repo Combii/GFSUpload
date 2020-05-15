@@ -139,6 +139,7 @@ describe('ValidationTest', () => {
         // K = pdst
 
         expect(Validations.IsValidSkemaid('RES010401111111111111', '')[0]).toBe('Cannot be over 20');
+        expect(Validations.IsValidSkemaid('', 'OBLPULJ1').length).toBe(0);
         expect(Validations.IsValidSkemaid('', '')[0]).toBe('Cannot be empty');
     });
 });
