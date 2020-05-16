@@ -200,7 +200,7 @@ export class Validations {
 
     if (!Validations.isNotEmptyString(kngr_typ)) {
       errorsArray.push('Cannot be empty');
-    } else if (kngr_typ.length === 3) {
+    } else if (kngr_typ.length !== 3) {
       errorsArray.push('Must be 3 characters');
     }
 
@@ -214,10 +214,6 @@ export class Validations {
     // må være 8 karakter
     // må være 6 karakter
     // hvis 6 karakter lang skal det være tal
-
-    if (pdst.length === 8) {
-      return errorsArray;
-    }
 
     if (pdst.length === 6) {
       if (/^\d{6}$/.test(pdst)) {
