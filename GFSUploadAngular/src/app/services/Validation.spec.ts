@@ -4,7 +4,7 @@ import { CheckboxService } from './checkbox.service';
 import { error } from 'protractor';
 
 // Run ng test
-describe('ValidationTest', () => {
+describe('Validation Test', () => {
   it('ValidateCurrency', () => {
     const result = Validations.IsValidCurrency('DKKK');
 
@@ -73,7 +73,7 @@ describe('ValidationTest', () => {
     expect(isValid).toEqual(true);
   });
 
-  it('ValidateDate bookInFebosfirstmondayofmonth', () => {
+  xit('ValidateDate bookInFebosfirstmondayofmonth', () => {
     const checkboxService = new CheckboxService();
 
     checkboxService.bookInFebos = true;
