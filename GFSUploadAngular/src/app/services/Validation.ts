@@ -497,7 +497,7 @@ export class Validations {
       errorsArray.push('Balance must not exceed 16 characters');
     }
 
-    if (!/^\d*\,?\d*$/.test(balance)) {
+    if (!/^-?\d*\,?\d*$/.test(balance)) {
       errorsArray.push('Is not a valid digit');
     }
 
