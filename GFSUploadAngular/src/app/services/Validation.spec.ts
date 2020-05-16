@@ -85,7 +85,12 @@ describe('ValidationTest', () => {
     console.log('result', result);
 
     expect(
-      Validations.IsValidDate('20200504', checkboxService, new Date(2007, 5, 1))[0]).toBe(
+      Validations.IsValidDate(
+        '20200204',
+        checkboxService,
+        new Date(2020, 5, 1)
+      )[0]
+    ).toBe(
       'The date has to be today\'s date or after when it is the first monday in the month and book in febos in checked.'
     );
   });

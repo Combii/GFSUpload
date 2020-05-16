@@ -70,17 +70,17 @@ export class ParserService {
     this.tempDataArr.forEach((row) => {
       if (this.isFirst) {
         if (row.length > 0) {
-          this.dataListIAccountBookKeeping.push({
-            AccountingDate: !row[0] ? ' ‏‏‎ ' : '' + row[0],
-            RegistrationNo: !row[1] ? ' ‏‏‎ ' : '' + row[1],
-            IDKT: !row[2] ? ' ‏‏‎ ' : '' + row[2],
-            OriginalIDKT: !row[3] ? ' ‏‏‎ ' : '' + row[3],
-            CounterAccountIDKT: !row[4] ? ' ‏‏‎ ' : '' + row[4],
-            Text: !row[5] ? ' ‏‏‎ ' : '' + row[5],
-            ProjectCode: !row[6] ? ' ‏‏‎ ' : '' + row[6],
-            Currency: !row[7] ? ' ‏‏‎ ' : '' + row[7],
-            Balance: !row[8] ? ' ‏‏‎ ' : '' + row[8],
-          });
+          this.dataListIAccountBookKeeping.push(this.defaultValueService.insertDefaultAccountValues({
+            AccountingDate: row[0],
+            RegistrationNo: row[1],
+            IDKT: row[2],
+            OriginalIDKT: row[3],
+            CounterAccountIDKT: row[4],
+            Text: row[5],
+            ProjectCode: row[6],
+            Currency: row[7],
+            Balance: row[8],
+          }));
         }
       }
       this.isFirst = true;
@@ -93,7 +93,7 @@ export class ParserService {
       if (this.isFirst) {
         if (row.length > 0) {
           this.dataListIBookKeeping.push(
-            this.defaultValueService.insertDefaultChart({
+            this.defaultValueService.insertDefaultChartValues({
               Dato: row[0],
               RegNr: row[1],
               regnskabstype: row[2],

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { IBookKeeping } from 'src/models/IbookKeeping';
+import { IAccountBookKeeping } from 'src/models/IAccountBookKeeping';
 
 @Injectable({
   providedIn: 'root',
@@ -7,14 +8,24 @@ import { IBookKeeping } from 'src/models/IbookKeeping';
 export class DefaultValueService {
   constructor() {}
 
-  insertDefaultChart(bookKeeping: IBookKeeping): IBookKeeping {
-
+  insertDefaultChartValues(bookKeeping: IBookKeeping): IBookKeeping {
     Object.keys(bookKeeping).forEach((key) => {
       bookKeeping[key] = this.defaultValue(bookKeeping[key]);
     });
 
     this.defaultKngr(bookKeeping);
     this.defaultSkemarakke(bookKeeping);
+
+    return bookKeeping;
+  }
+
+  insertDefaultAccountValues(
+    bookKeeping: IAccountBookKeeping
+  ): IAccountBookKeeping {
+
+    Object.keys(bookKeeping).forEach(key => {
+      bookKeeping[key] = this.defaultValue(bookKeeping[key]);
+    })
 
     return bookKeeping;
   }
