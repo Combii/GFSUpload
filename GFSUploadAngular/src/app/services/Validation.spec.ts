@@ -206,4 +206,22 @@ describe('ValidationTest', () => {
     );
 
   });
+
+  it('Validsum_rgopid', () => {
+    // må være blank (melemrum) eller tom
+    // må være 8 karakter
+    // må være 6 karakter
+    // hvis 6 karakter lang skal det være tal
+
+    expect(Validations.IsValidSum('C')[0]).toBe(
+        'sum_rgopid must be equal B'
+    );
+    expect(Validations.IsValidSum('A')[0]).toBe(
+        'sum_rgopid must be equal B'
+    );
+    expect(Validations.IsValidSum('T')[0]).toBe(
+        'sum_rgopid must be equal B'
+    );
+
+  });
 });
