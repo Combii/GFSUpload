@@ -224,4 +224,17 @@ describe('ValidationTest', () => {
     );
 
   });
+
+  it('Validopdater_lev', () => {
+
+    expect(Validations.IsValidOpdateLev('C')[0]).toBe(
+        'opdater_lev must be equal to either J or N'
+    );
+    expect(Validations.IsValidOpdateLev('J').length).toBe(
+        0
+    );
+    expect(Validations.IsValidOpdateLev('N').length).toBe(
+        0
+    );
+  });
 });
