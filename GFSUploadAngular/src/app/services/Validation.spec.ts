@@ -100,6 +100,11 @@ describe('ValidationTest', () => {
 
     expect(Validations.isFirstMondayOfMonth(new Date(2020, 5, 8))).toBe(false);
   });
+  it('Validate is current date is after', () => {
+    expect(Validations.currentDateIsAfter(new Date(2020, 5, 1),new Date(2020,6,1))).toBeTruthy();
+
+    //expect(Validations.isFirstMondayOfMonth(new Date(2020, 5, 8))).toBe(false);
+  });
 
   it('ValidateCounterAccountIDKT', () => {
     const checkboxService = new CheckboxService();
