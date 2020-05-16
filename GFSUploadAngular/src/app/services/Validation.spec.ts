@@ -20,7 +20,6 @@ describe('ValidationTest', () => {
   });
 
   it('ValidateDate Sunday or Saturday', () => {
-    console.log('testing');
     const result = Validations.IsValidDate('20200207');
     let isValid = false;
 
@@ -78,16 +77,15 @@ describe('ValidationTest', () => {
     const checkboxService = new CheckboxService();
 
     checkboxService.bookInFebos = true;
-    checkboxService.bookInFebosAndUploadToGfs = false;
-    checkboxService.uploadToGfs = false;
+    checkboxService.bookInFebosAndUploadToGfs = true;
+    checkboxService.uploadToGfs = true;
+
+    const result = Validations.IsValidDate('20200404', checkboxService, new Date(2020, 5, 1));
+
+    console.log('result', result);
 
     expect(
-      Validations.IsValidDate(
-        '20200504',
-        checkboxService,
-        new Date(2007, 5, 1)
-      )[0]
-    ).toBe(
+      Validations.IsValidDate('20200504', checkboxService, new Date(2007, 5, 1))[0]).toBe(
       'The date has to be today\'s date or after when it is the first monday in the month and book in febos in checked.'
     );
   });
@@ -361,7 +359,8 @@ describe('ValidationTest', () => {
 
     expect(Validations.IsValidRegnskabstype('')[0]).toBe('Is empty');
     expect(Validations.IsValidRegnskabstype('RMKORR').length).toBe(0);
-    expect(Validations.IsValidRegnskabstype('RMKORRRRR')[0]).toBe('Cannot be more than 6 characters long');
-
+    expect(Validations.IsValidRegnskabstype('RMKORRRRR')[0]).toBe(
+      'Cannot be more than 6 characters long'
+    );
   });
 });

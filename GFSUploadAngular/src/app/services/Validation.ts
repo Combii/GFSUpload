@@ -319,7 +319,7 @@ export class Validations {
         Validations.isFirstMondayOfMonth(testDate ? testDate : null) &&
         checkBoxService.bookInFebos
       ) {
-        if (parsedDate.getMilliseconds() < new Date().getMilliseconds())
+        if (parsedDate.getMilliseconds() < testDate.getMilliseconds())
           errorsArray.push(
             'The date has to be today\'s date or after when it is the first monday in the month and book in febos in checked.'
           );
