@@ -278,9 +278,10 @@ export class Validations {
     return errorsArray;
   }
 
-  static IsValidDate(
+  static  IsValidDate(
     date: string,
-    checkBoxService?: CheckboxService
+    checkBoxService?: CheckboxService,
+    testDate?: Date // Only pass this date for testing purposes
   ): string[] {
     const errorsArray = [];
 
@@ -312,14 +313,10 @@ export class Validations {
       errorsArray.push('Date cannot be first of January');
     }
 
-    console.log(Validations.isFirstMondayOfMonth());
-
     if (checkBoxService) {
       // If bookInFebos is checked and it is first monday of month, the date has to be today's date or after.
       if (
-        !Validations.isFirstMondayOfMonth(
-          environment.production ? parsedDate : null
-        ) &&
+        Validations.isFirstMondayOfMonth(testDate ? testDate : null) &&
         checkBoxService.bookInFebos
       ) {
         if (parsedDate.getMilliseconds() < new Date().getMilliseconds())
@@ -344,17 +341,16 @@ export class Validations {
     return errorsArray;
   }
 
-  private static isFirstMondayOfMonth(date = new Date()): boolean {
-    const currentMonth = date.getMonth();
+  public static isFirstMondayOfMonth(d = new Date()): boolean {
+    const currentMonth = d.getMonth();
 
-    if (date.getDay() === 1) {
+    if (d.getDay() === 1) {
       // Then check if we are still in the same month if we go 7 days back in time. If we're not, then it is the first monday
-      date.setDate(date.getDate() - 7);
-      if (currentMonth !== date.getMonth()) {
+      d.setDate(d.getDate() - 7);
+      if (currentMonth !== d.getMonth()) {
         return true;
       }
     }
-
     return false;
   }
 

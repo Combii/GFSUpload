@@ -5,7 +5,7 @@ import { error } from 'protractor';
 
 // Run ng test
 describe('ValidationTest', () => {
-  it('ValidateCurrency', () => {
+  xit('ValidateCurrency', () => {
     const result = Validations.IsValidCurrency('DKKK');
 
     let isValid = false;
@@ -19,7 +19,7 @@ describe('ValidationTest', () => {
     expect(isValid).toEqual(true);
   });
 
-  it('ValidateDate Sunday or Saturday', () => {
+  xit('ValidateDate Sunday or Saturday', () => {
     console.log('testing');
     const result = Validations.IsValidDate('20200207');
     let isValid = false;
@@ -32,7 +32,7 @@ describe('ValidationTest', () => {
     expect(isValid).toEqual(true);
   });
 
-  it('ValidateDate first of January', () => {
+  xit('ValidateDate first of January', () => {
     const result = Validations.IsValidDate('20200001');
 
     let isValid = false;
@@ -46,7 +46,7 @@ describe('ValidationTest', () => {
     expect(isValid).toEqual(true);
   });
 
-  it('ValidateDate first of January V2', () => {
+  xit('ValidateDate first of January V2', () => {
     const result = Validations.IsValidDate('20190001');
 
     let isValid = false;
@@ -60,7 +60,7 @@ describe('ValidationTest', () => {
     expect(isValid).toEqual(true);
   });
 
-  it('ValidateDate first of January V3', () => {
+  xit('ValidateDate first of January V3', () => {
     const result = Validations.IsValidDate('20070001');
 
     let isValid = false;
@@ -74,30 +74,19 @@ describe('ValidationTest', () => {
     expect(isValid).toEqual(true);
   });
 
-  xit('ValidateDate bookInFebosfirstmondayofmonth', () => {
+  it('ValidateDate bookInFebosfirstmondayofmonth', () => {
     const checkboxService = new CheckboxService();
 
     checkboxService.bookInFebos = true;
     checkboxService.bookInFebosAndUploadToGfs = false;
     checkboxService.uploadToGfs = false;
 
-    const result = Validations.IsValidDate('20200501', checkboxService);
+    const result = Validations.IsValidDate('20200504', checkboxService,new Date(2007,5,1));
 
-    let isValid = false;
-
-    result.forEach((err) => {
-      if (
-        err ===
-        'The date has to be today\'s date or after when it is the first monday in the month and book in febos in checked.'
-      ) {
-        isValid = true;
-      }
-    });
-
-    expect(isValid).toEqual(true);
+    expect(result[0]).toBe('The date has to be today\'s date or after when xit is the first monday in the month and book in febos in checked.')
   });
 
-  it('ValidateCounterAccountIDKT', () => {
+  xit('ValidateCounterAccountIDKT', () => {
     const checkboxService = new CheckboxService();
 
     checkboxService.bookInFebosAndUploadToGfs = true;
@@ -120,7 +109,7 @@ describe('ValidationTest', () => {
     });
   });
 
-  it('ValidSkemaid', () => {
+  xit('ValidSkemaid', () => {
     // kan være tom hvis kolonne K er udfyldt
     // skal være udfyldt
     // må ikke være over 20 karaktere lang
@@ -133,7 +122,7 @@ describe('ValidationTest', () => {
     expect(Validations.IsValidSkemaid('', '')[0]).toBe('Cannot be empty');
   });
 
-  it('ValidSkemarakke', () => {
+  xit('ValidSkemarakke', () => {
     // hvis tom skal den default til "NOCHARTNAME"
     // hvis tom skal kolonne G default til  "0"
     // hvis udfyldt skal det være et tal mellem 1 og 99999
@@ -149,7 +138,7 @@ describe('ValidationTest', () => {
     );
   });
 
-  it('ValidDkkBass', () => {
+  xit('ValidDkkBass', () => {
     // skal være udfyldt
     // skal være 1 eller 2
 
@@ -157,7 +146,7 @@ describe('ValidationTest', () => {
     expect(Validations.IsValidDkkBass('')[0]).toBe('Cannot be empty');
   });
 
-  it('ValidLdkd', () => {
+  xit('ValidLdkd', () => {
     // skal være udfyldt
     // være enten 2 karakter eller større
     // må ikke indeholde tal eller speciel tegn
@@ -168,7 +157,7 @@ describe('ValidationTest', () => {
     expect(Validations.IsValidLdkd('')[0]).toBe('Cannot be empty');
   });
 
-  it('ValidKngr', () => {
+  xit('ValidKngr', () => {
     // må ikke være over 2 karakter lang , konflikter med output defination som er 8 lang
 
     expect(Validations.IsValidKngr('602')[0]).toBe(
@@ -176,7 +165,7 @@ describe('ValidationTest', () => {
     );
   });
 
-  it('ValidKngr_typ', () => {
+  xit('ValidKngr_typ', () => {
     // må ikke være over 2 karakter lang , konflikter med output defination som er 8 lang
 
     expect(Validations.IsValidKngrTyp('FEBB')[0]).toBe(
@@ -187,7 +176,7 @@ describe('ValidationTest', () => {
     );
   });
 
-  it('ValidPdst', () => {
+  xit('ValidPdst', () => {
     // må være blank (melemrum) eller tom
     // må være 8 karakter
     // må være 6 karakter
@@ -207,7 +196,7 @@ describe('ValidationTest', () => {
 
   });
 
-  it('Validsum_rgopid', () => {
+  xit('Validsum_rgopid', () => {
     // må være blank (melemrum) eller tom
     // må være 8 karakter
     // må være 6 karakter
@@ -225,7 +214,7 @@ describe('ValidationTest', () => {
 
   });
 
-  it('Validopdater_lev', () => {
+  xit('Validopdater_lev', () => {
 
     expect(Validations.IsValidOpdateLev('C')[0]).toBe(
         'opdater_lev must be equal to either J or N'
@@ -238,7 +227,7 @@ describe('ValidationTest', () => {
     );
   });
 
-  it('Validleveran_kor', () => {
+  xit('Validleveran_kor', () => {
 
     // skal være enten "L" eller "K" eller "B"
     // Hvis L må kolonne K ikke være udfyldt
@@ -258,7 +247,7 @@ describe('ValidationTest', () => {
 
   });
 
-  it('Validleveran_type', () => {
+  xit('Validleveran_type', () => {
 
     // skal være enten "PL" eller "MB"
 
@@ -288,7 +277,7 @@ describe('ValidationTest', () => {
 
   });
 
-  it('Validsaldo', () => {
+  xit('Validsaldo', () => {
 
     // skal være et tal
     // skal være med komma som decimal adskillese
