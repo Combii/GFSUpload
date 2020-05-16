@@ -379,14 +379,10 @@ export class Validations {
     // https://openexchangerates.org/api/currencies.json
   }
 
-  private static IsValidRegNumber(regNumber: string): string[] {
-    // This validation is not complete
-
+  static IsValidRegNumber(regNumber: string): string[] {
     const errorsArray = [];
 
     const firstNumber = Number(regNumber.toString().substring(0, 2));
-    const firstLastNumberOrChar = regNumber.toString().substring(2, 3);
-    const secondLastNumberOrChar = regNumber.toString().substring(3, 4);
 
     if (regNumber.toString().length !== 4) {
       errorsArray.push('Is not 4 in length');
@@ -394,24 +390,6 @@ export class Validations {
 
     if (firstNumber < 30 || firstNumber > 49) {
       errorsArray.push('First two digits are not between 30 and 49');
-    }
-
-    if (
-      isNaN(Number(firstLastNumberOrChar)) &&
-      isNaN(Number(secondLastNumberOrChar))
-    ) {
-      errorsArray.push(
-        'second last char and last char cannot both be digits or characters'
-      );
-    }
-
-    if (
-      !isNaN(Number(firstLastNumberOrChar)) &&
-      !isNaN(Number(secondLastNumberOrChar))
-    ) {
-      errorsArray.push(
-        'second last char and last char cannot both be digits or characters'
-      );
     }
 
     return errorsArray;

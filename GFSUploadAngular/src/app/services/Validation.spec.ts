@@ -325,4 +325,17 @@ describe('ValidationTest', () => {
       Validations.IsValidIDKT('34MT9910126233252535', checkboxService)[0]
     ).toBe('Is longer than 14 characters');
   });
+
+  it('ValidRegNumber', () => {
+    // skal være 4 karakter lang
+    // skal være udfyldt
+    // skal have de samme valideringer som på forsiden
+
+    expect(Validations.IsValidRegNumber('39AS').length).toBe(0);
+    expect(Validations.IsValidRegNumber('')[0]).toBe('Is not 4 in length');
+    expect(Validations.IsValidRegNumber('32455')[0]).toBe('Is not 4 in length');
+    expect(Validations.IsValidRegNumber('325')[0]).toBe('Is not 4 in length');
+    expect(Validations.IsValidRegNumber('3')[0]).toBe('Is not 4 in length');
+    expect(Validations.IsValidRegNumber('32')[0]).toBe('Is not 4 in length');
+  });
 });
