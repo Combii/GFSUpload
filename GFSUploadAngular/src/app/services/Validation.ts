@@ -329,7 +329,6 @@ export class Validations {
     console.log(Validations.isFirstMondayOfMonth());
     
     if (checkBoxService) {
-      console.log('in here');
       // If bookInFebos is checked and it is first monday of month, the date has to be today's date or after.
       if (!Validations.isFirstMondayOfMonth(environment.production ? parsedDate : null) && checkBoxService.bookInFebos) {
         if (parsedDate.getMilliseconds() < new Date().getMilliseconds())
