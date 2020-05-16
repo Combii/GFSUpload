@@ -278,7 +278,7 @@ export class Validations {
     return errorsArray;
   }
 
-  static  IsValidDate(
+  static IsValidDate(
     date: string,
     checkBoxService?: CheckboxService,
     testDate?: Date // Only pass this date for testing purposes
@@ -341,7 +341,7 @@ export class Validations {
     return errorsArray;
   }
 
-  public static isFirstMondayOfMonth(d = new Date()): boolean {
+  static isFirstMondayOfMonth(d = new Date()): boolean {
     const currentMonth = d.getMonth();
 
     if (d.getDay() === 1) {
