@@ -333,4 +333,38 @@ describe('ValidationTest', () => {
     );
 
   });
+
+  it('ValidIDKT', () => {
+
+    // skal være udfyldt
+    // HVIS (BookinFebos || BookandUpload) må længen kun være 10 karakterer lang 
+    // hvis ikke en af de 2 er sande må længen være op til 14 karakterer lang 
+
+    const checkboxService = new CheckboxService();
+
+    checkboxService.bookInFebos = true;
+    checkboxService.bookInFebosAndUploadToGfs = true;
+    checkboxService.uploadToGfs = true;
+
+    expect(Validations.IsValidIDKT('34MT991016', checkboxService).length).toBe(
+        0
+    );
+
+    expect(Validations.IsValidIDKT('34MT9910126', checkboxService)[0]).toBe(
+        'Is longer than 10 characters'
+    );
+
+    checkboxService.bookInFebos = false;
+    checkboxService.bookInFebosAndUploadToGfs = false;
+    checkboxService.uploadToGfs = false;
+
+    expect(Validations.IsValidIDKT('34MT9910126235', checkboxService).length).toBe(
+        0
+    );
+
+    expect(Validations.IsValidIDKT('34MT9910126233252535', checkboxService)[0]).toBe(
+        'Is longer than 14 characters'
+    );
+
+  });
 });

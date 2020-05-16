@@ -421,10 +421,7 @@ export class Validations {
     return errorsArray;
   }
 
-  private static IsValidIDKT(
-    IDKT: string,
-    checkboxService: CheckboxService
-  ): string[] {
+  static IsValidIDKT(IDKT: string, checkboxService: CheckboxService): string[] {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(IDKT)) {
