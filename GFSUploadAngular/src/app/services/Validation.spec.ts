@@ -287,4 +287,22 @@ describe('ValidationTest', () => {
     );
 
   });
+
+  it('Validsaldo', () => {
+
+    // skal være et tal
+    // skal være med komma som decimal adskillese
+    // skal formateres til output med med 2 decimaler 
+    // skal have minus tegn foran beløbfeltes første tal hvis negativt
+    // må max fylde 16 karakter incl komma og fortegn
+
+    expect(Validations.IsValidBalance('afea')[0]).toBe(
+        'Is not a valid digit'
+    );
+
+    expect(Validations.IsValidBalance('200,000').length).toBe(
+        0
+    );
+
+  });
 });
