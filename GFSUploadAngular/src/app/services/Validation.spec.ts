@@ -142,4 +142,19 @@ describe('ValidationTest', () => {
         expect(Validations.IsValidSkemaid('', 'OBLPULJ1').length).toBe(0);
         expect(Validations.IsValidSkemaid('', '')[0]).toBe('Cannot be empty');
     });
+
+    it('ValidSkemarakke', () => {
+
+        // hvis tom skal den default til "NOCHARTNAME"
+        // hvis tom skal kolonne G default til  "0"
+        // hvis udfyldt skal det være et tal mellem 1 og 99999
+
+        // G = valutakode
+        // K = pdst
+
+
+        expect(Validations.IsValidSkemarakke('0')[0]).toBe('Must be 2 or more characters');
+        expect(Validations.IsValidSkemarakke('999999')[0]).toBe('Must be 2 or more characters');
+
+    });
 });
