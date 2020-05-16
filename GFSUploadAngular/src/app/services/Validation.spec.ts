@@ -317,4 +317,20 @@ describe('ValidationTest', () => {
     );
 
   });
+
+  it('ValidText', () => {
+
+    expect(Validations.IsValidText('')[0]).toBe(
+        'Is empty'
+    );
+
+    expect(Validations.IsValidText('Character Count Online is an online tool that lets you easily calculate and count the number of characters, words, sentences and paragraphs in your text.')[0]).toBe(
+        'Text must not be longer than 40 characters'
+    );
+
+    expect(Validations.IsValidText('paragraphs in your text.').length).toBe(
+        0
+    );
+
+  });
 });

@@ -456,12 +456,8 @@ export class Validations {
     return errorsArray;
   }
 
-  private static IsValidText(text: string): string[] {
+  static IsValidText(text: string): string[] {
     const errorsArray = [];
-
-    if (typeof text === 'undefined') {
-      return errorsArray;
-    }
 
     if (!Validations.isNotEmptyString(text)) {
       errorsArray.push('Is empty');
