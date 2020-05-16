@@ -201,5 +201,9 @@ describe('ValidationTest', () => {
         'pdst must be number when 8 char long or 6'
     );
 
+    expect(Validations.IsValidPdst('OB3451323')[0]).toBe(
+        'pdst must be number when 8 char long or 6'
+    );
+
   });
 });
