@@ -214,9 +214,8 @@ export class Validations {
     // må være 8 karakter
     // må være 6 karakter
     // hvis 6 karakter lang skal det være tal
-
     if (pdst.length === 6) {
-      if (/^\d{6}$/.test(pdst)) {
+      if (!/^\d{6}$/.test(pdst)) {
         errorsArray.push('pdst must be number when 6 char long');
       }
     }
