@@ -308,5 +308,13 @@ describe('ValidationTest', () => {
         'Balance must not exceed 16 characters'
     );
 
+    expect(Validations.IsValidBalance('')[0]).toBe(
+        'Cannot be empty'
+    );
+
+    expect(Validations.IsValidBalance('-200').length).toBe(
+        0
+    );
+
   });
 });

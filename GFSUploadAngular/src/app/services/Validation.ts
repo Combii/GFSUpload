@@ -488,7 +488,7 @@ export class Validations {
   static IsValidBalance(balance: any): string[] {
     const errorsArray: string[] = [];
 
-    if (typeof balance === 'undefined') {
+    if (!Validations.isNotEmptyString(balance)) {
       errorsArray.push('Cannot be empty');
       return errorsArray;
     }
