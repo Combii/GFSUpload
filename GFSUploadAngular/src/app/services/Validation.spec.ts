@@ -237,4 +237,24 @@ describe('ValidationTest', () => {
         0
     );
   });
+
+  it('Validleveran_kor', () => {
+
+    // skal være enten "L" eller "K" eller "B"
+    // Hvis L må kolonne K ikke være udfyldt
+    // K = pdst
+
+    expect(Validations.IsValidKor('L','OBLPULJ1')[0]).toBe(
+        'If value is L then column pdst can not be specified'
+    );
+
+    expect(Validations.IsValidKor('L','').length).toBe(
+        0
+    );
+
+    expect(Validations.IsValidKor('T','OBLPULJ1')[0]).toBe(
+        'leveran_kor must be equal to either K or B or L'
+    );
+
+  });
 });

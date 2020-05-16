@@ -63,7 +63,6 @@ export class Validations {
       opdater_lev: Validations.IsValidOpdateLev(csvBookKeeping.opdater_lev),
       leveran_kor: Validations.IsValidKor(
         csvBookKeeping.leveran_kor,
-        csvBookKeeping.sum_rgopid,
         csvBookKeeping.pdst
       ),
       leveran_type: Validations.IsValidLeveranType(csvBookKeeping.leveran_type),
@@ -246,24 +245,16 @@ export class Validations {
     return errorsArray;
   }
 
-  static IsValidKor(
-    leveran_kor: string,
-    sum_rgopid: string,
-    pdst: string
-  ): string[] {
+  static IsValidKor(leveran_kor: string, pdst: string): string[] {
     const errorsArray = [];
 
     // skal være enten "L" eller "K" eller "B"
     // Hvis L må kolonne K ikke være udfyldt
-    // L = sum_rgopid
     // K = pdst
 
     if (leveran_kor === 'L' || leveran_kor === 'K' || leveran_kor === 'B') {
       if (leveran_kor === 'L') {
-        if (
-          !Validations.isNotEmptyString(sum_rgopid) &&
-          Validations.isNotEmptyString(pdst)
-        ) {
+        if (Validations.isNotEmptyString(pdst)) {
           errorsArray.push(
             'If value is L then column pdst can not be specified'
           );
@@ -322,10 +313,15 @@ export class Validations {
     }
 
     console.log(Validations.isFirstMondayOfMonth());
-    
+
     if (checkBoxService) {
       // If bookInFebos is checked and it is first monday of month, the date has to be today's date or after.
-      if (!Validations.isFirstMondayOfMonth(environment.production ? parsedDate : null) && checkBoxService.bookInFebos) {
+      if (
+        !Validations.isFirstMondayOfMonth(
+          environment.production ? parsedDate : null
+        ) &&
+        checkBoxService.bookInFebos
+      ) {
         if (parsedDate.getMilliseconds() < new Date().getMilliseconds())
           errorsArray.push(
             'The date has to be today\'s date or after when it is the first monday in the month and book in febos in checked.'
