@@ -414,7 +414,7 @@ export class Validations {
     return errorsArray;
   }
 
-  private static IsValidProjectCode(projectCode: string): string[] {
+  static IsValidProjectCode(projectCode: string): string[] {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(projectCode)) {
@@ -471,7 +471,7 @@ export class Validations {
     return errorsArray;
   }
 
-  private static IsValidRegnskabstype(regnskabstype: any): string[] {
+  static IsValidRegnskabstype(regnskabstype: any): string[] {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(regnskabstype)) {
