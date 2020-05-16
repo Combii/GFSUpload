@@ -81,19 +81,21 @@ describe('ValidationTest', () => {
     checkboxService.bookInFebosAndUploadToGfs = false;
     checkboxService.uploadToGfs = false;
 
-    expect(Validations.IsValidDate(
+    expect(
+      Validations.IsValidDate(
         '20200504',
         checkboxService,
         new Date(2007, 5, 1)
-      )[0]).toBe(
-        'The date has to be today\'s date or after when xit is the first monday in the month and book in febos in checked.'
-        );
+      )[0]
+    ).toBe(
+      'The date has to be today\'s date or after when xit is the first monday in the month and book in febos in checked.'
+    );
   });
 
   it('Validate is First Monday of the month', () => {
-    expect(Validations.isFirstMondayOfMonth(new Date(2020,5,1))).toBe(
-        true
-      );
+    expect(Validations.isFirstMondayOfMonth(new Date(2020, 5, 1))).toBe(true);
+
+    expect(Validations.isFirstMondayOfMonth(new Date(2020, 5, 8))).toBe(false);
   });
 
   xit('ValidateCounterAccountIDKT', () => {
