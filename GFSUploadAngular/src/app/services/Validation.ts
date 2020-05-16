@@ -4,6 +4,8 @@ import {
 } from 'src/models/IAccountBookKeeping';
 import { IBookKeeping, IBookKeepingError } from 'src/models/IbookKeeping';
 import { CheckboxService } from './checkbox.service';
+import { deflate } from 'zlib';
+import { environment } from 'src/environments/environment';
 
 export class Validations {
   static validateAccountBookKeepingError(
@@ -309,7 +311,6 @@ export class Validations {
 
     // Check if sunday or saturday
     const dayOfWeek = parsedDate.getDay();
-  
 
     // Saturday === 6
     // Sunday === 1
@@ -321,13 +322,16 @@ export class Validations {
     const theMonth = parsedDate.getMonth();
     const dayOfMonth = parsedDate.getDate();
 
-    if (month === 1 && dayOfMonth === 1) {
+    if (month === 0 && dayOfMonth === 1) {
       errorsArray.push('Date cannot be first of January');
     }
 
+    console.log(Validations.isFirstMondayOfMonth());
+    
     if (checkBoxService) {
+      console.log('in here');
       // If bookInFebos is checked and it is first monday of month, the date has to be today's date or after.
-      if (Validations.isFirstMondayOfMonth() && checkBoxService.bookInFebos) {
+      if (!Validations.isFirstMondayOfMonth(environment.production ? parsedDate : null) && checkBoxService.bookInFebos) {
         if (parsedDate.getMilliseconds() < new Date().getMilliseconds())
           errorsArray.push(
             'The date has to be today\'s date or after when it is the first monday in the month and book in febos in checked.'
@@ -350,15 +354,13 @@ export class Validations {
     return errorsArray;
   }
 
-  private static isFirstMondayOfMonth(): boolean {
-    const d = new Date();
-    const currentMonth = d.getMonth();
+  private static isFirstMondayOfMonth(date = new Date()): boolean {
+    const currentMonth = date.getMonth();
 
-    // if it is monday
-    if (d.getDay() === 1) {
+    if (date.getDay() === 1) {
       // Then check if we are still in the same month if we go 7 days back in time. If we're not, then it is the first monday
-      d.setDate(d.getDate() - 7);
-      if (currentMonth !== d.getMonth()) {
+      date.setDate(date.getDate() - 7);
+      if (currentMonth !== date.getMonth()) {
         return true;
       }
     }
