@@ -122,6 +122,7 @@ describe('Validation Test', () => {
         isValid = true;
       }
     });
+    expect(isValid).toEqual(true);
   });
 
   it('ValidSkemaid', () => {
