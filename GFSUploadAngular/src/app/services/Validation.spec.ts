@@ -300,8 +300,12 @@ describe('ValidationTest', () => {
         'Is not a valid digit'
     );
 
-    expect(Validations.IsValidBalance('200,000').length).toBe(
+    expect(Validations.IsValidBalance('200,00').length).toBe(
         0
+    );
+
+    expect(Validations.IsValidBalance('20021345432756,00')[0]).toBe(
+        'Balance must not exceed 16 characters'
     );
 
   });
