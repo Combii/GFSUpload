@@ -5,6 +5,7 @@ import { error } from 'protractor';
 
 // Run ng test
 describe('ValidationTest', () => {
+
   it('ValidateCurrency', () => {
     const result = Validations.IsValidCurrency('DKKK');
 
@@ -155,5 +156,14 @@ describe('ValidationTest', () => {
 
     expect(Validations.IsValidDkkBass('4')[0]).toBe('Must be 2 or 1');
     expect(Validations.IsValidDkkBass('')[0]).toBe('Cannot be empty');
+  });
+
+  it('ValidLdkd', () => {
+     // skal være udfyldt
+    // være enten 2 karakter eller større
+    // må ikke indeholde tal eller speciel tegn
+
+    expect(Validations.IsValidLdkd('K')[0]).toBe('Must be 2 or more characters');
+    expect(Validations.IsValidLdkd('')[0]).toBe('Cannot be empty');
   });
 });
