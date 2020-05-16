@@ -268,7 +268,7 @@ export class Validations {
     return errorsArray;
   }
 
-  private static IsValidLeveranType(leveran_type: string): string[] {
+  static IsValidLeveranType(leveran_type: string): string[] {
     const errorsArray: string[] = [];
 
     if (leveran_type === 'MB' || leveran_type === 'PL') {

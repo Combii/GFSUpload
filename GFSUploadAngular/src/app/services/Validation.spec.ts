@@ -257,4 +257,34 @@ describe('ValidationTest', () => {
     );
 
   });
+
+  it('Validleveran_type', () => {
+
+    // skal være enten "PL" eller "MB"
+
+    expect(Validations.IsValidLeveranType('PL').length).toBe(
+        0
+    );
+
+    expect(Validations.IsValidLeveranType('PL').length).toBe(
+        0
+    );
+
+    expect(Validations.IsValidLeveranType('TA')[0]).toBe(
+        'leveran_type must be equal to either PL or MB'
+    );
+
+    expect(Validations.IsValidLeveranType('AVAV')[0]).toBe(
+        'leveran_type must be equal to either PL or MB'
+    );
+
+    expect(Validations.IsValidLeveranType('T')[0]).toBe(
+        'leveran_type must be equal to either PL or MB'
+    );
+
+    expect(Validations.IsValidLeveranType('PLL')[0]).toBe(
+        'leveran_type must be equal to either PL or MB'
+    );
+
+  });
 });
