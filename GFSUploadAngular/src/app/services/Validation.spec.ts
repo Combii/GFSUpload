@@ -73,7 +73,7 @@ describe('Validation Test', () => {
     expect(isValid).toEqual(true);
   });
 
-  xit('ValidateDate bookInFebosfirstmondayofmonth', () => {
+  it('ValidateDate bookInFebosfirstmondayofmonth', () => {
     const checkboxService = new CheckboxService();
 
     checkboxService.bookInFebos = true;
