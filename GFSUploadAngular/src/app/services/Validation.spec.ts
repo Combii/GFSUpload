@@ -289,8 +289,70 @@ describe('ValidationTest', () => {
         'Is not a valid digit'
     );
 
-    expect(Validations.IsValidBalance('200,000').length).toBe(
+    expect(Validations.IsValidBalance('200,00').length).toBe(
         0
+    );
+
+    expect(Validations.IsValidBalance('20021345432756,00')[0]).toBe(
+        'Balance must not exceed 16 characters'
+    );
+
+    expect(Validations.IsValidBalance('')[0]).toBe(
+        'Cannot be empty'
+    );
+
+    expect(Validations.IsValidBalance('-200').length).toBe(
+        0
+    );
+
+  });
+
+  it('ValidText', () => {
+
+    expect(Validations.IsValidText('')[0]).toBe(
+        'Is empty'
+    );
+
+    expect(Validations.IsValidText('Character Count Online is an online tool that lets you easily calculate and count the number of characters, words, sentences and paragraphs in your text.')[0]).toBe(
+        'Text must not be longer than 40 characters'
+    );
+
+    expect(Validations.IsValidText('paragraphs in your text.').length).toBe(
+        0
+    );
+
+  });
+
+  it('ValidIDKT', () => {
+
+    // skal være udfyldt
+    // HVIS (BookinFebos || BookandUpload) må længen kun være 10 karakterer lang 
+    // hvis ikke en af de 2 er sande må længen være op til 14 karakterer lang 
+
+    const checkboxService = new CheckboxService();
+
+    checkboxService.bookInFebos = true;
+    checkboxService.bookInFebosAndUploadToGfs = true;
+    checkboxService.uploadToGfs = true;
+
+    expect(Validations.IsValidIDKT('34MT991016', checkboxService).length).toBe(
+        0
+    );
+
+    expect(Validations.IsValidIDKT('34MT9910126', checkboxService)[0]).toBe(
+        'Is longer than 10 characters'
+    );
+
+    checkboxService.bookInFebos = false;
+    checkboxService.bookInFebosAndUploadToGfs = false;
+    checkboxService.uploadToGfs = false;
+
+    expect(Validations.IsValidIDKT('34MT9910126235', checkboxService).length).toBe(
+        0
+    );
+
+    expect(Validations.IsValidIDKT('34MT9910126233252535', checkboxService)[0]).toBe(
+        'Is longer than 14 characters'
     );
 
   });

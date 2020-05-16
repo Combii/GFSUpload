@@ -417,10 +417,7 @@ export class Validations {
     return errorsArray;
   }
 
-  private static IsValidIDKT(
-    IDKT: string,
-    checkboxService: CheckboxService
-  ): string[] {
+  static IsValidIDKT(IDKT: string, checkboxService: CheckboxService): string[] {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(IDKT)) {
@@ -452,12 +449,8 @@ export class Validations {
     return errorsArray;
   }
 
-  private static IsValidText(text: string): string[] {
+  static IsValidText(text: string): string[] {
     const errorsArray = [];
-
-    if (typeof text === 'undefined') {
-      return errorsArray;
-    }
 
     if (!Validations.isNotEmptyString(text)) {
       errorsArray.push('Is empty');
@@ -484,7 +477,7 @@ export class Validations {
   static IsValidBalance(balance: any): string[] {
     const errorsArray: string[] = [];
 
-    if (typeof balance === 'undefined') {
+    if (!Validations.isNotEmptyString(balance)) {
       errorsArray.push('Cannot be empty');
       return errorsArray;
     }
@@ -493,7 +486,7 @@ export class Validations {
       errorsArray.push('Balance must not exceed 16 characters');
     }
 
-    if (!/^\d*\,?\d*$/.test(balance)) {
+    if (!/^-?\d*\,?\d*$/.test(balance)) {
       errorsArray.push('Is not a valid digit');
     }
 
