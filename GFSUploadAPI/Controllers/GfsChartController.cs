@@ -17,12 +17,12 @@ namespace GFSUploadAPI.Controllers
     [Route("api/[controller]")]
     public class GfsChartController : ControllerBase
     {
-        private readonly ILogger<GfsAccountController> _logger;
+        private readonly ILogger<GfsChartController> _logger;
         private readonly IBookingRepository _bookingRepository;
         private readonly DataContext _context;
         private readonly IAccountBookKeepingToFileParser _parser;
 
-        public GfsChartController(ILogger<GfsAccountController> logger, DataContext context,
+        public GfsChartController(ILogger<GfsChartController> logger, DataContext context,
           IBookingRepository bookingRepository, IAccountBookKeepingToFileParser parser)
         {
             _context = context;
