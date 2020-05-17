@@ -38,11 +38,5 @@ namespace GFSUploadAPI.Controllers
             _parser.WriteToTxtFile(listAddedToDb);
             return Ok(listAddedToDb);
         }
-
-        [HttpGet]
-        public ActionResult Get()
-        {
-            return StatusCode(200);
-        }
     }
 }
