@@ -13,7 +13,6 @@ using Newtonsoft.Json.Linq;
 
 namespace GFSUploadAPI.Controllers
 {
-    [AllowAnonymous]
     [Route("api/[controller]")]
     public class GfsAccountController : ControllerBase
     {
@@ -38,6 +37,13 @@ namespace GFSUploadAPI.Controllers
             var listAddedToDb = await _accountBookingRepository.PostAccountBookKeepingList(request);
             _parser.WriteToTxtFile(listAddedToDb);
             return Ok(listAddedToDb);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult Get()
+        {
+            return Ok("b0ss :0)");
         }
     }
 }

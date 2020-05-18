@@ -32,8 +32,7 @@ namespace GFSUploadAPI.Controllers
         }
 
         [HttpGet]
-        [Authorize]
-        public IActionResult boss()
+        public IActionResult Boss()
         {
             return Ok("b0ss :0)");
         }
