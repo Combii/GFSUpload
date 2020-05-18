@@ -17,13 +17,13 @@ namespace GFSUploadAPI.Controllers
     [Route("api/[controller]")]
     public class GfsChartController : ControllerBase
     {
-        private readonly ILogger<GfsAccountController> _logger;
+        private readonly ILogger<GfsChartController> _logger;
         private readonly IBookingRepository _bookingRepository;
         private readonly DataContext _context;
-        private readonly IAccountBookKeepingToFileParser _parser;
+        private readonly IBookKeepingToTextFileParser _parser;
 
-        public GfsChartController(ILogger<GfsAccountController> logger, DataContext context,
-          IBookingRepository bookingRepository, IAccountBookKeepingToFileParser parser)
+        public GfsChartController(ILogger<GfsChartController> logger, DataContext context,
+          IBookingRepository bookingRepository, IBookKeepingToTextFileParser parser)
         {
             _context = context;
             _bookingRepository = bookingRepository;
@@ -37,12 +37,6 @@ namespace GFSUploadAPI.Controllers
             var listAddedToDb = await _bookingRepository.PostBookKeepingList(request);
             _parser.WriteToTxtFile(listAddedToDb);
             return Ok(listAddedToDb);
-        }
-
-        [HttpGet]
-        public ActionResult Get()
-        {
-            return StatusCode(200);
         }
     }
 }

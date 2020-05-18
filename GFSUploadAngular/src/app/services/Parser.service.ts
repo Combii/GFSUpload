@@ -5,6 +5,7 @@ import { IAccountBookKeeping } from '../../models/IAccountBookKeeping';
 import { Validations } from '../services/Validation';
 import { IBookKeeping } from 'src/models/IbookKeeping';
 import { CheckboxService } from './checkbox.service';
+import { DefaultValueService } from './default-value.service';
 
 @Injectable({ providedIn: 'root' })
 export class ParserService {
@@ -18,7 +19,10 @@ export class ParserService {
   wopts: XLSX.WritingOptions = { bookType: 'xlsx', type: 'array' };
   isFirst = false;
 
-  constructor(private checkBoxService : CheckboxService) {}
+  constructor(
+    private checkBoxService: CheckboxService,
+    private defaultValueService: DefaultValueService
+  ) {}
 
   parseFile(evt: any, type: string) {
     this.resetEveryList();
@@ -63,20 +67,20 @@ export class ParserService {
 
   insertDataIntoListIAccountBookKeeping() {
     this.isFirst = false;
-    this.tempDataArr.forEach(row => {
+    this.tempDataArr.forEach((row) => {
       if (this.isFirst) {
         if (row.length > 0) {
-          this.dataListIAccountBookKeeping.push({
-            AccountingDate: !row[0] ? '' : ''+row[0],
-            RegistrationNo: !row[1] ? '' : ''+row[1],
-            IDKT: !row[2] ? '' : ''+row[2],
-            OriginalIDKT: !row[3] ? '' : ''+row[3],
-            CounterAccountIDKT: !row[4] ? '' : ''+row[4],
-            Text: !row[5] ? '' : ''+row[5],
-            ProjectCode: !row[6] ? '' : ''+row[6],
-            Currency: !row[7] ? '' : ''+row[7],
-            Balance: !row[8] ? '' : ''+row[8]
-          });
+          this.dataListIAccountBookKeeping.push(this.defaultValueService.insertDefaultAccountValues({
+            AccountingDate: row[0],
+            RegistrationNo: row[1],
+            IDKT: row[2],
+            OriginalIDKT: row[3],
+            CounterAccountIDKT: row[4],
+            Text: row[5],
+            ProjectCode: row[6],
+            Currency: row[7],
+            Balance: row[8],
+          }));
         }
       }
       this.isFirst = true;
@@ -85,28 +89,30 @@ export class ParserService {
 
   insertDataIntoListIBookKeeping() {
     this.isFirst = false;
-    this.tempDataArr.forEach(row => {
+    this.tempDataArr.forEach((row) => {
       if (this.isFirst) {
         if (row.length > 0) {
-          this.dataListIBookKeeping.push({
-            Dato: !row[0] ? '' : ''+row[0],
-            RegNr: !row[1] ? '' : ''+row[1],
-            regnskabstype: !row[2] ? '' : ''+row[2],
-            dkkbass: !row[3] ? '' : ''+row[3],
-            skema_id: !row[4] ? '' : ''+row[4],
-            skemarakke: !row[5] ? '' : ''+row[5],
-            valutakod: !row[6] ? '' : ''+row[6],
-            ldkd: !row[7] ? '' : ''+row[7],
-            kngr: !row[8] ? '' : ''+row[8],
-            kngr_typ: !row[9] ? '' : ''+row[9],
-            pdst: !row[10] ? '' : ''+row[10],
-            sum_rgopid: !row[11] ? '' : ''+row[11],
-            opdater_lev: !row[12] ? '' : ''+row[12],
-            leveran_kor: !row[13] ? '' : ''+row[13],
-            leveran_type: !row[14] ? '' : ''+row[14],
-            saldo: !row[15] ? '' : ''+row[15],
-            Tekst: !row[16] ? '' : ''+row[16]
-          });
+          this.dataListIBookKeeping.push(
+            this.defaultValueService.insertDefaultChartValues({
+              Dato: row[0],
+              RegNr: row[1],
+              regnskabstype: row[2],
+              dkkbass: row[3],
+              skema_id: row[4],
+              skemarakke: row[5],
+              valutakod: row[6],
+              ldkd: row[7],
+              kngr: row[8],
+              kngr_typ: row[9],
+              pdst: row[10],
+              sum_rgopid: row[11],
+              opdater_lev: row[12],
+              leveran_kor: row[13],
+              leveran_type: row[14],
+              saldo: row[15],
+              Tekst: row[16],
+            })
+          );
         }
       }
       this.isFirst = true;
@@ -114,20 +120,24 @@ export class ParserService {
   }
 
   validateAccountBookingsList() {
-    console.log('CHECKBOX: ' + this.checkBoxService.bookInFebos + ' ' + this.checkBoxService.bookInFebosAndUploadToGfs + ' ' + this.checkBoxService.uploadToGfs + ' ')
-    this.dataListIAccountBookKeeping.forEach(row => {
-      row.errors = Validations.validateAccountBookKeepingError(row,this.checkBoxService);
+    this.dataListIAccountBookKeeping.forEach((row) => {
+      row.errors = Validations.validateAccountBookKeepingError(
+        row,
+        this.checkBoxService
+      );
     });
   }
 
   validateBookingsList() {
-    this.dataListIBookKeeping.forEach(row => {
+    this.dataListIBookKeeping.forEach((row) => {
       row.errors = Validations.validateCSVBookKeeping(row);
     });
   }
 
-  private resetEveryList(){
-    this.onAccountFileParsedIAccountBookKeeping = new Subject<IAccountBookKeeping[]>();
+  private resetEveryList() {
+    this.onAccountFileParsedIAccountBookKeeping = new Subject<
+      IAccountBookKeeping[]
+    >();
     this.onFileParsedIBookKeeping = new Subject<IBookKeeping[]>();
 
     this.tempDataArr = [[], []];

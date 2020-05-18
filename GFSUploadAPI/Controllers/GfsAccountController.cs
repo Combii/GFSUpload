@@ -20,11 +20,11 @@ namespace GFSUploadAPI.Controllers
         private readonly ILogger<GfsAccountController> _logger;
         private readonly IAccountBookingRepository _accountBookingRepository;
         private readonly DataContext _context;
-        private readonly IAccountBookKeepingToFileParser _parser;
+        private readonly IBookKeepingToTextFileParser _parser;
 
 
         public GfsAccountController(ILogger<GfsAccountController> logger, DataContext context,
-          IAccountBookingRepository accountBookingRepository, IAccountBookKeepingToFileParser parser)
+          IAccountBookingRepository accountBookingRepository, IBookKeepingToTextFileParser parser)
         {
             _context = context;
             _accountBookingRepository = accountBookingRepository;
@@ -38,12 +38,6 @@ namespace GFSUploadAPI.Controllers
             var listAddedToDb = await _accountBookingRepository.PostAccountBookKeepingList(request);
             _parser.WriteToTxtFile(listAddedToDb);
             return Ok(listAddedToDb);
-        }
-
-        [HttpGet]
-        public ActionResult Get()
-        {
-            return StatusCode(200);
         }
     }
 }
