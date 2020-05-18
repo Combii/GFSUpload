@@ -20,10 +20,10 @@ namespace GFSUploadAPI.Controllers
         private readonly ILogger<GfsChartController> _logger;
         private readonly IBookingRepository _bookingRepository;
         private readonly DataContext _context;
-        private readonly IAccountBookKeepingToFileParser _parser;
+        private readonly IBookKeepingToTextFileParser _parser;
 
         public GfsChartController(ILogger<GfsChartController> logger, DataContext context,
-          IBookingRepository bookingRepository, IAccountBookKeepingToFileParser parser)
+          IBookingRepository bookingRepository, IBookKeepingToTextFileParser parser)
         {
             _context = context;
             _bookingRepository = bookingRepository;

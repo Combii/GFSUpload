@@ -4,7 +4,7 @@ using GFSUploadAPI.Models;
 
 namespace GFSUploadAPI.Services
 {
-    public class AccountBookKeepingToFileParser : IAccountBookKeepingToFileParser
+    public class BookKeepingToTextFileParser : IBookKeepingToTextFileParser
     {
         public void WriteToTxtFile(IEnumerable<AccountBookKeeping> accountBookKeepings)
         {
