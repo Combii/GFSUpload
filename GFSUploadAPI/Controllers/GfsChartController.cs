@@ -31,6 +31,13 @@ namespace GFSUploadAPI.Controllers
             _parser = parser;
         }
 
+        [HttpGet]
+        [Authorize]
+        public IActionResult boss()
+        {
+            return Ok("b0ss :0)");
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] IEnumerable<BookKeeping> request)
         {

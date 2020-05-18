@@ -15,6 +15,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using GFSUploadAPI.Models;
 
 namespace GFSUploadAPI
 {
@@ -32,6 +35,8 @@ namespace GFSUploadAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ApplicationSettings>(Configuration.GetSection("AppSettings"));
+            
             services.AddScoped<IAccountBookingRepository, AccountBookingRepository>();
             services.AddScoped<IBookingRepository, BookingRepository>();
             services.AddScoped<IBookKeepingToTextFileParser, BookKeepingToTextFileParser>();
@@ -43,6 +48,26 @@ namespace GFSUploadAPI
 
             services.AddIdentity<IdentityUser, IdentityRole>()
               .AddEntityFrameworkStores<DataContext>();
+
+              var key = System.Text.Encoding.UTF8
+                        .GetBytes(Configuration.GetSection("AppSettings:Token").Value);
+
+            services.AddAuthentication(x => {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(x => {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = false;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew =  TimeSpan.Zero
+                };
+            });
 
 
             services.AddControllers();

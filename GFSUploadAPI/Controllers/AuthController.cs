@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using Microsoft.Extensions.Options;
 
 namespace GFSUploadAPI.Controllers
 {
@@ -25,10 +26,12 @@ namespace GFSUploadAPI.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IMapper _mapper;
 
+        private readonly ApplicationSettings appSettings;
 
         public AuthController(IConfiguration config, UserManager<IdentityUser> userManager,
-          SignInManager<IdentityUser> signInManager, IMapper mapper)
+          SignInManager<IdentityUser> signInManager, IMapper mapper, IOptions<ApplicationSettings> appSettings)
         {
+            this.appSettings = appSettings.Value;
             _config = config;
             _userManager = userManager;
             _signInManager = signInManager;
@@ -47,67 +50,84 @@ namespace GFSUploadAPI.Controllers
 
             if (result.Succeeded)
             {
-                var appUser = await _userManager.Users
-                    .FirstOrDefaultAsync(u => u.NormalizedUserName == userForLoginDto.Username.ToUpper());
-
-                var loggedInUser = _mapper.Map<IdentityUser, UserForLoggedInDto>(appUser);
-
-                return Ok(new
+                var tokenDescriptor = new SecurityTokenDescriptor
                 {
-                    token = GenerateJwtToken(appUser).Result,
-                    user = loggedInUser
-                });
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                        new Claim("UserID",user.Id.ToString())
+                    }),
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8
+                        .GetBytes(appSettings.Token)), SecurityAlgorithms.HmacSha256Signature)
+                };
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.WriteToken(securityToken);
+
+                return Ok(new { token });
+
+                /*                 var appUser = await _userManager.Users
+                                    .FirstOrDefaultAsync(u => u.NormalizedUserName == userForLoginDto.Username.ToUpper());
+
+                                var loggedInUser = _mapper.Map<IdentityUser, UserForLoggedInDto>(appUser);
+
+                                return Ok(new
+                                {
+                                    token = GenerateJwtToken(appUser).Result,
+                                    user = loggedInUser
+                                }); */
             }
 
             return Unauthorized();
         }
+        
+             [HttpPost("register")]
+             public async Task<IActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto)
+             {
+                 var userToCreate = new IdentityUser(userForRegisterDto.Username);
+                 var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto)
-        {
-            var userToCreate = new IdentityUser(userForRegisterDto.Username);
-            var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
+                 return Ok(new
+                 {
+                    // token = GenerateJwtToken(userToCreate).Result,
+                     user = result
+                 });
 
-            return Ok(new
-            {
-                token = GenerateJwtToken(userToCreate).Result,
-                user = result
-            });
+             } 
 
-        }
+        /*       private async Task<string> GenerateJwtToken(IdentityUser user)
+              {
+                  var claims = new List<Claim>
+                  {
+                      new Claim(ClaimTypes.NameIdentifier, user.Id),
+                      new Claim(ClaimTypes.Name, user.UserName)
+                  };
 
-        private async Task<string> GenerateJwtToken(IdentityUser user)
-        {
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Name, user.UserName)
-            };
+                  var roles = await _userManager.GetRolesAsync(user);
 
-            var roles = await _userManager.GetRolesAsync(user);
+                  foreach (var role in roles)
+                  {
+                      claims.Add(new Claim(ClaimTypes.Role, role));
+                  }
 
-            foreach (var role in roles)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, role));
-            }
+                  var key = new SymmetricSecurityKey(Encoding.UTF8
+                    .GetBytes(_config.GetSection("AppSettings:Token").Value));
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8
-              .GetBytes(_config.GetSection("AppSettings:Token").Value));
+                  var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+                  var tokenDescriptor = new SecurityTokenDescriptor
+                  {
+                      Subject = new ClaimsIdentity(claims),
+                      Expires = DateTime.Now.AddDays(1),
+                      SigningCredentials = creds
+                  };
 
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
-                SigningCredentials = creds
-            };
+                  var tokenHandler = new JwtSecurityTokenHandler();
 
-            var tokenHandler = new JwtSecurityTokenHandler();
+                  var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return tokenHandler.WriteToken(token);
-        }
+                  return tokenHandler.WriteToken(token);
+              } */
     }
 }
