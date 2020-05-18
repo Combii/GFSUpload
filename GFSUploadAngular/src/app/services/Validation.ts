@@ -4,7 +4,6 @@ import {
 } from 'src/models/IAccountBookKeeping';
 import { IBookKeeping, IBookKeepingError } from 'src/models/IbookKeeping';
 import { CheckboxService } from './checkbox.service';
-import { deflate } from 'zlib';
 import { environment } from 'src/environments/environment';
 
 export class Validations {

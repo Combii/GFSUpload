@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ParserService } from '../services/Parser.service';
 import { IAccountBookKeeping } from 'src/models/IAccountBookKeeping';
-import { IAccountBookKeepingAPI } from 'src/models/IAccountBookKeepingAPI';
 import { ListSorter } from '../services/ListSorter';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as fastJson from 'fast-json-stringify';
