@@ -49,23 +49,23 @@ namespace GFSUploadAPI
             services.AddIdentity<IdentityUser, IdentityRole>()
               .AddEntityFrameworkStores<DataContext>();
 
-              var key = System.Text.Encoding.UTF8
-                        .GetBytes(Configuration.GetSection("AppSettings:Token").Value);
+             var key = System.Text.Encoding.UTF8.GetBytes(Configuration["AppSettings:Token"].ToString());
 
-            services.AddAuthentication(x => {
+            services.AddAuthentication(x =>
+            {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x => {
+            }).AddJwtBearer(x=> {
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = false;
-                x.TokenValidationParameters = new TokenValidationParameters
+                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(key),
                     ValidateIssuer = false,
                     ValidateAudience = false,
-                    ClockSkew =  TimeSpan.Zero
+                    ClockSkew = TimeSpan.Zero
                 };
             });
 
@@ -91,11 +91,11 @@ namespace GFSUploadAPI
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
+
             app.UseRouting();
 
             app.UseAuthorization();
-
-            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

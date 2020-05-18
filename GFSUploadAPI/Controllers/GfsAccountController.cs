@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 namespace GFSUploadAPI.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class GfsAccountController : ControllerBase
     {
         private readonly ILogger<GfsAccountController> _logger;
