@@ -15,6 +15,7 @@ namespace GFSUploadAPI.Controllers
 {
     [AllowAnonymous]
     [Route("api/[controller]")]
+    [ApiController]
     public class GfsChartController : ControllerBase
     {
         private readonly ILogger<GfsChartController> _logger;
