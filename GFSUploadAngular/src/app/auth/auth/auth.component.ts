@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
   constructor(private http: HttpClient, private auth: AuthService) {}
@@ -16,27 +16,25 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit(form: NgForm){
+  onSubmit(form: NgForm) {
     console.log(form.value.email);
     console.log(form.value.password);
-    //form.reset();
+    // form.reset();
 
-    let authResponse : Observable<AuthResponseData>;
+    let authResponse: Observable<AuthResponseData>;
 
-    if(this.isLoginMode) {
-      authResponse = this.auth.login(form.value.email,form.value.password)
+    if (this.isLoginMode) {
+      authResponse = this.auth.login(form.value.email, form.value.password);
     } else {
-      authResponse = this.auth.signup(form.value.email,form.value.password);
+      authResponse = this.auth.signup(form.value.email, form.value.password);
     }
 
-    authResponse.subscribe(user => {
-      
-    }, errors => {
-      console.log(errors); // TODO Show error message in html
-    })
-
-
-
+    authResponse.subscribe(
+      (user) => {},
+      (errors) => {
+        console.log(errors); // TODO Show error message in html
+      }
+    );
   }
 
   onSwitchMode() {

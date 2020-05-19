@@ -23,10 +23,10 @@ export class AuthService {
     return this.http
       .post<AuthResponseData>('http://localhost:5000/api/auth/register', {
         Username: username,
-        Password: password
+        Password: password,
       })
       .pipe(
-        tap(resData => {
+        tap((resData) => {
           // this.token.next(resData.token)
         })
       );
@@ -36,10 +36,10 @@ export class AuthService {
     return this.http
       .post<AuthResponseData>('http://localhost:5000/api/auth/login', {
         Username: username,
-        Password: password
+        Password: password,
       })
       .pipe(
-        tap(resData => {
+        tap((resData) => {
           const expirationDate = new Date(
             new Date().setDate(new Date().getDate() + 1)
           );
