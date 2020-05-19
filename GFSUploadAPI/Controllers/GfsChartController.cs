@@ -13,7 +13,7 @@ using Newtonsoft.Json.Linq;
 
 namespace GFSUploadAPI.Controllers
 {
-    [Authorize]
+    [AllowAnonymous]
     [Route("api/[controller]")]
     public class GfsChartController : ControllerBase
     {
