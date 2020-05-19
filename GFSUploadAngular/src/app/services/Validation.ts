@@ -288,8 +288,9 @@ export class Validations {
     // https://stackoverflow.com/questions/10638529/how-to-parse-a-date-in-format-yyyymmdd-in-javascript
     if (!/^(\d){8}$/.test(date)) {
       errorsArray.push('Date must be 8 digits only');
+      return errorsArray;
     }
-
+    console.log(date);
     const year = Number(date.toString().substring(0, 4));
     const month = Number(date.toString().substring(4, 6));
     const day = Number(date.toString().substring(6, 8));
@@ -316,10 +317,10 @@ export class Validations {
     if (checkBoxService) {
       // If bookInFebos is checked and it is first monday of month, the date has to be today's date or after.
       if (
-        Validations.isFirstMondayOfMonth(testDate ? testDate : null) &&
+        Validations.isFirstMondayOfMonth() &&
         checkBoxService.bookInFebos
       ) {
-        if (Validations.currentDateIsAfter(parsedDate, testDate ? testDate : null)) {}
+        if (Validations.currentDateIsAfter(parsedDate)) {}
           errorsArray.push(
             'The date has to be today\'s date or after when it is the first monday in the month and book in febos in checked.'
           );
