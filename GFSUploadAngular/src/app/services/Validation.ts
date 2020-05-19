@@ -113,7 +113,8 @@ export class Validations {
     if (!Validations.isNotEmptyString(dkkbass)) {
       errorsArray.push('Cannot be empty');
       return errorsArray;
-    } else if (dkkbass === '1' || dkkbass === '2') {
+    }
+    if (Number(dkkbass) === 1 || Number(dkkbass) === 2) {
       return errorsArray;
     }
     errorsArray.push('Must be 2 or 1');
