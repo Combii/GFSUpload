@@ -10,7 +10,8 @@ export class DefaultValueService {
 
   insertDefaultChartValues(bookKeeping: IBookKeeping): IBookKeeping {
     Object.keys(bookKeeping).forEach((key) => {
-      bookKeeping[key] = this.defaultValue(bookKeeping[key]);
+      // Do not remove + '' after as this is necessary for API compatibility
+      bookKeeping[key] = this.defaultValue(bookKeeping[key]) + '';
     });
 
     this.defaultKngr(bookKeeping);
@@ -24,7 +25,8 @@ export class DefaultValueService {
   ): IAccountBookKeeping {
 
     Object.keys(bookKeeping).forEach(key => {
-      bookKeeping[key] = this.defaultValue(bookKeeping[key]);
+      // Do not remove + '' after as this is necessary for API compatibility
+      bookKeeping[key] = this.defaultValue(bookKeeping[key]) + '';
     })
 
     return bookKeeping;
