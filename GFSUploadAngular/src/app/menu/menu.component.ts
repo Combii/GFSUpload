@@ -46,14 +46,4 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  onClickedUpload() {
-    this.router.navigate(["tableAccount"], {
-      queryParams: {
-        utg: this.uploadToGfsChecked,
-        bif: this.bookInFebosChecked,
-        utgabif: this.bookInFebosAnduploadToGfsChecked
-      }
-    });
-  }
-
 }
