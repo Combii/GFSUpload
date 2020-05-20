@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
   constructor(private http: HttpClient, private auth: AuthService, private router: Router) {}
-
+  errorMessage : string = null;
   isLoginMode = false;
 
   ngOnInit(): void {}
@@ -35,7 +35,7 @@ export class AuthComponent implements OnInit {
         this.router.navigate(['/'])
       },
       (errors) => {
-        console.log(errors); // TODO Show error message in html
+        this.errorMessage = errors.error[0].description; // TODO Show error message in html
       }
     );
   }
