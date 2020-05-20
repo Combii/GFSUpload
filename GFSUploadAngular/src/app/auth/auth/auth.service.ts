@@ -55,14 +55,17 @@ export class AuthService {
             new Date().setDate(new Date().getDate() + 1)
           );
 
+          // console.log(resData);
+
           this.user.next(
             new User(
-              resData.user.username,
+              resData.user['userName'],
               resData.user.id,
               resData.token,
               expirationDate
             )
           );
+          // console.log(this.user);
         })
       );
   }

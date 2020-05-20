@@ -46,13 +46,11 @@ namespace GFSUploadAPI.Controllers
             var result = await _signInManager
                 .CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
 
-
-
             if (result.Succeeded)
             {
                 var token = GenerateToken(user);
 
-                return Ok(new { token });
+                return Ok(new { user, token });
             }
 
             return Unauthorized();
@@ -64,12 +62,16 @@ namespace GFSUploadAPI.Controllers
             var userToCreate = new IdentityUser(userForRegisterDto.Username);
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
 
+            
+            if(result.Succeeded){
             return Ok(new
             {
                 token = GenerateToken(userToCreate),
                 user = result
             });
-
+            }
+            
+            return BadRequest(result.Errors);
         }
 
         private string GenerateToken(IdentityUser user)
