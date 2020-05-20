@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { AuthService, AuthResponseData } from './auth.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -10,8 +11,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
-  constructor(private http: HttpClient, private auth: AuthService) {}
-
+  constructor(private http: HttpClient, private auth: AuthService, private router: Router) {}
+  errorMessage : string = null;
   isLoginMode = false;
 
   ngOnInit(): void {}
@@ -30,9 +31,11 @@ export class AuthComponent implements OnInit {
     }
 
     authResponse.subscribe(
-      (user) => {},
+      (user) => {
+        this.router.navigate(['/'])
+      },
       (errors) => {
-        console.log(errors); // TODO Show error message in html
+        this.errorMessage = errors.error[0].description; // TODO Show error message in html
       }
     );
   }
