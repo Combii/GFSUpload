@@ -50,14 +50,6 @@ namespace GFSUploadAPI.Services
 
                 foreach (var bookKeeping in bookKeepings)
                 {
-                    // row.Append(string.Format("{0,-60}{1,-17}{2,-17}{3,-17}{4,-17}{5,-17}",
-                    // bookKeeping.CreatedDate + bookKeeping.RegNr + bookKeeping.regnskabstype + bookKeeping.dkkbass + bookKeeping.skema_id,
-                    // bookKeeping.skemarakke + bookKeeping.valutakod, 
-                    // bookKeeping.ldkd, 
-                    // bookKeeping.kngr,
-                    // bookKeeping.kngr_typ + bookKeeping.pdst + bookKeeping.sum_rgopid + bookKeeping.opdater_lev + bookKeeping.leveran_kor + bookKeeping.leveran_type,
-                    // bookKeeping.saldo + "LATVIA JANUARY 2020 UPLOAD"));
-
                     row.Append(string.Format("{0,-50}{1,20}{2,-10}{3,-10}{4,-10}{5,30}",
                     bookKeeping.CreatedDate + bookKeeping.RegNr + bookKeeping.regnskabstype + bookKeeping.dkkbass + bookKeeping.skema_id,
                     bookKeeping.skemarakke + bookKeeping.valutakod, 
