@@ -35,6 +35,7 @@ namespace GFSUploadAPI.Services
             while(counter < 1000){
                 if(firstRun){
                     row.Append("----" + counter);
+                    firstRun = false;
                 }
                 else{
                     row.Append("---" + counter);
