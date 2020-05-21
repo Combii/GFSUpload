@@ -33,7 +33,7 @@ export class AuthService {
 
           this.user.next(
             new User(
-              resData.user.username,
+              resData.user['userName'],
               resData.user.id,
               resData.token,
               expirationDate

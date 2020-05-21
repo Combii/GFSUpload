@@ -67,7 +67,7 @@ namespace GFSUploadAPI.Controllers
             return Ok(new
             {
                 token = GenerateToken(userToCreate),
-                user = result
+                user = userToCreate
             });
             }
             
