@@ -32,7 +32,7 @@ namespace GFSUploadAPI.Services
 
                 var counter = 10;
                 var firstRun = true;
-                while (counter < 1000)
+                while (counter < 150)
                 {
                     if (firstRun)
                     {
