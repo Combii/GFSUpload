@@ -42,6 +42,10 @@ namespace GFSUploadAPI.Controllers
         public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
         {
             var user = await _userManager.FindByNameAsync(userForLoginDto.Username);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
 
             var result = await _signInManager
                 .CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
@@ -62,15 +66,16 @@ namespace GFSUploadAPI.Controllers
             var userToCreate = new IdentityUser(userForRegisterDto.Username);
             var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
 
-            
-            if(result.Succeeded){
-            return Ok(new
+
+            if (result.Succeeded)
             {
-                token = GenerateToken(userToCreate),
-                user = userToCreate
-            });
+                return Ok(new
+                {
+                    token = GenerateToken(userToCreate),
+                    user = userToCreate
+                });
             }
-            
+
             return BadRequest(result.Errors);
         }
 

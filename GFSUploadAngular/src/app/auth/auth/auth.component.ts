@@ -36,8 +36,13 @@ export class AuthComponent implements OnInit {
       },
       (errors) => {
         console.log(errors);
+        if(errors.status === 401){
+          this.errorMessage = ['Invalid login'];
+        }
+        else{
         this.errorMessage = errors.error.map(err => err.description)
-        //this.errorMessage = errors.error[0].description; // TODO Show error message in html
+        }
+        // this.errorMessage = errors.error[0].description; // TODO Show error message in html
       }
     );
   }
