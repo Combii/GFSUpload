@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
   constructor(private http: HttpClient, private auth: AuthService, private router: Router) {}
-  errorMessage : string = null;
+  errorMessage : string[] = null;
   isLoginMode = false;
 
   ngOnInit(): void {}
