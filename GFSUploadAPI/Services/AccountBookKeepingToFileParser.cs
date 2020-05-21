@@ -64,7 +64,7 @@ namespace GFSUploadAPI.Services
                     bookKeeping.ldkd, 
                     bookKeeping.kngr,
                     bookKeeping.kngr_typ + bookKeeping.pdst + bookKeeping.sum_rgopid + bookKeeping.opdater_lev + bookKeeping.leveran_kor + bookKeeping.leveran_type,
-                    bookKeeping.saldo + " LATVIA JANUARY 2020 UPLOAD"));
+                    bookKeeping.saldo + "LATVIA JANUARY 2020 UPLOAD"));
                     row.Append("\n");
                 }
                 sw.WriteLine(row);
