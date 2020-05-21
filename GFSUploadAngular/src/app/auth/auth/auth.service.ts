@@ -54,9 +54,6 @@ export class AuthService {
           const expirationDate = new Date(
             new Date().setDate(new Date().getDate() + 1)
           );
-
-          // console.log(resData);
-
           this.user.next(
             new User(
               resData.user['userName'],
@@ -65,7 +62,6 @@ export class AuthService {
               expirationDate
             )
           );
-          // console.log(this.user);
         })
       );
   }
