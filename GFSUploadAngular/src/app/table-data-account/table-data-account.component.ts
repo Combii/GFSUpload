@@ -8,7 +8,7 @@ import * as fastJson from 'fast-json-stringify';
 @Component({
   selector: 'app-table-data-account',
   templateUrl: './table-data-account.component.html',
-  styleUrls: ['./table-data-account.component.css']
+  styleUrls: ['./table-data-account.component.css'],
 })
 export class TableDataAccountComponent {
   data: IAccountBookKeeping[] = [];
@@ -22,7 +22,7 @@ export class TableDataAccountComponent {
   onFileChange(evt: any) {
     this.loading = true;
     this.parser.parseFile(evt, 'account');
-    this.parser.onAccountFileParsedIAccountBookKeeping.subscribe(rData => {
+    this.parser.onAccountFileParsedIAccountBookKeeping.subscribe((rData) => {
       this.loading = false;
       this.data = rData;
 
@@ -38,14 +38,18 @@ export class TableDataAccountComponent {
   // If using Chrome you need to paste this in your url to get it to work
   // chrome://flags/#allow-insecure-localhost
   onClickSendToAPI() {
-    this.http
-      .post('http://localhost:5000/api/GFSAccount', this.data)
-      .subscribe(reponse => {
-        console.log(reponse);
-      });
+    if (!this.areErrors) {
+      this.http
+        .post('http://localhost:5000/api/GFSAccount', this.data)
+        .subscribe((reponse) => {
+          console.log(reponse);
+        });
+    }
   }
 
   checkIfErrorsInArray(listOfArray: IAccountBookKeeping[]): boolean {
-    return ListSorter.sortListForErrorsOnlyIExcelBookKeeping(this.data).length > 0;
+    return (
+      ListSorter.sortListForErrorsOnlyIExcelBookKeeping(this.data).length > 0
+    );
   }
 }

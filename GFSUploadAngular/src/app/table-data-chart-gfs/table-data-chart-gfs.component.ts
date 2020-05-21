@@ -9,7 +9,7 @@ import { take } from 'rxjs/operators';
 @Component({
   selector: 'app-table-data-chart-gfs',
   templateUrl: './table-data-chart-gfs.component.html',
-  styleUrls: ['./table-data-chart-gfs.component.css']
+  styleUrls: ['./table-data-chart-gfs.component.css'],
 })
 export class TableDataChartGfsComponent {
   dataList: IBookKeeping[] = [];
@@ -27,7 +27,7 @@ export class TableDataChartGfsComponent {
   onFileChange(evt: any) {
     this.loading = true;
     this.parser.parseFile(evt, 'chartGFS');
-    this.parser.onFileParsedIBookKeeping.subscribe(rData => {
+    this.parser.onFileParsedIBookKeeping.subscribe((rData) => {
       this.dataList = rData;
       this.loading = false;
 
@@ -46,20 +46,16 @@ export class TableDataChartGfsComponent {
   }
 
   onClickSendToAPI() {
-    // this.authService.user.pipe(take(1)).subscribe(user => {
-    //   const headers = new HttpHeaders({
-    //     Authorization: `Bearer ${user.token}` });
-    //   const options = { headers };
-
+    if (!this.areErrors) {
       this.http
-      .post('http://localhost:5000/api/GfsChart', this.dataList)
-      .subscribe(reponse => console.log(reponse));
-      
-    //});
+        .post('http://localhost:5000/api/GfsChart', this.dataList)
+        .subscribe((reponse) => console.log(reponse));
+    }
   }
 
   checkIfErrorsInArray(listOfArray: IBookKeeping[]): boolean {
-    return ListSorter.sortListForErrorsOnlyIBookKeeping(this.dataList).length > 0;
+    return (
+      ListSorter.sortListForErrorsOnlyIBookKeeping(this.dataList).length > 0
+    );
   }
-
 }
