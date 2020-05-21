@@ -35,7 +35,9 @@ export class AuthComponent implements OnInit {
         this.router.navigate(['/'])
       },
       (errors) => {
-        this.errorMessage = errors.error[0].description; // TODO Show error message in html
+        console.log(errors);
+        this.errorMessage = errors.error.map(err => err.description)
+        //this.errorMessage = errors.error[0].description; // TODO Show error message in html
       }
     );
   }
