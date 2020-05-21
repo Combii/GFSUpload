@@ -404,7 +404,7 @@ export class Validations {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(IDKT)) {
-      errorsArray.push('Is empty');
+      errorsArray.push('Cannot be empty');
     }
 
     if (checkboxService.bookInFebosAndUploadToGfs) {
@@ -423,7 +423,7 @@ export class Validations {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(projectCode)) {
-      errorsArray.push('Is empty');
+      errorsArray.push('Cannot be empty');
     }
     if (projectCode !== '078') {
       errorsArray.push('Project Code must be 078');
@@ -436,7 +436,7 @@ export class Validations {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(text)) {
-      errorsArray.push('Is empty');
+      errorsArray.push('Cannot be empty');
     }
     if (text.length > 40) {
       errorsArray.push('Text must not be longer than 40 characters');
@@ -480,7 +480,7 @@ export class Validations {
     const errorsArray = [];
 
     if (!Validations.isNotEmptyString(regnskabstype)) {
-      errorsArray.push('Is empty');
+      errorsArray.push('Cannot be empty');
     }
     if (regnskabstype.length > 6) {
       errorsArray.push('Cannot be more than 6 characters long');

@@ -287,7 +287,7 @@ describe('Validation Test', () => {
   });
 
   it('ValidText', () => {
-    expect(Validations.IsValidText('')[0]).toBe('Is empty');
+    expect(Validations.IsValidText('')[0]).toBe('Cannot be empty');
 
     expect(
       Validations.IsValidText(
@@ -353,7 +353,7 @@ describe('Validation Test', () => {
     // skal være udfyldt
     // skal være '078'
     expect(Validations.IsValidProjectCode('078').length).toBe(0);
-    expect(Validations.IsValidProjectCode('')[0]).toBe('Is empty');
+    expect(Validations.IsValidProjectCode('')[0]).toBe('Cannot be empty');
     expect(Validations.IsValidProjectCode('079')[0]).toBe(
       'Project Code must be 078'
     );
@@ -363,7 +363,7 @@ describe('Validation Test', () => {
     // skal være udfyldt
     // må ikke være mere end 6 karakterer lang
 
-    expect(Validations.IsValidRegnskabstype('')[0]).toBe('Is empty');
+    expect(Validations.IsValidRegnskabstype('')[0]).toBe('Cannot be empty');
     expect(Validations.IsValidRegnskabstype('RMKORR').length).toBe(0);
     expect(Validations.IsValidRegnskabstype('RMKORRRRR')[0]).toBe(
       'Cannot be more than 6 characters long'
