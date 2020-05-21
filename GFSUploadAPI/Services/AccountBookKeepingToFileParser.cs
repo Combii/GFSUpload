@@ -32,12 +32,15 @@ namespace GFSUploadAPI.Services
 
                 var counter = 10;
                 var firstRun = true;
-                while(counter < 1000){
-                    if(firstRun){
+                while (counter < 1000)
+                {
+                    if (firstRun)
+                    {
                         row.Append("----" + counter);
                         firstRun = false;
                     }
-                    else{
+                    else
+                    {
                         row.Append("---" + counter);
                     }
                     counter = counter + 5;
