@@ -9,8 +9,8 @@ import { AuthGuard } from './auth/auth/auth.guard';
 
 const routes: Routes = [
   {path: '', component: MenuComponent},
-  {path: 'tableChartGFS', component: TableDataChartGfsComponent},
-  {path: 'tableAccount', component: TableDataAccountComponent},
+  {path: 'tableChartGFS', canActivate:[AuthGuard], component: TableDataChartGfsComponent},
+  {path: 'tableAccount', canActivate:[AuthGuard], component: TableDataAccountComponent},
   {path: 'auth', component: AuthComponent}
 ];
 
