@@ -33,7 +33,7 @@ export class AuthService {
 
           this.user.next(
             new User(
-              resData.user['userName'],
+              resData.user.username,
               resData.user.id,
               resData.token,
               expirationDate
@@ -56,7 +56,7 @@ export class AuthService {
           );
           this.user.next(
             new User(
-              resData.user['userName'],
+              resData.user.username,
               resData.user.id,
               resData.token,
               expirationDate
