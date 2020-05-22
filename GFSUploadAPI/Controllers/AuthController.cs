@@ -41,18 +41,20 @@ namespace GFSUploadAPI.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserForLoginDto userForLoginDto)
         {
-            var user = await _userManager.FindByNameAsync(userForLoginDto.Username);
-            if (user == null)
+            var userFromDb = await _userManager.FindByNameAsync(userForLoginDto.Username);
+            if (userFromDb == null)
             {
                 return Unauthorized();
             }
 
+            var user = _mapper.Map<IdentityUser,UserForLoggedInDto>(userFromDb);
+
             var result = await _signInManager
-                .CheckPasswordSignInAsync(user, userForLoginDto.Password, false);
+                .CheckPasswordSignInAsync(userFromDb, userForLoginDto.Password, false);
 
             if (result.Succeeded)
             {
-                var token = GenerateToken(user);
+                var token = GenerateToken(userFromDb);
 
                 return Ok(new { user, token });
             }
@@ -63,16 +65,16 @@ namespace GFSUploadAPI.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto)
         {
-            var userToCreate = new IdentityUser(userForRegisterDto.Username);
-            var result = await _userManager.CreateAsync(userToCreate, userForRegisterDto.Password);
+            var userFromDb = new IdentityUser(userForRegisterDto.Username);
+            var result = await _userManager.CreateAsync(userFromDb, userForRegisterDto.Password);
 
-
+            var user = _mapper.Map<IdentityUser,UserForLoggedInDto>(userFromDb);
             if (result.Succeeded)
             {
                 return Ok(new
                 {
-                    token = GenerateToken(userToCreate),
-                    user = userToCreate
+                    token = GenerateToken(userFromDb),
+                    user = user
                 });
             }
 
