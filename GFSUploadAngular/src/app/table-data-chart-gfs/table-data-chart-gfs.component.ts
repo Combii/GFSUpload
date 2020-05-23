@@ -4,7 +4,7 @@ import { ParserService } from '../services/Parser.service';
 import { ListSorter } from '../services/ListSorter';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../auth/auth/auth.service';
-import { take } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-table-data-chart-gfs',
@@ -17,6 +17,7 @@ export class TableDataChartGfsComponent {
   loading = false;
   showOnlyErrors = false;
   areErrors = false;
+  backendReceivedData = false;
 
   constructor(
     private parser: ParserService,
@@ -45,13 +46,13 @@ export class TableDataChartGfsComponent {
     return parts[parts.length - 1];
   }
 
-  onClickSendToAPI() {
-    if (!this.areErrors) {
-      this.http
-        .post('http://localhost:5000/api/GfsChart', this.dataList)
-        .subscribe((reponse) => console.log(reponse));
+    onClickSendToAPI() {
+      if (!this.areErrors) {
+        this.http
+          .post('http://localhost:5000/api/GfsChart', this.dataList)
+          .subscribe(_ => this.backendReceivedData = true);
+      }
     }
-  }
 
   checkIfErrorsInArray(listOfArray: IBookKeeping[]): boolean {
     return (
