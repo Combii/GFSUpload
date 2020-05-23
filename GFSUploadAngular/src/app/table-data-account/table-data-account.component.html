@@ -27,6 +27,10 @@
   </button>
   <p></p>
 
+  <div class="alert alert-success" role="alert" *ngIf="backendReceivedData">
+    Success
+  </div>
+
   <p *ngIf="loading">Loading...</p>
 
   <h1 *ngIf="data.length > 0 && areErrors">

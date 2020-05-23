@@ -4,6 +4,7 @@ import { IAccountBookKeeping } from 'src/models/IAccountBookKeeping';
 import { ListSorter } from '../services/ListSorter';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as fastJson from 'fast-json-stringify';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-table-data-account',
@@ -16,6 +17,7 @@ export class TableDataAccountComponent {
   loading = false;
   showOnlyErrors = false;
   areErrors = false;
+  backendReceivedData = false;
 
   constructor(private parser: ParserService, private http: HttpClient) {}
 
@@ -41,9 +43,7 @@ export class TableDataAccountComponent {
     if (!this.areErrors) {
       this.http
         .post('http://localhost:5000/api/GFSAccount', this.data)
-        .subscribe((reponse) => {
-          console.log(reponse);
-        });
+        .subscribe(_ => this.backendReceivedData = true);
     }
   }
 
