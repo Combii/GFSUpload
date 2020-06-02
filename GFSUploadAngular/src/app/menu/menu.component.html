@@ -1,5 +1,5 @@
-<div class="container ">
-  <h1 class="text-center" style="margin-top:150px;">
+<div class="container">
+  <h1 class="text-center" style="margin-top: 150px;">
     Welcome to GFS (KRS) upload
   </h1>
 
@@ -12,14 +12,15 @@
   </div>
 
   <div class="row" *ngIf="isAuthenticated">
-    <div class="col text-center align-self-end">
+    <div class="col-md-8 text-center align-self-end">
       <button routerLink="/tableChartGFS" class="btn btn-primary" type="button">
         Upload chart to GFS
       </button>
     </div>
-    <div class="col text-center">
-      <div class="col text-left">
+    <div class="col">
+      <div class="col" style="padding: 0;">
         <input
+          class="mr-2"
           type="checkbox"
           name="upload"
           [checked]="uploadToGfsChecked"
@@ -27,6 +28,7 @@
         />
         <label> Upload to GFS</label><br />
         <input
+          class="mr-2"
           type="checkbox"
           name="book"
           [checked]="bookInFebosChecked"
@@ -34,6 +36,7 @@
         />
         <label> Book in FEBOS</label><br />
         <input
+          class="mr-2"
           type="checkbox"
           name="bookAndUpload"
           [checked]="bookInFebosAnduploadToGfsChecked"
@@ -49,7 +52,7 @@
 
   <div class="row" *ngIf="isAuthenticated">
     <div class="col text-center">
-      <label>Registration Number: </label>
+      <label class="mr-2">Registration Number: </label>
       <input type="text" /><br /><br />
     </div>
   </div>
