@@ -20,7 +20,7 @@
   >
     Show Errors
   </button>
-  <button class="btn btn-primary" (click)="onClickSendToAPI()">
+  <button [disabled]="data.length === 0 || areErrors" class="btn btn-primary" (click)="onClickSendToAPI()">
     Send to API
   </button>
   <p></p>
