@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <h3>Upload Chart to GFS</h3>
+  <h3 class="display-4">Upload Chart to GFS</h3>
 
   <div class="form-group">
     <input
@@ -15,13 +15,11 @@
 
   <button
     *ngIf="dataList.length > 0 && areErrors"
-    class="btn btn-danger"
+    class="btn btn-danger mr-2"
     (click)="onClickShowErros()"
   >
     Show Errors
   </button>
-
-  <div class="divider"></div>
   <button class="btn btn-primary" (click)="onClickSendToAPI()">
     Send to API
   </button>
