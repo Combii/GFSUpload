@@ -46,13 +46,21 @@ export class TableDataChartGfsComponent {
     return parts[parts.length - 1];
   }
 
-    onClickSendToAPI() {
+  onClickSendToAPI() {
+    this.authService.user.pipe(take(1)).subscribe((user) => {
+      const headers = new HttpHeaders()
+        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${user.token}`);
+
       if (!this.areErrors) {
         this.http
-          .post('http://localhost:5000/api/GfsChart', this.dataList)
-          .subscribe(_ => this.backendReceivedData = true);
+          .post('http://localhost:5000/api/GfsChart', this.dataList, {
+            headers,
+          })
+          .subscribe((_) => (this.backendReceivedData = true));
       }
-    }
+    });
+  }
 
   checkIfErrorsInArray(listOfArray: IBookKeeping[]): boolean {
     return (

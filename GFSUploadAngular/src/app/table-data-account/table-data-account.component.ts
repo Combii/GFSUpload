@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ParserService } from '../services/Parser.service';
 import { IAccountBookKeeping } from 'src/models/IAccountBookKeeping';
@@ -19,7 +20,11 @@ export class TableDataAccountComponent {
   areErrors = false;
   backendReceivedData = false;
 
-  constructor(private parser: ParserService, private http: HttpClient) {}
+  constructor(
+    private parser: ParserService,
+    private http: HttpClient,
+    private authService: AuthService
+  ) {}
 
   onFileChange(evt: any) {
     this.loading = true;
@@ -40,11 +45,17 @@ export class TableDataAccountComponent {
   // If using Chrome you need to paste this in your url to get it to work
   // chrome://flags/#allow-insecure-localhost
   onClickSendToAPI() {
-    if (!this.areErrors) {
-      this.http
-        .post('http://localhost:5000/api/GFSAccount', this.data)
-        .subscribe(_ => this.backendReceivedData = true);
-    }
+    this.authService.user.pipe(take(1)).subscribe((user) => {
+      const headers = new HttpHeaders()
+        .set('content-type', 'application/json')
+        .set('Authorization', `Bearer ${user.token}`);
+
+      if (!this.areErrors) {
+        this.http
+          .post('http://localhost:5000/api/GFSAccount', this.data, {headers})
+          .subscribe((_) => (this.backendReceivedData = true));
+      }
+    });
   }
 
   checkIfErrorsInArray(listOfArray: IAccountBookKeeping[]): boolean {
