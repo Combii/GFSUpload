@@ -57,7 +57,10 @@ export class TableDataChartGfsComponent {
           .post('http://localhost:5000/api/GfsChart', this.dataList, {
             headers,
           })
-          .subscribe((_) => (this.backendReceivedData = true));
+          .subscribe(_ => {
+            this.backendReceivedData = true
+            console.log(_);
+          });
       }
     });
   }
