@@ -8,9 +8,11 @@ namespace GFSUploadAPI.Test
     public class BookKeepingTests
     {
         private readonly IBookingRepository _bookingRepository;
+
         public BookKeepingTests(IBookingRepository bookingRepository)
         {
             _bookingRepository = bookingRepository;
+
         }
 
         [Fact]

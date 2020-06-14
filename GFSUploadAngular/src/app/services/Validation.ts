@@ -100,7 +100,6 @@ export class Validations {
         errorsArray.push('Cannot be over 14 characters');
       }
     }
-    errorsArray.push('Must be 2 or 1');
     return errorsArray;
   }
 
