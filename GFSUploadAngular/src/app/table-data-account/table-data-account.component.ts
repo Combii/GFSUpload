@@ -43,7 +43,10 @@ export class TableDataAccountComponent {
     if (!this.areErrors) {
       this.http
         .post('http://localhost:5000/api/GFSAccount', this.data)
-        .subscribe(_ => this.backendReceivedData = true);
+        .subscribe(_ => {
+          this.backendReceivedData = true
+          console.log(_);
+        });
     }
   }
 
